@@ -1,8 +1,5 @@
 package cn.truthseeker.container.safe.list;
 
-import cn.truthseeker.container.Collections2;
-
-import java.util.Collection;
 import java.util.List;
 
 /**

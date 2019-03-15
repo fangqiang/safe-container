@@ -10,11 +10,11 @@ import java.util.function.Consumer;
  */
 public class TestUtil {
 
-    public static boolean throwException(Consumer consumer){
+    public static boolean throwException(Consumer consumer) {
         try {
             consumer.accept(null);
             return false;
-        }catch (Throwable e){
+        } catch (Throwable e) {
             return true;
         }
     }

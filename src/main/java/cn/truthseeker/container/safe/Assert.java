@@ -7,8 +7,8 @@ package cn.truthseeker.container.safe;
  * @date: Created by on 19/3/15
  */
 public class Assert {
-    public static void isTrue(boolean bool, String message){
-        if(!bool){
+    public static void isTrue(boolean bool, String message) {
+        if (!bool) {
             throw new RuntimeException(message);
         }
     }

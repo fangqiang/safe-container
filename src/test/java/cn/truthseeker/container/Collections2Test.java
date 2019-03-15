@@ -7,8 +7,6 @@ import org.junit.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 /**
  * @Description:
  * @author: qiang.fang
@@ -20,9 +18,9 @@ public class Collections2Test {
     @Test
     public void checkSafe() {
         List list = Arrays.asList(1);
-        List list2 = Arrays.asList(1,null);
+        List list2 = Arrays.asList(1, null);
 
-        Assert.assertFalse(TestUtil.throwException((a)->Collections2.checkSafe(list)));
-        Assert.assertTrue(TestUtil.throwException((a)->Collections2.checkSafe(list2)));
+        Assert.assertFalse(TestUtil.throwException((a) -> Collections2.checkSafe(list)));
+        Assert.assertTrue(TestUtil.throwException((a) -> Collections2.checkSafe(list2)));
     }
 }

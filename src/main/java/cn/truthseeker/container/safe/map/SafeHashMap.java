@@ -1,6 +1,9 @@
 package cn.truthseeker.container.safe.map;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
 
 /**
  * @Description:
@@ -8,23 +11,23 @@ import java.util.*;
  * @email: lowping@163.com
  * @date: Created by on 19/3/14
  */
-public class SafeHashMap<K,V> extends HashMap<K,V> implements SafeMap<K,V>{
-    public SafeHashMap(){
+public class SafeHashMap<K, V> extends HashMap<K, V> implements SafeMap<K, V> {
+    public SafeHashMap() {
         super();
     }
 
-    public SafeHashMap(Map<? extends K, ? extends V> m){
+    public SafeHashMap(Map<? extends K, ? extends V> m) {
         super(m);
-        if(! (m instanceof SafeMap)) {
+        if (!(m instanceof SafeMap)) {
             Maps.checkSafe(m);
         }
     }
 
-    public SafeHashMap(int initialCapacity){
+    public SafeHashMap(int initialCapacity) {
         super(initialCapacity);
     }
 
-    public SafeHashMap(int initialCapacity, float loadFactor){
+    public SafeHashMap(int initialCapacity, float loadFactor) {
         super(initialCapacity, loadFactor);
     }
 
@@ -43,13 +46,13 @@ public class SafeHashMap<K,V> extends HashMap<K,V> implements SafeMap<K,V>{
     }
 
     @Override
-    public Optional<V> getNullable(Object key){
+    public Optional<V> getNullable(Object key) {
         return Optional.ofNullable(super.get(key));
     }
 
     @Override
     @Deprecated
-    public V get(Object key){
+    public V get(Object key) {
         return super.get(key);
     }
 

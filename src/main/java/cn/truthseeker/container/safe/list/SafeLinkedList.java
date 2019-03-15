@@ -2,8 +2,8 @@ package cn.truthseeker.container.safe.list;
 
 import cn.truthseeker.container.Collections2;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.Objects;
 
 /**
@@ -12,20 +12,16 @@ import java.util.Objects;
  * @email: lowping@163.com
  * @date: Created by on 19/3/14
  */
-public class SafeArrayList<E> extends ArrayList<E> implements SafeList<E> {
-    public SafeArrayList() {
+public class SafeLinkedList<E> extends LinkedList<E> implements SafeList<E> {
+    public SafeLinkedList() {
         super();
     }
 
-    public SafeArrayList(Collection<? extends E> c) {
+    public SafeLinkedList(Collection<? extends E> c) {
         super(c);
         if (!(c instanceof SafeList)) {
             Collections2.checkSafe(c);
         }
-    }
-
-    public SafeArrayList(int initialCapacity) {
-        super(initialCapacity);
     }
 
     @Override

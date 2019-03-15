@@ -10,7 +10,7 @@ import java.util.Objects;
  * @date: Created by on 19/3/14
  */
 public class Collections2 {
-    public static <T> void checkSafe(Collection<T> c){
+    public static <T> void checkSafe(Collection<T> c) {
         Objects.requireNonNull(c);
         for (T e : c) {
             Objects.requireNonNull(e);

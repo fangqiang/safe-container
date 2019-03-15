@@ -8,9 +8,9 @@ import java.util.*;
  * @email: lowping@163.com
  * @date: Created by on 19/3/14
  */
-public class SafeTreeMap<K,V> extends TreeMap<K,V> implements SafeMap<K,V>{
+public class SafeTreeMap<K, V> extends TreeMap<K, V> implements SafeMap<K, V> {
 
-    public SafeTreeMap(){
+    public SafeTreeMap() {
         super();
     }
 
@@ -18,16 +18,16 @@ public class SafeTreeMap<K,V> extends TreeMap<K,V> implements SafeMap<K,V>{
         super(comparator);
     }
 
-    public SafeTreeMap(Map<? extends K, ? extends V> m){
+    public SafeTreeMap(Map<? extends K, ? extends V> m) {
         super(m);
-        if(! (m instanceof SafeMap)) {
+        if (!(m instanceof SafeMap)) {
             Maps.checkSafe(m);
         }
     }
 
     public SafeTreeMap(SortedMap<K, ? extends V> m) {
         super(m);
-        if(! (m instanceof SafeMap)) {
+        if (!(m instanceof SafeMap)) {
             Maps.checkSafe(m);
         }
     }
@@ -47,13 +47,13 @@ public class SafeTreeMap<K,V> extends TreeMap<K,V> implements SafeMap<K,V>{
     }
 
     @Override
-    public Optional<V> getNullable(Object key){
+    public Optional<V> getNullable(Object key) {
         return Optional.ofNullable(super.get(key));
     }
 
     @Override
     @Deprecated
-    public V get(Object key){
+    public V get(Object key) {
         return super.get(key);
     }
 

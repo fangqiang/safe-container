@@ -14,23 +14,23 @@ import java.util.List;
  * @email: lowping@163.com
  * @date: Created by on 19/3/14
  */
-public class SafeArrayListTest {
+public class SafeLinkedListTest {
 
     @Test
     public void init() {
         List list = new ArrayList();
         list.add(null);
         list.add(null);
-        Assert.assertTrue(TestUtil.throwException((a) -> new SafeArrayList(list)));
+        Assert.assertTrue(TestUtil.throwException((a) -> new SafeLinkedList(list)));
         list.clear();
-        Assert.assertFalse(TestUtil.throwException((a) -> new SafeArrayList(list)));
+        Assert.assertFalse(TestUtil.throwException((a) -> new SafeLinkedList(list)));
 
-        new SafeArrayList<>(1);
+        new SafeLinkedList(Arrays.asList(1));
     }
 
     @Test
     public void add() {
-        SafeArrayList list = new SafeArrayList();
+        SafeLinkedList list = new SafeLinkedList();
         Assert.assertTrue(TestUtil.throwException((a) -> list.add(null)));
         Assert.assertTrue(TestUtil.throwException((a) -> list.add(1, null)));
 
@@ -40,7 +40,7 @@ public class SafeArrayListTest {
 
     @Test
     public void addAll() {
-        SafeArrayList list = new SafeArrayList();
+        SafeLinkedList list = new SafeLinkedList();
         Assert.assertTrue(TestUtil.throwException((a) -> list.addAll(null)));
         Assert.assertTrue(TestUtil.throwException((a) -> list.addAll(1, null)));
 
@@ -50,7 +50,7 @@ public class SafeArrayListTest {
 
     @Test
     public void set() {
-        SafeArrayList list = new SafeArrayList();
+        SafeLinkedList list = new SafeLinkedList();
         list.add(1);
         list.set(0, 1);
     }

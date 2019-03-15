@@ -211,15 +211,15 @@ public final class Maps {
     }
 
     public static <K, V> Map<K, V> of(K k1, V v1) {
-        return of(k1,v1, HashMap::new);
+        return of(k1, v1, HashMap::new);
     }
 
     public static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2) {
-        return of(k1,v1,k2,v2, HashMap::new);
+        return of(k1, v1, k2, v2, HashMap::new);
     }
 
-    public static <K, V> Map<K, V> of(K k1, V v1,K k2, V v2, K k3, V v3) {
-        return of(k1,v1,k2,v2,k3,v3, HashMap::new);
+    public static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3) {
+        return of(k1, v1, k2, v2, k3, v3, HashMap::new);
     }
 
     public static <K, V, T extends Map<K, V>> T of(K k1, V v1, Supplier<T> supplier) {
