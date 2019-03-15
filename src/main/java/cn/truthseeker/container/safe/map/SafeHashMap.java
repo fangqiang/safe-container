@@ -1,10 +1,6 @@
-package cn.truthseeker.container.safe;
+package cn.truthseeker.container.safe.map;
 
-import cn.truthseeker.container.Maps;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * @Description:
@@ -12,14 +8,16 @@ import java.util.Objects;
  * @email: lowping@163.com
  * @date: Created by on 19/3/14
  */
-public class SafeHashMap<K,V> extends HashMap<K,V> implements SafeContainer{
+public class SafeHashMap<K,V> extends HashMap<K,V> implements SafeMap<K,V>{
     public SafeHashMap(){
         super();
     }
 
     public SafeHashMap(Map<? extends K, ? extends V> m){
         super(m);
-        Maps.checkSafe(m);
+        if(! (m instanceof SafeMap)) {
+            Maps.checkSafe(m);
+        }
     }
 
     public SafeHashMap(int initialCapacity){
@@ -42,5 +40,21 @@ public class SafeHashMap<K,V> extends HashMap<K,V> implements SafeContainer{
         Objects.requireNonNull(key);
         Objects.requireNonNull(value);
         return super.put(key, value);
+    }
+
+    @Override
+    public Optional<V> getNullable(Object key){
+        return Optional.ofNullable(super.get(key));
+    }
+
+    @Override
+    @Deprecated
+    public V get(Object key){
+        return super.get(key);
+    }
+
+    @Override
+    public <T> T newInstance() {
+        return (T) new SafeHashMap();
     }
 }

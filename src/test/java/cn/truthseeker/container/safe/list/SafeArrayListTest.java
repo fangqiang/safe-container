@@ -1,6 +1,7 @@
-package cn.truthseeker.container.safe;
+package cn.truthseeker.container.safe.list;
 
 import cn.truthseeker.TestUtil;
+import cn.truthseeker.container.safe.list.SafeArrayList;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -46,5 +47,12 @@ public class SafeArrayListTest {
 
         Assert.assertFalse(TestUtil.throwException((a) -> list.addAll(Arrays.asList(1))));
         Assert.assertFalse(TestUtil.throwException((a) -> list.addAll(1,Arrays.asList(1))));
+    }
+
+    @Test
+    public void set() {
+        SafeArrayList list = new SafeArrayList();
+        list.add(1);
+        list.set(0,1);
     }
 }
