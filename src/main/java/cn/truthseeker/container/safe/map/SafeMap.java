@@ -1,7 +1,5 @@
 package cn.truthseeker.container.safe.map;
 
-import cn.truthseeker.container.util.Assert;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -93,14 +91,14 @@ public interface SafeMap<K, V> extends Map<K, V> {
     /**
      * 返回唯一的key，如果map.size != 1则抛出异常
      */
-    default K firstKey() {
-        return Maps.firstKey(this);
+    default K getTheOnlyKey() {
+        return Maps.getTheOnlyKey(this);
     }
 
     /**
      * 返回唯一的value，如果map.size != 1则抛出异常
      */
-    default V firstValue() {
-        return Maps.firstValue(this);
+    default V getTheOnlyValue() {
+        return Maps.getTheOnlyValue(this);
     }
 }

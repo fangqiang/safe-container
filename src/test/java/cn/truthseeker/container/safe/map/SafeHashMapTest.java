@@ -142,10 +142,10 @@ public class SafeHashMapTest {
     @Test
     public void firstKeyValue() {
         SafeHashMap<String, Integer> all = Maps.of("a", 1, SafeHashMap::new);
-        Assert.assertTrue(all.firstKey().equals("a"));
-        Assert.assertTrue(all.firstValue() == 1);
+        Assert.assertTrue(all.getTheOnlyKey().equals("a"));
+        Assert.assertTrue(all.getTheOnlyValue() == 1);
 
         all.put("b",1);
-        Assert.assertTrue(TestUtil.throwException(()->all.firstKey()));
+        Assert.assertTrue(TestUtil.throwException(()->all.getTheOnlyKey()));
     }
 }
