@@ -138,4 +138,14 @@ public class SafeHashMapTest {
         Assert.assertTrue(all.containsKeys(Arrays.asList("a", "b")));
         Assert.assertFalse(all.containsKeys(Arrays.asList("a", "d")));
     }
+
+    @Test
+    public void firstKeyValue() {
+        SafeHashMap<String, Integer> all = Maps.of("a", 1, SafeHashMap::new);
+        Assert.assertTrue(all.firstKey().equals("a"));
+        Assert.assertTrue(all.firstValue() == 1);
+
+        all.put("b",1);
+        Assert.assertTrue(TestUtil.throwException((a)->all.firstKey()));
+    }
 }

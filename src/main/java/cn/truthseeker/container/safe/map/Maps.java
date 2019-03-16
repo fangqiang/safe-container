@@ -262,4 +262,14 @@ public final class Maps {
         }
         return ret;
     }
+
+    public static <K, V> K firstKey(Map<K,V> map) {
+        Assert.isTrue(map.size() == 1, "map size must be 1");
+        return map.keySet().iterator().next();
+    }
+
+    public static <K, V> V firstValue(Map<K,V> map) {
+        Assert.isTrue(map.size() == 1, "map size must be 1");
+        return map.values().iterator().next();
+    }
 }
