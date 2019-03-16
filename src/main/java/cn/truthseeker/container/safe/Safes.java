@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  */
 public final class Safes {
 
-    public static <K, V> SafeMap<K, V> newSafeMap() {
+    public static SafeMap newSafeMap() {
         return new SafeHashMap();
     }
 
@@ -41,7 +41,7 @@ public final class Safes {
         return Maps.of(k1,v1,k2,v2,k3,v3,SafeHashMap::new);
     }
 
-    public static <K, V> SafeMap<K, V> newSafeSortMap() {
+    public static SafeMap newSafeSortMap() {
         return new SafeTreeMap();
     }
 
@@ -86,11 +86,11 @@ public final class Safes {
     }
 
 
-    public static <E> SafeList<E> newSafeList() {
+    public static SafeList newSafeList() {
         return new SafeArrayList<>();
     }
 
-    public static <E> SafeList<E> newSafeLinkedList() {
+    public static SafeList newSafeLinkedList() {
         return new SafeLinkedList<>();
     }
 
@@ -122,11 +122,11 @@ public final class Safes {
         return list.stream().filter(Utils::isNotEmpty).collect(Collectors.toCollection(SafeLinkedList::new));
     }
 
-    public static <E> SafeSet<E> newSafeSet() {
+    public static SafeSet newSafeSet() {
         return new SafeHashSet<>();
     }
 
-    public static <E> SafeSet<E> newSafeSortSet() {
+    public static SafeSet newSafeSortSet() {
         return new SafeTreeSet<>();
     }
 
