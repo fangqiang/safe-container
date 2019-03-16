@@ -104,4 +104,12 @@ public class MapsTest {
         Assert.assertTrue(zip.get("a") == 1);
         Assert.assertTrue(zip.get("b") == 2);
     }
+
+    @Test
+    public void clearEmpty() {
+        Map<Integer, String> map = Maps.of(1, "1",  2, null, 3,"");
+        Assert.assertTrue(Maps.clearNull(map).size() ==2);
+        map = Maps.of(1, "1",  2, null, 3,"");
+        Assert.assertTrue(Maps.clearEmpty(map).size() ==1);
+    }
 }

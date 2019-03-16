@@ -1,6 +1,7 @@
 package cn.truthseeker.container.safe.map;
 
 import cn.truthseeker.container.util.Assert;
+import cn.truthseeker.container.util.Utils;
 
 import java.util.*;
 import java.util.function.BiPredicate;
@@ -271,5 +272,15 @@ public final class Maps {
     public static <K, V> V getTheOnlyValue(Map<K,V> map) {
         Assert.isTrue(map.size() == 1, "map size must be 1");
         return map.values().iterator().next();
+    }
+
+    public static <K, V> Map<K, V> clearEmpty(Map<K, V> map) {
+        map.entrySet().removeIf(entry -> ! Utils.isNoneEmpty(entry.getKey(),entry.getValue()));
+        return map;
+    }
+
+    public static <K, V> Map<K, V> clearNull(Map<K, V> map) {
+        map.entrySet().removeIf(entry -> ! Utils.isNoneNull(entry.getKey(),entry.getValue()));
+        return map;
     }
 }
