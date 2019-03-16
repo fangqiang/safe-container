@@ -1,6 +1,6 @@
 package cn.truthseeker.container.safe.list;
 
-import cn.truthseeker.container.Collections2;
+import cn.truthseeker.container.util.Assert;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -20,7 +20,7 @@ public class SafeLinkedList<E> extends LinkedList<E> implements SafeList<E> {
     public SafeLinkedList(Collection<? extends E> c) {
         super(c);
         if (!(c instanceof SafeList)) {
-            Collections2.checkSafe(c);
+            Assert.checkSafe(c);
         }
     }
 
@@ -44,13 +44,13 @@ public class SafeLinkedList<E> extends LinkedList<E> implements SafeList<E> {
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        Collections2.checkSafe(c);
+        Assert.checkSafe(c);
         return super.addAll(c);
     }
 
     @Override
     public boolean addAll(int index, Collection<? extends E> c) {
-        Collections2.checkSafe(c);
+        Assert.checkSafe(c);
         return super.addAll(index, c);
     }
 }

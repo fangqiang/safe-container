@@ -1,6 +1,6 @@
 package cn.truthseeker.container.safe.set;
 
-import cn.truthseeker.container.Collections2;
+import cn.truthseeker.container.util.Assert;
 
 import java.util.*;
 
@@ -23,13 +23,13 @@ public class SafeTreeSet<E> extends TreeSet<E> implements SafeSet<E> {
     public SafeTreeSet(Collection<? extends E> c) {
         super(c);
         if (!(c instanceof SafeSet)) {
-            Collections2.checkSafe(c);
+            Assert.checkSafe(c);
         }
     }
 
     public SafeTreeSet(SortedSet<E> s) {
         super(s);
-        Collections2.checkSafe(s);
+        Assert.checkSafe(s);
     }
 
 
@@ -41,7 +41,7 @@ public class SafeTreeSet<E> extends TreeSet<E> implements SafeSet<E> {
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        Collections2.checkSafe(c);
+        Assert.checkSafe(c);
         return super.addAll(c);
     }
 

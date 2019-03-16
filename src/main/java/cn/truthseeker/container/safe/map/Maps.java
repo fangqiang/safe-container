@@ -1,6 +1,6 @@
 package cn.truthseeker.container.safe.map;
 
-import cn.truthseeker.container.safe.Assert;
+import cn.truthseeker.container.util.Assert;
 
 import java.util.*;
 import java.util.function.BiPredicate;

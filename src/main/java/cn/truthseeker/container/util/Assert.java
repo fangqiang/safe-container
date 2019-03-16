@@ -1,4 +1,7 @@
-package cn.truthseeker.container.safe;
+package cn.truthseeker.container.util;
+
+import java.util.Collection;
+import java.util.Objects;
 
 /**
  * @Description:
@@ -10,6 +13,13 @@ public class Assert {
     public static void isTrue(boolean bool, String message) {
         if (!bool) {
             throw new RuntimeException(message);
+        }
+    }
+
+    public static <T> void checkSafe(Collection<T> c) {
+        Objects.requireNonNull(c);
+        for (T e : c) {
+            Objects.requireNonNull(e);
         }
     }
 }
