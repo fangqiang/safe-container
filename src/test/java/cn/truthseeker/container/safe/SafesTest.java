@@ -23,7 +23,13 @@ public class SafesTest {
     @Test
     public void newSafeMap() {
         Assert.assertTrue(Safes.newSafeMap() != null);
+        Assert.assertTrue(Safes.newSafeMap(1,1) != null);
+        Assert.assertTrue(Safes.newSafeMap(1,1,1,1) != null);
+        Assert.assertTrue(Safes.newSafeMap(1,1,1,1,1,1) != null);
         Assert.assertTrue(Safes.newSafeSortMap() != null);
+        Assert.assertTrue(Safes.newSafeSortMap(1,1) != null);
+        Assert.assertTrue(Safes.newSafeSortMap(1,1,1,1) != null);
+        Assert.assertTrue(Safes.newSafeSortMap(1,1,1,1,1,1) != null);
     }
 
     @Test

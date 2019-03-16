@@ -29,8 +29,32 @@ public final class Safes {
         return new SafeHashMap();
     }
 
+    public static <K, V> SafeMap<K, V> newSafeMap(K k1, V v1) {
+        return Maps.of(k1,v1,SafeHashMap::new);
+    }
+
+    public static <K, V> SafeMap<K, V> newSafeMap(K k1, V v1, K k2, V v2) {
+        return Maps.of(k1,v1,k2,v2,SafeHashMap::new);
+    }
+
+    public static <K, V> SafeMap<K, V> newSafeMap(K k1, V v1,K k2, V v2,K k3, V v3) {
+        return Maps.of(k1,v1,k2,v2,k3,v3,SafeHashMap::new);
+    }
+
     public static <K, V> SafeMap<K, V> newSafeSortMap() {
         return new SafeTreeMap();
+    }
+
+    public static <K, V> SafeMap<K, V> newSafeSortMap(K k1, V v1) {
+        return Maps.of(k1,v1,SafeTreeMap::new);
+    }
+
+    public static <K, V> SafeMap<K, V> newSafeSortMap(K k1, V v1, K k2, V v2) {
+        return Maps.of(k1,v1,k2,v2,SafeTreeMap::new);
+    }
+
+    public static <K, V> SafeMap<K, V> newSafeSortMap(K k1, V v1,K k2, V v2,K k3, V v3) {
+        return Maps.of(k1,v1,k2,v2,k3,v3,SafeTreeMap::new);
     }
 
     /**
