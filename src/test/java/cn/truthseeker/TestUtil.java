@@ -1,7 +1,5 @@
 package cn.truthseeker;
 
-import java.util.function.Consumer;
-
 /**
  * @Description:
  * @author: qiang.fang
@@ -10,9 +8,14 @@ import java.util.function.Consumer;
  */
 public class TestUtil {
 
-    public static boolean throwException(Consumer consumer) {
+
+    public interface TestCode{
+        void exceptException();
+    }
+
+    public static boolean throwException(TestCode testCode) {
         try {
-            consumer.accept(null);
+            testCode.exceptException();
             return false;
         } catch (Throwable e) {
             return true;

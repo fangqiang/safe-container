@@ -19,11 +19,11 @@ public class MapsTest {
     @Test
     public void checkSafe() {
         Map map = Maps.of(null, null, HashMap::new);
-        Assert.assertTrue(TestUtil.throwException((a) -> Maps.checkSafe(map)));
+        Assert.assertTrue(TestUtil.throwException(() -> Maps.checkSafe(map)));
         map.clear();
-        Assert.assertFalse(TestUtil.throwException((a) -> Maps.checkSafe(map)));
+        Assert.assertFalse(TestUtil.throwException(() -> Maps.checkSafe(map)));
         map.put("1", "");
-        Assert.assertFalse(TestUtil.throwException((a) -> Maps.checkSafe(map)));
+        Assert.assertFalse(TestUtil.throwException(() -> Maps.checkSafe(map)));
 
     }
 

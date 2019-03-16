@@ -20,7 +20,7 @@ public class Collections2Test {
         List list = Arrays.asList(1);
         List list2 = Arrays.asList(1, null);
 
-        Assert.assertFalse(TestUtil.throwException((a) -> cn.truthseeker.container.util.Assert.checkSafe(list)));
-        Assert.assertTrue(TestUtil.throwException((a) -> cn.truthseeker.container.util.Assert.checkSafe(list2)));
+        Assert.assertFalse(TestUtil.throwException(() -> cn.truthseeker.container.util.Assert.checkSafe(list)));
+        Assert.assertTrue(TestUtil.throwException(() -> cn.truthseeker.container.util.Assert.checkSafe(list2)));
     }
 }

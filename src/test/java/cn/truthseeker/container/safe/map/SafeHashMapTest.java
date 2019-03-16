@@ -18,11 +18,11 @@ public class SafeHashMapTest {
     @Test
     public void init() {
         Map<Object, Object> map = Maps.of(null, null);
-        Assert.assertTrue(TestUtil.throwException((a) -> new SafeHashMap(map)));
+        Assert.assertTrue(TestUtil.throwException(() -> new SafeHashMap(map)));
 
         map.clear();
         map.put("", "");
-        Assert.assertFalse(TestUtil.throwException((a) -> new SafeHashMap(map)));
+        Assert.assertFalse(TestUtil.throwException(() -> new SafeHashMap(map)));
 
         new SafeHashMap(1);
         new SafeHashMap(1, 0.5f);
@@ -31,11 +31,11 @@ public class SafeHashMapTest {
     @Test
     public void put() {
         SafeHashMap hashMap = new SafeHashMap();
-        Assert.assertTrue(TestUtil.throwException((a) -> hashMap.put(null, "")));
-        Assert.assertTrue(TestUtil.throwException((a) -> hashMap.put("", null)));
+        Assert.assertTrue(TestUtil.throwException(() -> hashMap.put(null, "")));
+        Assert.assertTrue(TestUtil.throwException(() -> hashMap.put("", null)));
 
-        Assert.assertFalse(TestUtil.throwException((a) -> hashMap.put("", "")));
-        Assert.assertFalse(TestUtil.throwException((a) -> hashMap.put("", "")));
+        Assert.assertFalse(TestUtil.throwException(() -> hashMap.put("", "")));
+        Assert.assertFalse(TestUtil.throwException(() -> hashMap.put("", "")));
     }
 
     @Test
@@ -43,11 +43,11 @@ public class SafeHashMapTest {
         Map<Object, Object> map = Maps.of(null, null);
 
         SafeHashMap hashMap = new SafeHashMap();
-        Assert.assertTrue(TestUtil.throwException((a) -> hashMap.putAll(map)));
+        Assert.assertTrue(TestUtil.throwException(() -> hashMap.putAll(map)));
 
         map.clear();
         map.put("", "");
-        Assert.assertFalse(TestUtil.throwException((a) -> hashMap.putAll(map)));
+        Assert.assertFalse(TestUtil.throwException(() -> hashMap.putAll(map)));
     }
 
     @Test
@@ -146,6 +146,6 @@ public class SafeHashMapTest {
         Assert.assertTrue(all.firstValue() == 1);
 
         all.put("b",1);
-        Assert.assertTrue(TestUtil.throwException((a)->all.firstKey()));
+        Assert.assertTrue(TestUtil.throwException(()->all.firstKey()));
     }
 }
