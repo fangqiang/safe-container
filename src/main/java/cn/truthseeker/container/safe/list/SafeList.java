@@ -1,5 +1,7 @@
 package cn.truthseeker.container.safe.list;
 
+import cn.truthseeker.container.util.Utils;
+
 import java.util.List;
 
 /**
@@ -9,5 +11,15 @@ import java.util.List;
  * @date: Created by on 19/3/14
  */
 public interface SafeList<E> extends List<E> {
+    default void addIgnoreNull(E e){
+        if(e != null){
+            add(e);
+        }
+    }
 
+    default void addIgnoreEmpty(E e){
+        if(Utils.isNotEmpty(e)){
+            add(e);
+        }
+    }
 }

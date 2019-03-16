@@ -1,5 +1,7 @@
 package cn.truthseeker.container.safe.map;
 
+import cn.truthseeker.container.util.Utils;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +21,18 @@ public interface SafeMap<K, V> extends Map<K, V> {
     <T> T newInstance();
 
     Optional<V> getNullable(Object key);
+
+    default void putIgnoreNull(K k, V v){
+        if(Utils.isNoneNull(k, v)){
+            put(k,v);
+        }
+    }
+
+    default void putIgnoreEmpty(K k, V v){
+        if(Utils.isNoneEmpty(k, v)){
+            put(k,v);
+        }
+    }
 
     /**
      * 按key映射

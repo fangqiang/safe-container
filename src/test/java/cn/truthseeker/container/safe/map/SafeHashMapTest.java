@@ -36,6 +36,18 @@ public class SafeHashMapTest {
 
         Assert.assertFalse(TestUtil.throwException(() -> hashMap.put("", "")));
         Assert.assertFalse(TestUtil.throwException(() -> hashMap.put("", "")));
+
+        hashMap.clear();
+        hashMap.put("a","a");
+        Assert.assertTrue(hashMap.size()==1);
+        hashMap.putIgnoreNull("b",null);
+        Assert.assertTrue(hashMap.size()==1);
+        hashMap.putIgnoreEmpty("b","");
+        Assert.assertTrue(hashMap.size()==1);
+        hashMap.putIgnoreNull("b","");
+        Assert.assertTrue(hashMap.size()==2);
+        hashMap.putIgnoreEmpty("c","c");
+        Assert.assertTrue(hashMap.size()==3);
     }
 
     @Test

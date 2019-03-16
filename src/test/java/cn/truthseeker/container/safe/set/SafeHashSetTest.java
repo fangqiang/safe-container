@@ -25,6 +25,18 @@ public class SafeHashSetTest {
     public void add() {
         SafeHashSet set = new SafeHashSet();
         Assert.assertTrue(TestUtil.throwException(() -> set.add(null)));
+
+        set.clear();
+        set.add("a");
+        Assert.assertTrue(set.size()==1);
+        set.addIgnoreNull(null);
+        Assert.assertTrue(set.size()==1);
+        set.addIgnoreEmpty("");
+        Assert.assertTrue(set.size()==1);
+        set.addIgnoreNull("");
+        Assert.assertTrue(set.size()==2);
+        set.addIgnoreEmpty("1");
+        Assert.assertTrue(set.size()==3);
     }
 
     @Test

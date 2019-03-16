@@ -53,5 +53,15 @@ public class SafeArrayListTest {
         SafeArrayList list = new SafeArrayList();
         list.add(1);
         list.set(0, 1);
+
+        Assert.assertTrue(list.size()==1);
+        list.addIgnoreNull(null);
+        Assert.assertTrue(list.size()==1);
+        list.addIgnoreEmpty("");
+        Assert.assertTrue(list.size()==1);
+        list.addIgnoreNull("");
+        Assert.assertTrue(list.size()==2);
+        list.addIgnoreEmpty("1");
+        Assert.assertTrue(list.size()==3);
     }
 }
