@@ -1,5 +1,6 @@
 package cn.truthseeker.container.safe.list;
 
+import cn.truthseeker.container.safe.set.SafeSet;
 import cn.truthseeker.container.util.Utils;
 
 import java.util.List;
@@ -21,5 +22,10 @@ public interface SafeList<E> extends List<E> {
         if(Utils.isNotEmpty(e)){
             add(e);
         }
+    }
+
+    default SafeList<E> cleanEmpty(){
+        removeIf(Utils::isEmpty);
+        return this;
     }
 }

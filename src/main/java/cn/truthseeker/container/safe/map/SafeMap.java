@@ -1,5 +1,6 @@
 package cn.truthseeker.container.safe.map;
 
+import cn.truthseeker.container.safe.list.SafeList;
 import cn.truthseeker.container.util.Utils;
 
 import java.util.Collection;
@@ -114,5 +115,10 @@ public interface SafeMap<K, V> extends Map<K, V> {
      */
     default V getTheOnlyValue() {
         return Maps.getTheOnlyValue(this);
+    }
+
+    default SafeMap<K, V> cleanEmpty(){
+        entrySet().removeIf(entry -> Utils.isAnyEmpty(entry.getKey(),entry.getValue()));
+        return this;
     }
 }

@@ -46,9 +46,11 @@ public class SafesTest {
     public void newSafeMapOmitEmpty() {
         Map<String, String> map = Maps.of(null, null, "b", "", "a", "1", HashMap::new);
         Assert.assertTrue(map.size() == 3);
-        SafeMap<String, String> safeMap = Safes.newSafeMapOmitEmpty(map);
+        SafeMap<String, String> safeMap = Safes.newSafeMapOmitNull(map);
+        Assert.assertTrue(safeMap.size() == 2);
+        safeMap.cleanEmpty();
         Assert.assertTrue(safeMap.size() == 1);
-        safeMap = Safes.newSafeSortMapOmitEmpty(map);
+        safeMap = Safes.newSafeSortMapOmitNull(map).cleanEmpty();
         Assert.assertTrue(safeMap.size() == 1);
     }
 
@@ -72,9 +74,11 @@ public class SafesTest {
     public void newSafeListOmitEmpty() {
         List<String> list = Arrays.asList(null, "", "a");
         Assert.assertTrue(list.size() == 3);
-        SafeList<String> l = Safes.newSafeListOmitEmpty(list);
+        SafeList<String> l = Safes.newSafeListOmitNull(list);
+        Assert.assertTrue(l.size() == 2);
+        l.cleanEmpty();
         Assert.assertTrue(l.size() == 1);
-        l = Safes.newSafeLinkedListOmitEmpty(list);
+        l = Safes.newSafeLinkedListOmitNull(list).cleanEmpty();
         Assert.assertTrue(l.size() == 1);
     }
 
@@ -98,9 +102,11 @@ public class SafesTest {
     public void newSafeSetOmitEmpty() {
         List<String> list = Arrays.asList(null, "", "a");
         Assert.assertTrue(list.size() == 3);
-        SafeSet<String> l = Safes.newSafeSetOmitEmpty(list);
+        SafeSet<String> l = Safes.newSafeSetOmitNull(list);
+        Assert.assertTrue(l.size() == 2);
+        l.cleanEmpty();
         Assert.assertTrue(l.size() == 1);
-        l = Safes.newSafeSortSetOmitEmpty(list);
+        l = Safes.newSafeSortSetOmitNull(list).cleanEmpty();
         Assert.assertTrue(l.size() == 1);
     }
 }

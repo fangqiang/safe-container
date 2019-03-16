@@ -71,21 +71,6 @@ public final class Safes {
         return Maps.filterByKeyValue(map, (k, v) -> Utils.isNoneNull(k, v), SafeTreeMap::new);
     }
 
-    /**
-     * 包装成SafeMap，并将其中的空值（key或value为null或是一个空字符串）删除
-     */
-    public static <K, V> SafeMap<K, V> newSafeMapOmitEmpty(Map<K, V> map) {
-        return Maps.filterByKeyValue(map, (k, v) -> Utils.isNoneEmpty(k, v), SafeHashMap::new);
-    }
-
-    /**
-     * 包装成SafeMap，并将其中的空值（key或value为null或是一个空字符串）删除
-     */
-    public static <K, V> SafeMap<K, V> newSafeSortMapOmitEmpty(Map<K, V> map) {
-        return Maps.filterByKeyValue(map, (k, v) -> Utils.isNoneEmpty(k, v), SafeTreeMap::new);
-    }
-
-
     public static <E> SafeList<E> newSafeList() {
         return new SafeArrayList<>();
     }
@@ -108,20 +93,6 @@ public final class Safes {
         return list.stream().filter(Objects::nonNull).collect(Collectors.toCollection(SafeLinkedList::new));
     }
 
-    /**
-     * 包装成SafeList，并将其中的空值（key或value为null或是一个空字符串）删除
-     */
-    public static <E> SafeList<E> newSafeListOmitEmpty(List<E> list) {
-        return list.stream().filter(Utils::isNotEmpty).collect(Collectors.toCollection(SafeArrayList::new));
-    }
-
-    /**
-     * 包装成SafeList，并将其中的空值（key或value为null或是一个空字符串）删除
-     */
-    public static <E> SafeList<E> newSafeLinkedListOmitEmpty(List<E> list) {
-        return list.stream().filter(Utils::isNotEmpty).collect(Collectors.toCollection(SafeLinkedList::new));
-    }
-
     public static <E> SafeSet<E> newSafeSet() {
         return new SafeHashSet<>();
     }
@@ -142,19 +113,5 @@ public final class Safes {
      */
     public static <E> SafeSet<E> newSafeSortSetOmitNull(List<E> list) {
         return list.stream().filter(Objects::nonNull).collect(Collectors.toCollection(SafeTreeSet::new));
-    }
-
-    /**
-     * 包装成SafeSet，并将其中的空值（key或value为null或是一个空字符串）删除
-     */
-    public static <E> SafeSet<E> newSafeSetOmitEmpty(List<E> list) {
-        return list.stream().filter(Utils::isNotEmpty).collect(Collectors.toCollection(SafeHashSet::new));
-    }
-
-    /**
-     * 包装成SafeSet，并将其中的空值（key或value为null或是一个空字符串）删除
-     */
-    public static <E> SafeSet<E> newSafeSortSetOmitEmpty(List<E> list) {
-        return list.stream().filter(Utils::isNotEmpty).collect(Collectors.toCollection(SafeTreeSet::new));
     }
 }

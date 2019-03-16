@@ -22,4 +22,9 @@ public interface SafeSet<E> extends Set<E> {
             add(e);
         }
     }
+
+    default SafeSet<E> cleanEmpty(){
+        removeIf(Utils::isEmpty);
+        return this;
+    }
 }
