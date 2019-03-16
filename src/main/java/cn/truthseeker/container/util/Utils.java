@@ -1,9 +1,7 @@
 package cn.truthseeker.container.util;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @Description:
@@ -160,5 +158,20 @@ public class Utils {
 
     public static boolean isEmpty(Object object) {
         return object == null || (object instanceof String && "".equals(((String) object).trim()));
+    }
+
+    public static boolean oneNull(Object a, Object b){
+        return a == null ^ b == null;
+    }
+
+    public static boolean oneEmpty(String a, String b){
+        return isEmpty(a) ^ isEmpty(b);
+    }
+
+    public static List<String> splitOmitEmpty(String str, String regex){
+        return Arrays.stream(str.split(regex))
+                .map(String::trim)
+                .filter(Utils::isNotEmpty)
+                .collect(Collectors.toList());
     }
 }

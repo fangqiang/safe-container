@@ -47,14 +47,8 @@ public class SafeTreeMap<K, V> extends TreeMap<K, V> implements SafeMap<K, V> {
     }
 
     @Override
-    public Optional<V> getNullable(Object key) {
+    public Optional<V> getNullable(K key) {
         return Optional.ofNullable(super.get(key));
-    }
-
-    @Override
-    @Deprecated
-    public V get(Object key) {
-        return super.get(key);
     }
 
     @Override

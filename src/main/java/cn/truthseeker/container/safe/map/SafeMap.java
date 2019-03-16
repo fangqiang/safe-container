@@ -2,6 +2,7 @@ package cn.truthseeker.container.safe.map;
 
 import cn.truthseeker.container.safe.list.SafeList;
 import cn.truthseeker.container.util.Utils;
+import cn.truthseeker.tags.Nullable;
 
 import java.util.Collection;
 import java.util.List;
@@ -21,7 +22,12 @@ public interface SafeMap<K, V> extends Map<K, V> {
 
     <T> T newInstance();
 
-    Optional<V> getNullable(Object key);
+    Optional<V> getNullable(K key);
+
+    @Deprecated // use getNullable() instead
+    @Nullable
+    @Override
+    V get(Object key);
 
     default void putIgnoreNull(K k, V v){
         if(Utils.isNoneNull(k, v)){
@@ -117,8 +123,13 @@ public interface SafeMap<K, V> extends Map<K, V> {
         return Maps.getTheOnlyValue(this);
     }
 
-    default SafeMap<K, V> cleanEmpty(){
+    default SafeMap<K, V> removeEmpty(){
         entrySet().removeIf(entry -> Utils.isAnyEmpty(entry.getKey(),entry.getValue()));
+        return this;
+    }
+
+    default SafeMap<K, V> removeIf(BiPredicate<K,V> filter){
+        entrySet().removeIf(entry -> filter.test(entry.getKey(),entry.getValue()));
         return this;
     }
 }

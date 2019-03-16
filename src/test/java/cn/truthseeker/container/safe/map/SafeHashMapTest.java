@@ -160,4 +160,13 @@ public class SafeHashMapTest {
         all.put("b",1);
         Assert.assertTrue(TestUtil.throwException(()->all.getTheOnlyKey()));
     }
+
+    @Test
+    public void removeIf() {
+        SafeHashMap<String, Integer> all = Maps.of("a", 1,"b", 2, SafeHashMap::new);
+        Assert.assertTrue(all.size()==2);
+        all.removeIf((k,v)-> k.equals("a") && v==1);
+        Assert.assertTrue(all.size()==1);
+        Assert.assertTrue(all.getTheOnlyKey().equals("b"));
+    }
 }

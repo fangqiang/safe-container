@@ -48,9 +48,9 @@ public class SafesTest {
         Assert.assertTrue(map.size() == 3);
         SafeMap<String, String> safeMap = Safes.newSafeMapOmitNull(map);
         Assert.assertTrue(safeMap.size() == 2);
-        safeMap.cleanEmpty();
+        safeMap.removeEmpty();
         Assert.assertTrue(safeMap.size() == 1);
-        safeMap = Safes.newSafeSortMapOmitNull(map).cleanEmpty();
+        safeMap = Safes.newSafeSortMapOmitNull(map).removeEmpty();
         Assert.assertTrue(safeMap.size() == 1);
     }
 

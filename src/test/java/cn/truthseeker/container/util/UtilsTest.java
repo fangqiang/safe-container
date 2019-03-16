@@ -3,6 +3,7 @@ package cn.truthseeker.container.util;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -57,5 +58,88 @@ public class UtilsTest {
         assertFalse(Utils.isNotEmpty(new float[0]));
         assertFalse(Utils.isNotEmpty(new boolean[0]));
         assertFalse(Utils.isNotEmpty(new char[0]));
+    }
+
+    @Test
+    public void oneNull() {
+        assertTrue(Utils.oneNull("a",null));
+        assertTrue(Utils.oneNull(null,"a"));
+        assertFalse(Utils.oneNull(null,null));
+        assertFalse(Utils.oneNull("a","a"));
+    }
+
+    @Test
+    public void oneEmpty() {
+        assertTrue(Utils.oneEmpty("","a"));
+        assertTrue(Utils.oneEmpty("a",""));
+        assertFalse(Utils.oneEmpty("",null));
+        assertFalse(Utils.oneEmpty("a","a"));
+    }
+
+    @Test
+    public void splitOmitEmpty() {
+        List<String> strings = Utils.splitOmitEmpty(",, a ,b ,\r \t,c,,", ",");
+        assertTrue(strings.size()==3);
+        assertTrue(strings.containsAll(Arrays.asList("a","b","c")));
+    }
+
+    @Test
+    public void isEmpty() {
+    }
+
+    @Test
+    public void isEmpty1() {
+    }
+
+    @Test
+    public void isEmpty2() {
+    }
+
+    @Test
+    public void isEmpty3() {
+    }
+
+    @Test
+    public void isEmpty4() {
+    }
+
+    @Test
+    public void isEmpty5() {
+    }
+
+    @Test
+    public void isEmpty6() {
+    }
+
+    @Test
+    public void isEmpty7() {
+    }
+
+    @Test
+    public void isEmpty8() {
+    }
+
+    @Test
+    public void isEmpty9() {
+    }
+
+    @Test
+    public void isEmpty10() {
+    }
+
+    @Test
+    public void isEmpty11() {
+    }
+
+    @Test
+    public void isNoneNull() {
+    }
+
+    @Test
+    public void isNoneEmpty() {
+    }
+
+    @Test
+    public void isEmpty12() {
     }
 }
