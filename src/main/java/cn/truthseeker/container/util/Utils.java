@@ -18,7 +18,7 @@ public class Utils {
         }
     }
 
-    public static <K,V> void mapAddList(Map<K, List<V>> map, K key, V item) {
+    public static <K, V> void mapAddList(Map<K, List<V>> map, K key, V item) {
         List<V> val = map.get(key);
 
         if (val != null) {
@@ -28,102 +28,6 @@ public class Utils {
             l.add(item);
             map.put(key, l);
         }
-    }
-
-    public static boolean isNotEmpty(String v) {
-        return !isEmpty(v);
-    }
-
-    public static boolean isEmpty(String v) {
-        return v == null || "".equals(v.trim());
-    }
-
-    public static boolean isNotEmpty(byte[] v) {
-        return !isEmpty(v);
-    }
-
-    public static boolean isEmpty(byte[] v) {
-        return v == null || v.length == 0;
-    }
-
-    public static boolean isNotEmpty(short[] v) {
-        return !isEmpty(v);
-    }
-
-    public static boolean isEmpty(short[] v) {
-        return v == null || v.length == 0;
-    }
-
-    public static boolean isNotEmpty(int[] v) {
-        return !isEmpty(v);
-    }
-
-    public static boolean isEmpty(int[] v) {
-        return v == null || v.length == 0;
-    }
-
-    public static boolean isNotEmpty(long[] v) {
-        return !isEmpty(v);
-    }
-
-    public static boolean isEmpty(long[] v) {
-        return v == null || v.length == 0;
-    }
-
-    public static boolean isNotEmpty(double[] v) {
-        return !isEmpty(v);
-    }
-
-    public static boolean isEmpty(double[] v) {
-        return v == null || v.length == 0;
-    }
-
-    public static boolean isNotEmpty(float[] v) {
-        return !isEmpty(v);
-    }
-
-    public static boolean isEmpty(float[] v) {
-        return v == null || v.length == 0;
-    }
-
-    public static boolean isNotEmpty(boolean[] v) {
-        return !isEmpty(v);
-    }
-
-    public static boolean isEmpty(boolean[] v) {
-        return v == null || v.length == 0;
-    }
-
-    public static boolean isNotEmpty(char[] v) {
-        return !isEmpty(v);
-    }
-
-    public static boolean isEmpty(char[] v) {
-        return v == null || v.length == 0;
-    }
-
-    public static boolean isNotEmpty(Object[] v) {
-        return !isEmpty(v);
-    }
-
-    public static boolean isEmpty(Object[] v) {
-        return v == null || v.length == 0;
-    }
-
-    public static boolean isNotEmpty(Collection v) {
-        return !isEmpty(v);
-    }
-
-    public static boolean isEmpty(Collection v) {
-        return v == null || v.isEmpty();
-    }
-
-    public static boolean isNotEmpty(Map v) {
-        return !isEmpty(v);
-    }
-
-    public static boolean isEmpty(Map v) {
-        return v == null || v.isEmpty();
     }
 
     public static boolean isAnyNull(Object... objects) {
@@ -152,26 +56,60 @@ public class Utils {
         return true;
     }
 
+    public static boolean oneNull(Object a, Object b) {
+        return a == null ^ b == null;
+    }
+
+    public static boolean oneEmpty(String a, String b) {
+        return isEmpty(a) ^ isEmpty(b);
+    }
+
+    public static List<String> splitOmitEmpty(String str, String regex) {
+        return Arrays.stream(str.split(regex))
+                .map(String::trim)
+                .filter(Utils::isNotEmpty)
+                .collect(Collectors.toList());
+    }
+
     public static boolean isNotEmpty(Object object) {
         return !isEmpty(object);
     }
 
     public static boolean isEmpty(Object object) {
-        return object == null || (object instanceof String && "".equals(((String) object).trim()));
-    }
+        if (object == null) {
+            return true;
+        }
+        if (object instanceof String) {
+            return "".equals(((String) object).trim());
+        }
+        if (object instanceof Collection) {
+            return ((Collection) object).isEmpty();
+        }
+        if (object instanceof Map) {
+            return ((Map) object).isEmpty();
+        }
+        if (object instanceof Object[]) {
+            return ((Object[]) object).length == 0;
+        }
 
-    public static boolean oneNull(Object a, Object b){
-        return a == null ^ b == null;
-    }
+        if (object instanceof byte[]) {
+            return ((byte[]) object).length == 0;
+        } else if (object instanceof char[]) {
+            return ((char[]) object).length == 0;
+        } else if (object instanceof int[]) {
+            return ((int[]) object).length == 0;
+        } else if (object instanceof boolean[]) {
+            return ((boolean[]) object).length == 0;
+        } else if (object instanceof long[]) {
+            return ((long[]) object).length == 0;
+        } else if (object instanceof double[]) {
+            return ((double[]) object).length == 0;
+        } else if (object instanceof float[]) {
+            return ((float[]) object).length == 0;
+        } else if (object instanceof short[]) {
+            return ((short[]) object).length == 0;
+        }
 
-    public static boolean oneEmpty(String a, String b){
-        return isEmpty(a) ^ isEmpty(b);
-    }
-
-    public static List<String> splitOmitEmpty(String str, String regex){
-        return Arrays.stream(str.split(regex))
-                .map(String::trim)
-                .filter(Utils::isNotEmpty)
-                .collect(Collectors.toList());
+        return false;
     }
 }
