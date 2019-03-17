@@ -1,6 +1,6 @@
 package cn.truthseeker.container.safe.set;
 
-import cn.truthseeker.container.util.Utils;
+import cn.truthseeker.container.util.Emptys;
 
 import java.util.Set;
 
@@ -18,13 +18,13 @@ public interface SafeSet<E> extends Set<E> {
     }
 
     default void addIgnoreEmpty(E e){
-        if(Utils.isNotEmpty(e)){
+        if(Emptys.isNotEmpty(e)){
             add(e);
         }
     }
 
     default SafeSet<E> cleanEmpty(){
-        removeIf(Utils::isEmpty);
+        removeIf(Emptys::isEmpty);
         return this;
     }
 }

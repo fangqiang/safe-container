@@ -10,7 +10,7 @@ import cn.truthseeker.container.safe.map.SafeTreeMap;
 import cn.truthseeker.container.safe.set.SafeHashSet;
 import cn.truthseeker.container.safe.set.SafeSet;
 import cn.truthseeker.container.safe.set.SafeTreeSet;
-import cn.truthseeker.container.util.Utils;
+import cn.truthseeker.container.util.Emptys;
 
 import java.util.List;
 import java.util.Map;
@@ -61,14 +61,14 @@ public final class Safes {
      * 包装成SafeMap，并将其中的null值（key或value为null）删除
      */
     public static <K, V> SafeMap<K, V> newSafeMapOmitNull(Map<K, V> map) {
-        return Maps.filterByKeyValue(map, (k, v) -> Utils.isNoneNull(k, v), SafeHashMap::new);
+        return Maps.filterByKeyValue(map, (k, v) -> Emptys.isNoneNull(k, v), SafeHashMap::new);
     }
 
     /**
      * 包装成SafeMap，并将其中的null值（key或value为null）删除
      */
     public static <K, V> SafeMap<K, V> newSafeSortMapOmitNull(Map<K, V> map) {
-        return Maps.filterByKeyValue(map, (k, v) -> Utils.isNoneNull(k, v), SafeTreeMap::new);
+        return Maps.filterByKeyValue(map, (k, v) -> Emptys.isNoneNull(k, v), SafeTreeMap::new);
     }
 
     public static <E> SafeList<E> newSafeList() {

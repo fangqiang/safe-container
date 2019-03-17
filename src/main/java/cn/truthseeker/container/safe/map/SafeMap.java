@@ -1,7 +1,6 @@
 package cn.truthseeker.container.safe.map;
 
-import cn.truthseeker.container.safe.list.SafeList;
-import cn.truthseeker.container.util.Utils;
+import cn.truthseeker.container.util.Emptys;
 import cn.truthseeker.tags.Nullable;
 
 import java.util.Collection;
@@ -30,13 +29,13 @@ public interface SafeMap<K, V> extends Map<K, V> {
     V get(Object key);
 
     default void putIgnoreNull(K k, V v){
-        if(Utils.isNoneNull(k, v)){
+        if(Emptys.isNoneNull(k, v)){
             put(k,v);
         }
     }
 
     default void putIgnoreEmpty(K k, V v){
-        if(Utils.isNoneEmpty(k, v)){
+        if(Emptys.isNoneEmpty(k, v)){
             put(k,v);
         }
     }
@@ -124,7 +123,7 @@ public interface SafeMap<K, V> extends Map<K, V> {
     }
 
     default SafeMap<K, V> removeEmpty(){
-        entrySet().removeIf(entry -> Utils.isAnyEmpty(entry.getKey(),entry.getValue()));
+        entrySet().removeIf(entry -> Emptys.isAnyEmpty(entry.getKey(),entry.getValue()));
         return this;
     }
 
