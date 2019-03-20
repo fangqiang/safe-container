@@ -1,6 +1,7 @@
 package cn.truthseeker.container.safe.list;
 
 import cn.truthseeker.TestUtil;
+import cn.truthseeker.container.safe.Safes;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -63,5 +64,16 @@ public class SafeArrayListTest {
         Assert.assertTrue(list.size()==2);
         list.addIgnoreEmpty("1");
         Assert.assertTrue(list.size()==3);
+    }
+
+    @Test
+    public void anySatisfied(){
+        Assert.assertTrue(Safes.newSafeSetOmitNull(Arrays.asList(1,2)).anySatisfied((a)->a==1));
+        Assert.assertTrue(!Safes.newSafeSetOmitNull(Arrays.asList(1,2)).anySatisfied((a)->a==3));
+    }
+
+    @Test
+    public void add2(){
+        Assert.assertTrue(Safes.newSafeList().add2(1).size()==1);
     }
 }

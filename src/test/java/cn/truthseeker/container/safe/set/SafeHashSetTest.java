@@ -1,10 +1,12 @@
 package cn.truthseeker.container.safe.set;
 
 import cn.truthseeker.TestUtil;
+import cn.truthseeker.container.safe.Safes;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * @Description:
@@ -43,5 +45,16 @@ public class SafeHashSetTest {
     public void addAll() {
         SafeHashSet set = new SafeHashSet();
         Assert.assertTrue(TestUtil.throwException(() -> set.addAll(Arrays.asList(null))));
+    }
+
+    @Test
+    public void anySatisfied(){
+        Assert.assertTrue(Safes.newSafeListOmitNull(Arrays.asList(1,2)).anySatisfied((a)->a==1));
+        Assert.assertTrue(!Safes.newSafeListOmitNull(Arrays.asList(1,2)).anySatisfied((a)->a==3));
+    }
+
+    @Test
+    public void add2(){
+        Assert.assertTrue(Safes.newSafeSet().add2(1).add2(1).size()==1);
     }
 }

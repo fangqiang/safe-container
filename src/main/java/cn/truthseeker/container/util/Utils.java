@@ -1,6 +1,7 @@
 package cn.truthseeker.container.util;
 
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -36,4 +37,21 @@ public class Utils {
                 .collect(Collectors.toList());
     }
 
+    public static <T> boolean anySatisfied(Iterable<T> objects, Predicate<T> predicate){
+        for (T object : objects) {
+            if(predicate.test(object)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static <T> boolean anySatisfied(T[] objects, Predicate<T> predicate){
+        for (T object : objects) {
+            if(predicate.test(object)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

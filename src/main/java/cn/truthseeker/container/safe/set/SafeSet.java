@@ -1,8 +1,10 @@
 package cn.truthseeker.container.safe.set;
 
 import cn.truthseeker.container.util.Emptys;
+import cn.truthseeker.container.util.Utils;
 
 import java.util.Set;
+import java.util.function.Predicate;
 
 /**
  * @Description:
@@ -25,6 +27,15 @@ public interface SafeSet<E> extends Set<E> {
 
     default SafeSet<E> cleanEmpty(){
         removeIf(Emptys::isEmpty);
+        return this;
+    }
+
+    default boolean anySatisfied(Predicate<E> predicate){
+        return Utils.anySatisfied(this, predicate);
+    }
+
+    default SafeSet<E> add2(E e){
+        add(e);
         return this;
     }
 }

@@ -131,4 +131,18 @@ public interface SafeMap<K, V> extends Map<K, V> {
         entrySet().removeIf(entry -> filter.test(entry.getKey(),entry.getValue()));
         return this;
     }
+
+    default boolean anySatisfied(BiPredicate<K,V> filter){
+        for (Entry<K, V> entry : entrySet()) {
+            if(filter.test(entry.getKey(), entry.getValue())){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    default SafeMap<K, V> put2(K k, V v){
+        put(k, v);
+        return this;
+    }
 }

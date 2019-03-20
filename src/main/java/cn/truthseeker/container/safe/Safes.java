@@ -12,6 +12,7 @@ import cn.truthseeker.container.safe.set.SafeSet;
 import cn.truthseeker.container.safe.set.SafeTreeSet;
 import cn.truthseeker.container.util.Emptys;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -82,14 +83,14 @@ public final class Safes {
     /**
      * 包装成SafeList，并将其中的null值（key或value为null）删除
      */
-    public static <E> SafeList<E> newSafeListOmitNull(List<E> list) {
+    public static <E> SafeList<E> newSafeListOmitNull(Collection<E> list) {
         return list.stream().filter(Objects::nonNull).collect(Collectors.toCollection(SafeArrayList::new));
     }
 
     /**
      * 包装成SafeList，并将其中的null值（key或value为null）删除
      */
-    public static <E> SafeList<E> newSafeLinkedListOmitNull(List<E> list) {
+    public static <E> SafeList<E> newSafeLinkedListOmitNull(Collection<E> list) {
         return list.stream().filter(Objects::nonNull).collect(Collectors.toCollection(SafeLinkedList::new));
     }
 
@@ -104,14 +105,14 @@ public final class Safes {
     /**
      * 包装成SafeSet，并将其中的null值（key或value为null）删除
      */
-    public static <E> SafeSet<E> newSafeSetOmitNull(List<E> list) {
+    public static <E> SafeSet<E> newSafeSetOmitNull(Collection<E> list) {
         return list.stream().filter(Objects::nonNull).collect(Collectors.toCollection(SafeHashSet::new));
     }
 
     /**
      * 包装成SafeSet，并将其中的null值（key或value为null）删除
      */
-    public static <E> SafeSet<E> newSafeSortSetOmitNull(List<E> list) {
+    public static <E> SafeSet<E> newSafeSortSetOmitNull(Collection<E> list) {
         return list.stream().filter(Objects::nonNull).collect(Collectors.toCollection(SafeTreeSet::new));
     }
 }

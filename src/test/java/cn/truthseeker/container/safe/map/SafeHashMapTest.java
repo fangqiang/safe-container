@@ -1,11 +1,15 @@
 package cn.truthseeker.container.safe.map;
 
 import cn.truthseeker.TestUtil;
+import cn.truthseeker.container.safe.Safes;
+import cn.truthseeker.container.safe.set.SafeHashSet;
+import cn.truthseeker.container.util.Utils;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.function.Predicate;
 
 /**
  * @Description:
@@ -168,5 +172,16 @@ public class SafeHashMapTest {
         all.removeIf((k,v)-> k.equals("a") && v==1);
         Assert.assertTrue(all.size()==1);
         Assert.assertTrue(all.getTheOnlyKey().equals("b"));
+    }
+
+    @Test
+    public void anySatisfied(){
+        Assert.assertTrue(Maps.of(10,1,20,2, SafeHashMap::new).anySatisfied((a,b)->a+b==11));
+        Assert.assertTrue(!Maps.of(10,1,20,2, SafeHashMap::new).anySatisfied((a,b)->a+b==12));
+    }
+
+    @Test
+    public void add2(){
+        Assert.assertTrue(Safes.newSafeMap().put2(1,1).size()==1);
     }
 }

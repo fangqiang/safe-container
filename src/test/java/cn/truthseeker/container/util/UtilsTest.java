@@ -2,7 +2,6 @@ package cn.truthseeker.container.util;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -50,5 +49,16 @@ public class UtilsTest {
         assertTrue(strings.containsAll(Arrays.asList("a","b","c")));
         strings = Utils.splitOmitEmpty(" , ",",");
         assertTrue(strings.size()==0);
+    }
+
+
+    @Test
+    public void anySatisfy() {
+        assertTrue(Utils.anySatisfied(Arrays.asList(1,2), a->a==1));
+        assertTrue(Utils.anySatisfied(Arrays.asList(1,2).toArray(), a-> (int)a==2));
+
+        assertTrue(!Utils.anySatisfied(Arrays.asList(1,2), a->a==3));
+        assertTrue(!Utils.anySatisfied(Arrays.asList(1,2).toArray(), a-> (int)a==3));
+
     }
 }

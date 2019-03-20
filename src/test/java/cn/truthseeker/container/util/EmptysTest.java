@@ -16,6 +16,7 @@ import static org.junit.Assert.*;
 public class EmptysTest {
     @Test
     public void isNotEmpty() {
+        assertTrue(Emptys.isNotEmpty(new Object()));
         assertFalse(Emptys.isNotEmpty(new HashMap()));
         assertFalse(Emptys.isNotEmpty(new ArrayList()));
         assertFalse(Emptys.isNotEmpty("\r"));
