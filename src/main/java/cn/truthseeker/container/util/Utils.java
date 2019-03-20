@@ -31,7 +31,7 @@ public class Utils {
         }
     }
 
-    public static List<String> splitOmitEmpty(String str, String regex) {
+    public static List<String> splitIgnoreEmpty(String str, String regex) {
         return Arrays.stream(str.split(regex))
                 .map(String::trim)
                 .filter(Emptys::isNotEmpty)

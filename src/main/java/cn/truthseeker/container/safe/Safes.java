@@ -55,14 +55,14 @@ public final class Safes {
     /**
      * 包装成SafeMap，并将其中的null值（key或value为null）删除
      */
-    public static <K, V> SafeMap<K, V> newSafeMapOmitNull(Map<K, V> map) {
+    public static <K, V> SafeMap<K, V> newSafeMapIgnoreNull(Map<K, V> map) {
         return CommonMaps.filterByKeyValue(map, (k, v) -> Emptys.isNoneNull(k, v), SafeHashMap::new);
     }
 
     /**
      * 包装成SafeMap，并将其中的null值（key或value为null）删除
      */
-    public static <K, V> SafeMap<K, V> newSafeSortMapOmitNull(Map<K, V> map) {
+    public static <K, V> SafeMap<K, V> newSafeSortMapIgnoreNull(Map<K, V> map) {
         return CommonMaps.filterByKeyValue(map, (k, v) -> Emptys.isNoneNull(k, v), SafeTreeMap::new);
     }
 
@@ -74,24 +74,24 @@ public final class Safes {
         return new SafeLinkedList<>();
     }
 
-    public static <E> SafeList<E> newSafeListOmitNull(E[] list){
-        return newSafeListOmitNull(Arrays.asList(list));
+    public static <E> SafeList<E> newSafeListIgnoreNull(E[] list){
+        return newSafeListIgnoreNull(Arrays.asList(list));
     }
 
     /**
      * 包装成SafeList，并将其中的null值（key或value为null）删除
      */
-    public static <E> SafeList<E> newSafeListOmitNull(Collection<E> list) {
+    public static <E> SafeList<E> newSafeListIgnoreNull(Collection<E> list) {
         return list.stream().filter(Objects::nonNull).collect(Collectors.toCollection(SafeArrayList::new));
     }
 
-    public static <E> SafeList<E> newSafeLinkedListOmitNull(E[] list){
-        return newSafeLinkedListOmitNull(Arrays.asList(list));
+    public static <E> SafeList<E> newSafeLinkedListIgnoreNull(E[] list){
+        return newSafeLinkedListIgnoreNull(Arrays.asList(list));
     }
     /**
      * 包装成SafeList，并将其中的null值（key或value为null）删除
      */
-    public static <E> SafeList<E> newSafeLinkedListOmitNull(Collection<E> list) {
+    public static <E> SafeList<E> newSafeLinkedListIgnoreNull(Collection<E> list) {
         return list.stream().filter(Objects::nonNull).collect(Collectors.toCollection(SafeLinkedList::new));
     }
 
@@ -103,25 +103,25 @@ public final class Safes {
         return new SafeTreeSet<>();
     }
 
-    public static <E> SafeSet<E> newSafeSetOmitNull(E[] list){
-        return newSafeSetOmitNull(Arrays.asList(list));
+    public static <E> SafeSet<E> newSafeSetIgnoreNull(E[] list){
+        return newSafeSetIgnoreNull(Arrays.asList(list));
     }
 
     /**
      * 包装成SafeSet，并将其中的null值（key或value为null）删除
      */
-    public static <E> SafeSet<E> newSafeSetOmitNull(Collection<E> list) {
+    public static <E> SafeSet<E> newSafeSetIgnoreNull(Collection<E> list) {
         return list.stream().filter(Objects::nonNull).collect(Collectors.toCollection(SafeHashSet::new));
     }
 
-    public static <E> SafeSet<E> newSafeSortSetOmitNull(E[] list){
-        return newSafeSortSetOmitNull(Arrays.asList(list));
+    public static <E> SafeSet<E> newSafeSortSetIgnoreNull(E[] list){
+        return newSafeSortSetIgnoreNull(Arrays.asList(list));
     }
 
     /**
      * 包装成SafeSet，并将其中的null值（key或value为null）删除
      */
-    public static <E> SafeSet<E> newSafeSortSetOmitNull(Collection<E> list) {
+    public static <E> SafeSet<E> newSafeSortSetIgnoreNull(Collection<E> list) {
         return list.stream().filter(Objects::nonNull).collect(Collectors.toCollection(SafeTreeSet::new));
     }
 }

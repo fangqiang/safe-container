@@ -68,8 +68,8 @@ public class SafeArrayListTest {
 
     @Test
     public void anySatisfied(){
-        Assert.assertTrue(Safes.newSafeSetOmitNull(Arrays.asList(1,2)).anySatisfied((a)->a==1));
-        Assert.assertTrue(!Safes.newSafeSetOmitNull(Arrays.asList(1,2)).anySatisfied((a)->a==3));
+        Assert.assertTrue(Safes.newSafeSetIgnoreNull(Arrays.asList(1,2)).anySatisfied((a)->a==1));
+        Assert.assertTrue(!Safes.newSafeSetIgnoreNull(Arrays.asList(1,2)).anySatisfied((a)->a==3));
     }
 
     @Test
@@ -81,7 +81,7 @@ public class SafeArrayListTest {
     public void listToMap(){
         Assert.assertTrue(Safes.newSafeList().add2(1).toMap(a->"a").size()==1);
         Assert.assertTrue(Safes.newSafeList().add2(1).toMap(a->null).size()==1);
-        Assert.assertTrue(Safes.newSafeList().add2(1).toSafeMapOmitNull(a->"").size()==1);
-        Assert.assertTrue(Safes.newSafeList().add2(1).toSafeMapOmitNull(a->null).size()==0);
+        Assert.assertTrue(Safes.newSafeList().add2(1).toSafeMapIgnoreNull(a->"").size()==1);
+        Assert.assertTrue(Safes.newSafeList().add2(1).toSafeMapIgnoreNull(a->null).size()==0);
     }
 }

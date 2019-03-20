@@ -54,7 +54,7 @@ public interface SafeList<E> extends List<E> {
         return ret;
     }
 
-    default <V> SafeMap<E,V> toSafeMapOmitNull(Function<E,V> function){
+    default <V> SafeMap<E,V> toSafeMapIgnoreNull(Function<E,V> function){
         SafeMap<E,V> ret = Safes.newSafeMap();
         for (E k : this) {
             V v = function.apply(k);

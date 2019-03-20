@@ -6,7 +6,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 /**
  * @Description:
@@ -49,8 +48,8 @@ public class SafeHashSetTest {
 
     @Test
     public void anySatisfied(){
-        Assert.assertTrue(Safes.newSafeListOmitNull(Arrays.asList(1,2)).anySatisfied((a)->a==1));
-        Assert.assertTrue(!Safes.newSafeListOmitNull(Arrays.asList(1,2)).anySatisfied((a)->a==3));
+        Assert.assertTrue(Safes.newSafeListIgnoreNull(Arrays.asList(1,2)).anySatisfied((a)->a==1));
+        Assert.assertTrue(!Safes.newSafeListIgnoreNull(Arrays.asList(1,2)).anySatisfied((a)->a==3));
     }
 
     @Test
