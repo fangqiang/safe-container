@@ -18,7 +18,8 @@ public class SimpleCacheTest {
     public void put() {
         SimpleCache<String,Integer> cache = new SimpleCache();
         cache.put("a",1);
-        Assert.assertTrue(cache.get("a").get()==1);
+        Assert.assertTrue(cache.getNullable("a").get()==1);
+        Assert.assertTrue(cache.get("a")==1);
 
         Assert.assertTrue(cache.getOrCreate("b", ()-> 2)==2);
         Assert.assertTrue(cache.getOrCreate("b",this::throwException)==2);

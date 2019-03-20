@@ -1,5 +1,7 @@
 package cn.truthseeker.container;
 
+import cn.truthseeker.tags.Nullable;
+
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
@@ -10,22 +12,24 @@ import java.util.function.Supplier;
  * @email: lowping@163.com
  * @date: Created by on 19/3/19
  */
-public class SimpleCache<K,V>{
-    ConcurrentHashMap<K,V> cache = new ConcurrentHashMap<>();
+public class SimpleCache<K,V> extends ConcurrentHashMap<K,V>{
 
-    public void put(K k, V v){
-        cache.put(k, v);
+    @Override
+    @Deprecated
+    @Nullable
+    public V get(Object k){
+        return super.get(k);
     }
 
-    public Optional<V> get(String k){
-        return Optional.ofNullable(cache.get(k));
+    public Optional<V> getNullable(K k){
+        return Optional.ofNullable(get(k));
     }
 
     public V getOrCreate(K k, Supplier<V> supplier){
-        V v = cache.get(k);
+        V v = get(k);
         if(v == null){
             v = supplier.get();
-            cache.put(k, v);
+            put(k, v);
         }
         return v;
     }

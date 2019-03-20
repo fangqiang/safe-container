@@ -76,4 +76,12 @@ public class SafeArrayListTest {
     public void add2(){
         Assert.assertTrue(Safes.newSafeList().add2(1).size()==1);
     }
+
+    @Test
+    public void listToMap(){
+        Assert.assertTrue(Safes.newSafeList().add2(1).toMap(a->"a").size()==1);
+        Assert.assertTrue(Safes.newSafeList().add2(1).toMap(a->null).size()==1);
+        Assert.assertTrue(Safes.newSafeList().add2(1).toSafeMapOmitNull(a->"").size()==1);
+        Assert.assertTrue(Safes.newSafeList().add2(1).toSafeMapOmitNull(a->null).size()==0);
+    }
 }

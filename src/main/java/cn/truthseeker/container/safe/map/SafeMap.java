@@ -1,5 +1,6 @@
 package cn.truthseeker.container.safe.map;
 
+import cn.truthseeker.container.util.Assert;
 import cn.truthseeker.container.util.Emptys;
 import cn.truthseeker.tags.Nullable;
 
@@ -44,49 +45,49 @@ public interface SafeMap<K, V> extends Map<K, V> {
      * 按key映射
      */
     default <RK> SafeMap<RK, V> mapKey(Function<K, RK> kFun) {
-        return Maps.mapKey(this, kFun, this::newInstance);
+        return CommonMaps.mapKey(this, kFun, this::newInstance);
     }
 
     /**
      * 按value映射
      */
     default <RV> SafeMap<K, RV> mapValue(Function<V, RV> vFun) {
-        return Maps.mapValue(this, vFun, this::newInstance);
+        return CommonMaps.mapValue(this, vFun, this::newInstance);
     }
 
     /**
      * 按key,value映射
      */
     default <RK, RV> SafeMap<RK, RV> mapKeyValue(Function<K, RK> kFun, Function<V, RV> vFun) {
-        return Maps.mapKeyValue(this, kFun, vFun, this::newInstance);
+        return CommonMaps.mapKeyValue(this, kFun, vFun, this::newInstance);
     }
 
     /**
      * 按key过滤
      */
     default SafeMap<K, V> filterByKey(Predicate<K> kFun) {
-        return Maps.filterByKey(this, kFun, this::newInstance);
+        return CommonMaps.filterByKey(this, kFun, this::newInstance);
     }
 
     /**
      * 按value过滤
      */
     default SafeMap<K, V> filterByValue(Predicate<V> vFun) {
-        return Maps.filterByValue(this, vFun, this::newInstance);
+        return CommonMaps.filterByValue(this, vFun, this::newInstance);
     }
 
     /**
      * 按key,value过滤
      */
     default SafeMap<K, V> filterByKeyValue(BiPredicate<K, V> predicate) {
-        return Maps.filterByKeyValue(this, predicate, this::newInstance);
+        return CommonMaps.filterByKeyValue(this, predicate, this::newInstance);
     }
 
     /**
      * 按keys返回子map
      */
     default SafeMap<K, V> getSubMap(Collection<K> keys) {
-        return Maps.getSubMap(this, keys, this::newInstance);
+        return CommonMaps.getSubMap(this, keys, this::newInstance);
     }
 
     /**
@@ -112,14 +113,16 @@ public interface SafeMap<K, V> extends Map<K, V> {
      * 返回唯一的key，如果map.size != 1则抛出异常
      */
     default K getTheOnlyKey() {
-        return Maps.getTheOnlyKey(this);
+        Assert.isTrue(size() == 1, "map size must be 1");
+        return keySet().iterator().next();
     }
 
     /**
      * 返回唯一的value，如果map.size != 1则抛出异常
      */
     default V getTheOnlyValue() {
-        return Maps.getTheOnlyValue(this);
+        Assert.isTrue(size() == 1, "map size must be 1");
+        return values().iterator().next();
     }
 
     default SafeMap<K, V> removeEmpty(){

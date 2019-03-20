@@ -72,14 +72,14 @@ public class SafeTreeMapTest {
 
     @Test
     public void containsKeys() {
-        SafeTreeMap<String, Integer> all = Maps.of("a", 1, "b", 2, "c", 3, SafeTreeMap::new);
+        SafeTreeMap<String, Integer> all = CommonMaps.of("a", 1, "b", 2, "c", 3, SafeTreeMap::new);
         Assert.assertTrue(all.containsKeys(Arrays.asList("a", "b")));
         Assert.assertFalse(all.containsKeys(Arrays.asList("a", "d")));
     }
 
     @Test
     public void firstKeyValue() {
-        SafeTreeMap<String, Integer> all = Maps.of("a", 1, SafeTreeMap::new);
+        SafeTreeMap<String, Integer> all = CommonMaps.of("a", 1, SafeTreeMap::new);
         Assert.assertTrue(all.getTheOnlyKey().equals("a"));
         Assert.assertTrue(all.getTheOnlyValue() == 1);
 

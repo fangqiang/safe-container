@@ -86,7 +86,7 @@ public class SafeHashMapTest {
 
     @Test
     public void mapKey() {
-        SafeHashMap<String, String> all = Maps.of("1", "1", SafeHashMap::new);
+        SafeHashMap<String, String> all = CommonMaps.of("1", "1", SafeHashMap::new);
 
         SafeMap<Integer, String> ret = all.mapKey((a) -> Integer.parseInt(a));
         Assert.assertTrue(ret.getNullable(1).get().equals("1"));
@@ -94,7 +94,7 @@ public class SafeHashMapTest {
 
     @Test
     public void mapValue() {
-        SafeHashMap<String, String> all = Maps.of("1", "1", SafeHashMap::new);
+        SafeHashMap<String, String> all = CommonMaps.of("1", "1", SafeHashMap::new);
 
         SafeMap<String, Integer> ret = all.mapValue((a) -> Integer.parseInt(a));
         Assert.assertTrue(ret.getNullable("1").get() == 1);
@@ -102,7 +102,7 @@ public class SafeHashMapTest {
 
     @Test
     public void mapKeyValue() {
-        SafeHashMap<String, String> all = Maps.of("1", "1", SafeHashMap::new);
+        SafeHashMap<String, String> all = CommonMaps.of("1", "1", SafeHashMap::new);
 
         SafeMap<Integer, Integer> ret = all.mapKeyValue((a) -> Integer.parseInt(a), (a) -> Integer.parseInt(a));
         Assert.assertTrue(ret.getNullable(1).get() == 1);
@@ -110,7 +110,7 @@ public class SafeHashMapTest {
 
     @Test
     public void filterByKey() {
-        SafeHashMap<String, String> all = Maps.of("a", "1", "b", "1", SafeHashMap::new);
+        SafeHashMap<String, String> all = CommonMaps.of("a", "1", "b", "1", SafeHashMap::new);
 
         Assert.assertTrue(all.filterByKey(a -> a.equals("a")).size() == 1);
         Assert.assertTrue(all.filterByKey(a -> a.equals("c")).size() == 0);
@@ -118,7 +118,7 @@ public class SafeHashMapTest {
 
     @Test
     public void filterByValue() {
-        SafeHashMap<String, String> all = Maps.of("a", "1", "b", "2", SafeHashMap::new);
+        SafeHashMap<String, String> all = CommonMaps.of("a", "1", "b", "2", SafeHashMap::new);
 
         Assert.assertTrue(all.filterByValue(a -> a.equals("1")).size() == 1);
         Assert.assertTrue(all.filterByValue(a -> a.equals("3")).size() == 0);
@@ -126,7 +126,7 @@ public class SafeHashMapTest {
 
     @Test
     public void filterByKeyValue() {
-        SafeHashMap<String, String> all = Maps.of("a", "1", "b", "2", SafeHashMap::new);
+        SafeHashMap<String, String> all = CommonMaps.of("a", "1", "b", "2", SafeHashMap::new);
 
         Assert.assertTrue(all.filterByKeyValue((a, b) -> a.equals("a") && b.equals("1")).size() == 1);
         Assert.assertTrue(all.filterByKeyValue((a, b) -> a.equals("a") && b.equals("2")).size() == 0);
@@ -134,8 +134,8 @@ public class SafeHashMapTest {
 
     @Test
     public void containsMap() {
-        SafeHashMap<String, Integer> all = Maps.of("a", 1, "b", 2, "c", 3, SafeHashMap::new);
-        SafeHashMap<String, Integer> part = Maps.of("a", 1, "b", 2, SafeHashMap::new);
+        SafeHashMap<String, Integer> all = CommonMaps.of("a", 1, "b", 2, "c", 3, SafeHashMap::new);
+        SafeHashMap<String, Integer> part = CommonMaps.of("a", 1, "b", 2, SafeHashMap::new);
         Assert.assertTrue(all.containsMap(part));
         part.put("b", 3);
         Assert.assertFalse(all.containsMap(part));
@@ -143,21 +143,21 @@ public class SafeHashMapTest {
 
     @Test
     public void getSubMap() {
-        SafeHashMap<String, Integer> all = Maps.of("a", 1, "b", 2, "c", 3, SafeHashMap::new);
+        SafeHashMap<String, Integer> all = CommonMaps.of("a", 1, "b", 2, "c", 3, SafeHashMap::new);
         Map<String, Integer> subMap = all.getSubMap(Arrays.asList("a", "b"));
         Assert.assertTrue(all.containsMap(subMap));
     }
 
     @Test
     public void containsKeys() {
-        SafeHashMap<String, Integer> all = Maps.of("a", 1, "b", 2, "c", 3, SafeHashMap::new);
+        SafeHashMap<String, Integer> all = CommonMaps.of("a", 1, "b", 2, "c", 3, SafeHashMap::new);
         Assert.assertTrue(all.containsKeys(Arrays.asList("a", "b")));
         Assert.assertFalse(all.containsKeys(Arrays.asList("a", "d")));
     }
 
     @Test
     public void firstKeyValue() {
-        SafeHashMap<String, Integer> all = Maps.of("a", 1, SafeHashMap::new);
+        SafeHashMap<String, Integer> all = CommonMaps.of("a", 1, SafeHashMap::new);
         Assert.assertTrue(all.getTheOnlyKey().equals("a"));
         Assert.assertTrue(all.getTheOnlyValue() == 1);
 
@@ -167,7 +167,7 @@ public class SafeHashMapTest {
 
     @Test
     public void removeIf() {
-        SafeHashMap<String, Integer> all = Maps.of("a", 1,"b", 2, SafeHashMap::new);
+        SafeHashMap<String, Integer> all = CommonMaps.of("a", 1,"b", 2, SafeHashMap::new);
         Assert.assertTrue(all.size()==2);
         all.removeIf((k,v)-> k.equals("a") && v==1);
         Assert.assertTrue(all.size()==1);
@@ -176,8 +176,8 @@ public class SafeHashMapTest {
 
     @Test
     public void anySatisfied(){
-        Assert.assertTrue(Maps.of(10,1,20,2, SafeHashMap::new).anySatisfied((a,b)->a+b==11));
-        Assert.assertTrue(!Maps.of(10,1,20,2, SafeHashMap::new).anySatisfied((a,b)->a+b==12));
+        Assert.assertTrue(CommonMaps.of(10,1,20,2, SafeHashMap::new).anySatisfied((a,b)->a+b==11));
+        Assert.assertTrue(!CommonMaps.of(10,1,20,2, SafeHashMap::new).anySatisfied((a,b)->a+b==12));
     }
 
     @Test

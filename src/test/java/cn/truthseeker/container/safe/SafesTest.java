@@ -1,6 +1,7 @@
 package cn.truthseeker.container.safe;
 
 import cn.truthseeker.container.safe.list.SafeList;
+import cn.truthseeker.container.safe.map.CommonMaps;
 import cn.truthseeker.container.safe.map.Maps;
 import cn.truthseeker.container.safe.map.SafeMap;
 import cn.truthseeker.container.safe.set.SafeSet;
@@ -34,7 +35,7 @@ public class SafesTest {
 
     @Test
     public void newSafeMapOmitNull() {
-        Map<String, String> map = Maps.of(null, null, "b", "", "a", "1", HashMap::new);
+        Map<String, String> map = CommonMaps.of(null, null, "b", "", "a", "1", HashMap::new);
         Assert.assertTrue(map.size() == 3);
         SafeMap<String, String> safeMap = Safes.newSafeMapOmitNull(map);
         Assert.assertTrue(safeMap.size() == 2);
@@ -44,7 +45,7 @@ public class SafesTest {
 
     @Test
     public void newSafeMapOmitEmpty() {
-        Map<String, String> map = Maps.of(null, null, "b", "", "a", "1", HashMap::new);
+        Map<String, String> map = CommonMaps.of(null, null, "b", "", "a", "1", HashMap::new);
         Assert.assertTrue(map.size() == 3);
         SafeMap<String, String> safeMap = Safes.newSafeMapOmitNull(map);
         Assert.assertTrue(safeMap.size() == 2);
@@ -52,6 +53,13 @@ public class SafesTest {
         Assert.assertTrue(safeMap.size() == 1);
         safeMap = Safes.newSafeSortMapOmitNull(map).removeEmpty();
         Assert.assertTrue(safeMap.size() == 1);
+
+        HashMap<String, List<?>> map1 = CommonMaps.of("a", Arrays.asList(), "b", Arrays.asList(1), HashMap::new);
+        Assert.assertTrue(map1.size() == 2);
+        SafeMap<String, List<?>> map2 = Safes.newSafeMapOmitNull(map1);
+        Assert.assertTrue(map2.size() == 2);
+        map2.removeEmpty();
+        Assert.assertTrue(map2.size() == 1);
     }
 
     @Test
@@ -80,6 +88,9 @@ public class SafesTest {
         Assert.assertTrue(l.size() == 1);
         l = Safes.newSafeLinkedListOmitNull(list).cleanEmpty();
         Assert.assertTrue(l.size() == 1);
+
+        Assert.assertTrue(Safes.newSafeListOmitNull("1,2".split(",")).size() == 2);
+        Assert.assertTrue(Safes.newSafeLinkedListOmitNull("1,2".split(",")).size() == 2);
     }
 
     @Test
@@ -96,6 +107,9 @@ public class SafesTest {
         Assert.assertTrue(l.size() == 2);
         l = Safes.newSafeSortSetOmitNull(list);
         Assert.assertTrue(l.size() == 2);
+
+        Assert.assertTrue(Safes.newSafeSetOmitNull("1,2".split(",")).size() == 2);
+        Assert.assertTrue(Safes.newSafeSortSetOmitNull("1,2".split(",")).size() == 2);
     }
 
     @Test

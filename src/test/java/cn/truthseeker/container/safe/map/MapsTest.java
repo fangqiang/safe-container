@@ -18,7 +18,7 @@ public class MapsTest {
 
     @Test
     public void checkSafe() {
-        Map map = Maps.of(null, null, HashMap::new);
+        Map map = CommonMaps.of(null, null, HashMap::new);
         Assert.assertTrue(TestUtil.throwException(() -> Maps.checkSafe(map)));
         map.clear();
         Assert.assertFalse(TestUtil.throwException(() -> Maps.checkSafe(map)));
@@ -99,7 +99,7 @@ public class MapsTest {
 
     @Test
     public void zip() {
-        HashMap<String, Integer> zip = Maps.zip(Arrays.asList("a", "b"), Arrays.asList(1, 2), HashMap::new);
+        HashMap<String, Integer> zip = CommonMaps.zip(Arrays.asList("a", "b"), Arrays.asList(1, 2), HashMap::new);
         Assert.assertTrue(zip.size() == 2);
         Assert.assertTrue(zip.get("a") == 1);
         Assert.assertTrue(zip.get("b") == 2);
@@ -111,5 +111,11 @@ public class MapsTest {
         Assert.assertTrue(Maps.clearNull(map).size() ==2);
         map = Maps.of(1, "1",  2, null, 3,"");
         Assert.assertTrue(Maps.clearEmpty(map).size() ==1);
+    }
+
+    @Test
+    public void listToMap() {
+        Map<Integer, String> map = Maps.listToMap(Arrays.asList(1, 2), a -> a+"a");
+        Assert.assertTrue(map.size()==2);
     }
 }
