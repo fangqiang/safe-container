@@ -14,6 +14,11 @@ import java.util.function.Predicate;
  */
 public interface SafeSet<E> extends Set<E>, SafeCollection<E>{
 
+    default SafeSet<E> removeIf2(Predicate<E> predicate){
+        removeIf(predicate);
+        return this;
+    }
+
     default SafeSet<E> cleanEmpty(){
         removeIf(Emptys::isEmpty);
         return this;
@@ -24,7 +29,7 @@ public interface SafeSet<E> extends Set<E>, SafeCollection<E>{
         return this;
     }
 
-    default SafeSet<E> traverse(Consumer<E> consumer){
+    default SafeSet<E> forEach2(Consumer<E> consumer){
         for (E e : this) {
             consumer.accept(e);
         }

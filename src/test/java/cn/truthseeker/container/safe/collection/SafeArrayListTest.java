@@ -2,7 +2,6 @@ package cn.truthseeker.container.safe.collection;
 
 import cn.truthseeker.TestUtil;
 import cn.truthseeker.container.safe.Safes;
-import cn.truthseeker.container.safe.collection.SafeArrayList;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -86,7 +85,11 @@ public class SafeArrayListTest {
         Assert.assertTrue(Safes.newSafeList().add2(1).toSafeMapIgnoreNull(a->null).size()==0);
     }
     @Test
-    public void traverse(){
-        Assert.assertTrue(Safes.newSafeList().add2(1).traverse(a-> System.out.println(a)).size()==1);
+    public void forEach2(){
+        Assert.assertTrue(Safes.newSafeList().add2(1).forEach2(a-> System.out.println(a)).size()==1);
+    }
+    @Test
+    public void removeIf2(){
+        Assert.assertTrue(Safes.newSafeList().add2(1).removeIf2(a-> (int)a == 1).size()==0);
     }
 }

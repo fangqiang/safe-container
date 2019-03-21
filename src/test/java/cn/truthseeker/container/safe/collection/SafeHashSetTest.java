@@ -59,7 +59,12 @@ public class SafeHashSetTest {
     }
 
     @Test
-    public void traverse(){
-        Assert.assertTrue(Safes.newSafeSet().add2(1).traverse(a-> System.out.println(a)).size()==1);
+    public void forEach2(){
+        Assert.assertTrue(Safes.newSafeSet().add2(1).forEach2(a-> System.out.println(a)).size()==1);
+    }
+
+    @Test
+    public void removeIf2(){
+        Assert.assertTrue(Safes.newSafeSet().add2(1).removeIf2(a-> (int)a == 1).size()==0);
     }
 }
