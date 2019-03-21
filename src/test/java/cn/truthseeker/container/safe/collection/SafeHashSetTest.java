@@ -57,4 +57,9 @@ public class SafeHashSetTest {
     public void add2(){
         Assert.assertTrue(Safes.newSafeSet().add2(1).add2(1).size()==1);
     }
+
+    @Test
+    public void traverse(){
+        Assert.assertTrue(Safes.newSafeSet().add2(1).traverse(a-> System.out.println(a)).size()==1);
+    }
 }

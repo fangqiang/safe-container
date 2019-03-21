@@ -85,4 +85,8 @@ public class SafeArrayListTest {
         Assert.assertTrue(Safes.newSafeList().add2(1).toSafeMapIgnoreNull(a->"").size()==1);
         Assert.assertTrue(Safes.newSafeList().add2(1).toSafeMapIgnoreNull(a->null).size()==0);
     }
+    @Test
+    public void traverse(){
+        Assert.assertTrue(Safes.newSafeList().add2(1).traverse(a-> System.out.println(a)).size()==1);
+    }
 }
