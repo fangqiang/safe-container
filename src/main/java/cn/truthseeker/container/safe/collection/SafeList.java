@@ -7,6 +7,7 @@ import cn.truthseeker.container.util.Emptys;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -16,17 +17,11 @@ import java.util.function.Predicate;
  * @email: lowping@163.com
  * @date: Created by on 19/3/14
  */
-public interface SafeList<E> extends List<E> {
-    default void addIgnoreNull(E e){
-        if(e != null){
-            add(e);
-        }
-    }
+public interface SafeList<E> extends List<E> ,SafeCollection<E>{
 
-    default void addIgnoreEmpty(E e){
-        if(Emptys.isNotEmpty(e)){
-            add(e);
-        }
+    default SafeList<E> removeIf2(Predicate<E> predicate){
+        removeIf(predicate);
+        return this;
     }
 
     default SafeList<E> cleanEmpty(){
@@ -34,31 +29,15 @@ public interface SafeList<E> extends List<E> {
         return this;
     }
 
-    default boolean anySatisfied(Predicate<E> predicate){
-        return Collections2.anySatisfied(this, predicate);
-    }
-
-    default SafeList add2(E e){
+    default SafeList<E> add2(E e){
         add(e);
         return this;
     }
 
-    default <V> Map<E,V> toMap(Function<E,V> function){
-        Map<E,V> ret = new HashMap();
-        for (E k : this) {
-            ret.put(k, function.apply(k));
+    default SafeList<E> forEach2(Consumer<E> consumer){
+        for (E e : this) {
+            consumer.accept(e);
         }
-        return ret;
-    }
-
-    default <V> SafeMap<E,V> toSafeMapIgnoreNull(Function<E,V> function){
-        SafeMap<E,V> ret = Safes.newSafeMap();
-        for (E k : this) {
-            V v = function.apply(k);
-            if(v!=null) {
-                ret.put(k, v);
-            }
-        }
-        return ret;
+        return this;
     }
 }

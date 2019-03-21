@@ -3,6 +3,7 @@ package cn.truthseeker.container.safe.collection;
 import cn.truthseeker.container.util.Emptys;
 
 import java.util.Set;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 /**
@@ -11,17 +12,11 @@ import java.util.function.Predicate;
  * @email: lowping@163.com
  * @date: Created by on 19/3/15
  */
-public interface SafeSet<E> extends Set<E> {
-    default void addIgnoreNull(E e){
-        if(e != null){
-            add(e);
-        }
-    }
+public interface SafeSet<E> extends Set<E>, SafeCollection<E>{
 
-    default void addIgnoreEmpty(E e){
-        if(Emptys.isNotEmpty(e)){
-            add(e);
-        }
+    default SafeSet<E> removeIf2(Predicate<E> predicate){
+        removeIf(predicate);
+        return this;
     }
 
     default SafeSet<E> cleanEmpty(){
@@ -29,12 +24,15 @@ public interface SafeSet<E> extends Set<E> {
         return this;
     }
 
-    default boolean anySatisfied(Predicate<E> predicate){
-        return Collections2.anySatisfied(this, predicate);
-    }
-
     default SafeSet<E> add2(E e){
         add(e);
+        return this;
+    }
+
+    default SafeSet<E> forEach2(Consumer<E> consumer){
+        for (E e : this) {
+            consumer.accept(e);
+        }
         return this;
     }
 }

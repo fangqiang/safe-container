@@ -57,4 +57,14 @@ public class SafeHashSetTest {
     public void add2(){
         Assert.assertTrue(Safes.newSafeSet().add2(1).add2(1).size()==1);
     }
+
+    @Test
+    public void forEach2(){
+        Assert.assertTrue(Safes.newSafeSet().add2(1).forEach2(a-> System.out.println(a)).size()==1);
+    }
+
+    @Test
+    public void removeIf2(){
+        Assert.assertTrue(Safes.newSafeSet().add2(1).removeIf2(a-> (int)a == 1).size()==0);
+    }
 }
