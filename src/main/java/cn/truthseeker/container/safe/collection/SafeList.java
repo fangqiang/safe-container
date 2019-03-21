@@ -1,11 +1,8 @@
-package cn.truthseeker.container.safe.list;
+package cn.truthseeker.container.safe.collection;
 
 import cn.truthseeker.container.safe.Safes;
-import cn.truthseeker.container.safe.map.Maps;
-import cn.truthseeker.container.safe.map.SafeHashMap;
 import cn.truthseeker.container.safe.map.SafeMap;
 import cn.truthseeker.container.util.Emptys;
-import cn.truthseeker.container.util.Utils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -38,7 +35,7 @@ public interface SafeList<E> extends List<E> {
     }
 
     default boolean anySatisfied(Predicate<E> predicate){
-        return Utils.anySatisfied(this, predicate);
+        return Collections2.anySatisfied(this, predicate);
     }
 
     default SafeList add2(E e){

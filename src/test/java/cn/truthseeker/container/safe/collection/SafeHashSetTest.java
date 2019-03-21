@@ -1,7 +1,8 @@
-package cn.truthseeker.container.safe.set;
+package cn.truthseeker.container.safe.collection;
 
 import cn.truthseeker.TestUtil;
 import cn.truthseeker.container.safe.Safes;
+import cn.truthseeker.container.safe.collection.SafeHashSet;
 import org.junit.Assert;
 import org.junit.Test;
 

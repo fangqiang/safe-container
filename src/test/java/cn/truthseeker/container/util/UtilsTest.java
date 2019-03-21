@@ -1,5 +1,6 @@
 package cn.truthseeker.container.util;
 
+import cn.truthseeker.container.safe.collection.Collections2;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -49,16 +50,5 @@ public class UtilsTest {
         assertTrue(strings.containsAll(Arrays.asList("a","b","c")));
         strings = Utils.splitIgnoreEmpty(" , ",",");
         assertTrue(strings.size()==0);
-    }
-
-
-    @Test
-    public void anySatisfy() {
-        assertTrue(Utils.anySatisfied(Arrays.asList(1,2), a->a==1));
-        assertTrue(Utils.anySatisfied(Arrays.asList(1,2).toArray(), a-> (int)a==2));
-
-        assertTrue(!Utils.anySatisfied(Arrays.asList(1,2), a->a==3));
-        assertTrue(!Utils.anySatisfied(Arrays.asList(1,2).toArray(), a-> (int)a==3));
-
     }
 }

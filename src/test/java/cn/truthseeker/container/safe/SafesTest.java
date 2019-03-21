@@ -1,9 +1,9 @@
 package cn.truthseeker.container.safe;
 
-import cn.truthseeker.container.safe.list.SafeList;
+import cn.truthseeker.container.safe.collection.SafeList;
 import cn.truthseeker.container.safe.map.CommonMaps;
 import cn.truthseeker.container.safe.map.SafeMap;
-import cn.truthseeker.container.safe.set.SafeSet;
+import cn.truthseeker.container.safe.collection.SafeSet;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,7 +1,6 @@
-package cn.truthseeker.container.safe.set;
+package cn.truthseeker.container.safe.collection;
 
 import cn.truthseeker.container.util.Emptys;
-import cn.truthseeker.container.util.Utils;
 
 import java.util.Set;
 import java.util.function.Predicate;
@@ -31,7 +30,7 @@ public interface SafeSet<E> extends Set<E> {
     }
 
     default boolean anySatisfied(Predicate<E> predicate){
-        return Utils.anySatisfied(this, predicate);
+        return Collections2.anySatisfied(this, predicate);
     }
 
     default SafeSet<E> add2(E e){

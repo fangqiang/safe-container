@@ -1,10 +1,8 @@
-package cn.truthseeker.container.safe.set;
+package cn.truthseeker.container.safe.collection;
 
 import cn.truthseeker.container.util.Assert;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * @Description:
@@ -12,26 +10,28 @@ import java.util.Objects;
  * @email: lowping@163.com
  * @date: Created by on 19/3/14
  */
-public class SafeHashSet<E> extends HashSet<E> implements SafeSet<E> {
-    public SafeHashSet() {
+public class SafeTreeSet<E> extends TreeSet<E> implements SafeSet<E> {
+
+    public SafeTreeSet() {
         super();
     }
 
-    public SafeHashSet(Collection<? extends E> c) {
+    public SafeTreeSet(Comparator<? super E> comparator) {
+        super(comparator);
+    }
+
+    public SafeTreeSet(Collection<? extends E> c) {
         super(c);
         if (!(c instanceof SafeSet)) {
             Assert.checkSafe(c);
         }
     }
 
-    public SafeHashSet(int initialCapacity, float loadFactor) {
-        super(initialCapacity, loadFactor);
+    public SafeTreeSet(SortedSet<E> s) {
+        super(s);
+        Assert.checkSafe(s);
     }
 
-
-    public SafeHashSet(int initialCapacity) {
-        super(initialCapacity);
-    }
 
     @Override
     public boolean add(E e) {

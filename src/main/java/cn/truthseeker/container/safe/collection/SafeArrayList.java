@@ -1,4 +1,4 @@
-package cn.truthseeker.container.safe.list;
+package cn.truthseeker.container.safe.collection;
 
 import cn.truthseeker.container.util.Assert;
 

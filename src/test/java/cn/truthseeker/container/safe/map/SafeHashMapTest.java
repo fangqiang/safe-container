@@ -2,14 +2,11 @@ package cn.truthseeker.container.safe.map;
 
 import cn.truthseeker.TestUtil;
 import cn.truthseeker.container.safe.Safes;
-import cn.truthseeker.container.safe.set.SafeHashSet;
-import cn.truthseeker.container.util.Utils;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Map;
-import java.util.function.Predicate;
 
 /**
  * @Description:

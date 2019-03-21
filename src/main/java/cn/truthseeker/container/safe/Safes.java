@@ -1,12 +1,12 @@
 package cn.truthseeker.container.safe;
 
-import cn.truthseeker.container.safe.list.SafeArrayList;
-import cn.truthseeker.container.safe.list.SafeLinkedList;
-import cn.truthseeker.container.safe.list.SafeList;
+import cn.truthseeker.container.safe.collection.SafeArrayList;
+import cn.truthseeker.container.safe.collection.SafeLinkedList;
+import cn.truthseeker.container.safe.collection.SafeList;
 import cn.truthseeker.container.safe.map.*;
-import cn.truthseeker.container.safe.set.SafeHashSet;
-import cn.truthseeker.container.safe.set.SafeSet;
-import cn.truthseeker.container.safe.set.SafeTreeSet;
+import cn.truthseeker.container.safe.collection.SafeHashSet;
+import cn.truthseeker.container.safe.collection.SafeSet;
+import cn.truthseeker.container.safe.collection.SafeTreeSet;
 import cn.truthseeker.container.util.Emptys;
 
 import java.util.*;

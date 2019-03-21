@@ -1,6 +1,7 @@
-package cn.truthseeker.container.safe.list;
+package cn.truthseeker.container.safe.collection;
 
 import cn.truthseeker.TestUtil;
+import cn.truthseeker.container.safe.collection.SafeLinkedList;
 import org.junit.Assert;
 import org.junit.Test;
 
