@@ -181,4 +181,10 @@ public class SafeHashMapTest {
     public void add2(){
         Assert.assertTrue(Safes.newSafeMap().put2(1,1).size()==1);
     }
+
+    @Test
+    public void forEach2(){
+        Assert.assertTrue(Safes.newSafeMap().put2(1,1).forEach2((k,v)->System.out.println(k)).size()==1);
+    }
+
 }

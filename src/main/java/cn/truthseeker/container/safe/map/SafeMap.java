@@ -1,5 +1,6 @@
 package cn.truthseeker.container.safe.map;
 
+import cn.truthseeker.container.safe.collection.SafeList;
 import cn.truthseeker.container.util.Assert;
 import cn.truthseeker.container.util.Emptys;
 import cn.truthseeker.tags.Nullable;
@@ -8,9 +9,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.BiPredicate;
-import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.function.*;
 
 /**
  * @Description:
@@ -146,6 +145,11 @@ public interface SafeMap<K, V> extends Map<K, V> {
 
     default SafeMap<K, V> put2(K k, V v){
         put(k, v);
+        return this;
+    }
+
+    default SafeMap<K, V> forEach2(BiConsumer<K,V> consumer){
+        forEach(consumer);
         return this;
     }
 }
