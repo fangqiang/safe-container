@@ -83,7 +83,7 @@ public class SafeTreeMapTest {
         Assert.assertTrue(all.getTheOnlyKey().get().equals("a"));
         Assert.assertTrue(all.getTheOnlyValue().get() == 1);
 
-        all.put("b",1);
+        all.put("b", 1);
         Assert.assertFalse(all.getTheOnlyKey().isPresent());
         Assert.assertFalse(all.getTheOnlyValue().isPresent());
     }

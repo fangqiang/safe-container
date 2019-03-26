@@ -29,11 +29,11 @@ public class Collections2Test {
 
     @Test
     public void anySatisfy() {
-        assertTrue(Collections2.anySatisfied(Arrays.asList(1,2), a->a==1));
-        assertTrue(Collections2.anySatisfied(Arrays.asList(1,2).toArray(), a-> (int)a==2));
+        assertTrue(Collections2.anySatisfied(Arrays.asList(1, 2), a -> a == 1));
+        assertTrue(Collections2.anySatisfied(Arrays.asList(1, 2).toArray(), a -> (int) a == 2));
 
-        assertTrue(!Collections2.anySatisfied(Arrays.asList(1,2), a->a==3));
-        assertTrue(!Collections2.anySatisfied(Arrays.asList(1,2).toArray(), a-> (int)a==3));
+        assertTrue(!Collections2.anySatisfied(Arrays.asList(1, 2), a -> a == 3));
+        assertTrue(!Collections2.anySatisfied(Arrays.asList(1, 2).toArray(), a -> (int) a == 3));
 
     }
 }

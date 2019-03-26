@@ -1,8 +1,9 @@
 package cn.truthseeker.container.util;
 
-import java.util.*;
-import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -16,7 +17,8 @@ public class Utils {
     public static void sleep(long ms) {
         try {
             Thread.sleep(ms);
-        } catch (InterruptedException ignored) { }
+        } catch (InterruptedException ignored) {
+        }
     }
 
     public static <K, V> void mapAddList(Map<K, List<V>> map, K key, V item) {

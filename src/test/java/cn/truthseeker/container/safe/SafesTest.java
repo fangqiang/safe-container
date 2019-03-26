@@ -1,9 +1,9 @@
 package cn.truthseeker.container.safe;
 
 import cn.truthseeker.container.safe.collection.SafeList;
+import cn.truthseeker.container.safe.collection.SafeSet;
 import cn.truthseeker.container.safe.map.CommonMaps;
 import cn.truthseeker.container.safe.map.SafeMap;
-import cn.truthseeker.container.safe.collection.SafeSet;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -23,13 +23,13 @@ public class SafesTest {
     @Test
     public void newSafeMap() {
         Assert.assertTrue(Safes.newSafeMap() != null);
-        Assert.assertTrue(Safes.newSafeMap(1,1) != null);
-        Assert.assertTrue(Safes.newSafeMap(1,1,1,1) != null);
-        Assert.assertTrue(Safes.newSafeMap(1,1,1,1,1,1) != null);
+        Assert.assertTrue(Safes.newSafeMap(1, 1) != null);
+        Assert.assertTrue(Safes.newSafeMap(1, 1, 1, 1) != null);
+        Assert.assertTrue(Safes.newSafeMap(1, 1, 1, 1, 1, 1) != null);
         Assert.assertTrue(Safes.newSafeSortMap() != null);
-        Assert.assertTrue(Safes.newSafeSortMap(1,1) != null);
-        Assert.assertTrue(Safes.newSafeSortMap(1,1,1,1) != null);
-        Assert.assertTrue(Safes.newSafeSortMap(1,1,1,1,1,1) != null);
+        Assert.assertTrue(Safes.newSafeSortMap(1, 1) != null);
+        Assert.assertTrue(Safes.newSafeSortMap(1, 1, 1, 1) != null);
+        Assert.assertTrue(Safes.newSafeSortMap(1, 1, 1, 1, 1, 1) != null);
     }
 
     @Test

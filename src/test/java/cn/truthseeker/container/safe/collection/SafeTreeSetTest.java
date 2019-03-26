@@ -1,7 +1,6 @@
 package cn.truthseeker.container.safe.collection;
 
 import cn.truthseeker.TestUtil;
-import cn.truthseeker.container.safe.collection.SafeTreeSet;
 import org.junit.Assert;
 import org.junit.Test;
 

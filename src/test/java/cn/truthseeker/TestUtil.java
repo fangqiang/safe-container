@@ -9,7 +9,7 @@ package cn.truthseeker;
 public class TestUtil {
 
 
-    public interface TestCode{
+    public interface TestCode {
         void exceptException();
     }
 

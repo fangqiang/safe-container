@@ -2,7 +2,6 @@ package cn.truthseeker.container.safe.collection;
 
 import cn.truthseeker.TestUtil;
 import cn.truthseeker.container.safe.Safes;
-import cn.truthseeker.container.safe.collection.SafeHashSet;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -39,23 +38,23 @@ public class SafeHashSetTest {
     }
 
     @Test
-    public void anySatisfied(){
-        Assert.assertTrue(Safes.newSafeListIgnoreNull(Arrays.asList(1,2)).anySatisfied((a)->a==1));
-        Assert.assertTrue(!Safes.newSafeListIgnoreNull(Arrays.asList(1,2)).anySatisfied((a)->a==3));
+    public void anySatisfied() {
+        Assert.assertTrue(Safes.newSafeListIgnoreNull(Arrays.asList(1, 2)).anySatisfied((a) -> a == 1));
+        Assert.assertTrue(!Safes.newSafeListIgnoreNull(Arrays.asList(1, 2)).anySatisfied((a) -> a == 3));
     }
 
     @Test
-    public void add2(){
-        Assert.assertTrue(Safes.newSafeSetIgnoreNull(Arrays.asList(1)).size()==1);
+    public void add2() {
+        Assert.assertTrue(Safes.newSafeSetIgnoreNull(Arrays.asList(1)).size() == 1);
     }
 
     @Test
-    public void forEach2(){
-        Assert.assertTrue(Safes.newSafeSetIgnoreNull(Arrays.asList(1)).forEach2(a-> System.out.println(a)).size()==1);
+    public void forEach2() {
+        Assert.assertTrue(Safes.newSafeSetIgnoreNull(Arrays.asList(1)).forEach2(a -> System.out.println(a)).size() == 1);
     }
 
     @Test
-    public void removeIf2(){
-        Assert.assertTrue(Safes.newSafeSetIgnoreNull(Arrays.asList(1)).removeIf2(a-> (int)a == 1).size()==0);
+    public void removeIf2() {
+        Assert.assertTrue(Safes.newSafeSetIgnoreNull(Arrays.asList(1)).removeIf2(a -> (int) a == 1).size() == 0);
     }
 }

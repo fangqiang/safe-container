@@ -14,6 +14,6 @@ public class AssertTest {
 
     @Test
     public void isTrue() {
-        org.junit.Assert.assertTrue(TestUtil.throwException(()->Assert.isTrue(false,"a")));
+        org.junit.Assert.assertTrue(TestUtil.throwException(() -> Assert.isTrue(false, "a")));
     }
 }

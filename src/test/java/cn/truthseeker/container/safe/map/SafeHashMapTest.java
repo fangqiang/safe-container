@@ -142,22 +142,22 @@ public class SafeHashMapTest {
 
     @Test
     public void removeIf() {
-        SafeHashMap<String, Integer> all = CommonMaps.of("a", 1,"b", 2, SafeHashMap::new);
-        Assert.assertTrue(all.size()==2);
-        all.removeIf((k,v)-> k.equals("a") && v==1);
-        Assert.assertTrue(all.size()==1);
+        SafeHashMap<String, Integer> all = CommonMaps.of("a", 1, "b", 2, SafeHashMap::new);
+        Assert.assertTrue(all.size() == 2);
+        all.removeIf((k, v) -> k.equals("a") && v == 1);
+        Assert.assertTrue(all.size() == 1);
         Assert.assertTrue(all.getTheOnlyKey().get().equals("b"));
     }
 
     @Test
-    public void anySatisfied(){
-        Assert.assertTrue(CommonMaps.of(10,1,20,2, SafeHashMap::new).anySatisfied((a,b)->a+b==11));
-        Assert.assertTrue(!CommonMaps.of(10,1,20,2, SafeHashMap::new).anySatisfied((a,b)->a+b==12));
+    public void anySatisfied() {
+        Assert.assertTrue(CommonMaps.of(10, 1, 20, 2, SafeHashMap::new).anySatisfied((a, b) -> a + b == 11));
+        Assert.assertTrue(!CommonMaps.of(10, 1, 20, 2, SafeHashMap::new).anySatisfied((a, b) -> a + b == 12));
     }
 
     @Test
-    public void forEach2(){
-        Assert.assertTrue(Safes.newSafeMap(1,1).forEach2((k,v)->System.out.println(k)).size()==1);
+    public void forEach2() {
+        Assert.assertTrue(Safes.newSafeMap(1, 1).forEach2((k, v) -> System.out.println(k)).size() == 1);
     }
 
 }

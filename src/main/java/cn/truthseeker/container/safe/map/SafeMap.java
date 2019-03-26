@@ -1,7 +1,5 @@
 package cn.truthseeker.container.safe.map;
 
-import cn.truthseeker.container.safe.collection.SafeList;
-import cn.truthseeker.container.util.Assert;
 import cn.truthseeker.container.util.Emptys;
 import cn.truthseeker.tags.Nullable;
 
@@ -9,7 +7,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.*;
+import java.util.function.BiConsumer;
+import java.util.function.BiPredicate;
+import java.util.function.Function;
+import java.util.function.Predicate;
 
 /**
  * @Description:
@@ -100,9 +101,9 @@ public interface SafeMap<K, V> extends Map<K, V> {
      * 返回唯一的key，如果map.size != 1则抛出异常
      */
     default Optional<K> getTheOnlyKey() {
-        if(size()!=1){
+        if (size() != 1) {
             return Optional.empty();
-        }else{
+        } else {
             return Optional.of(keySet().iterator().next());
         }
     }
@@ -111,33 +112,33 @@ public interface SafeMap<K, V> extends Map<K, V> {
      * 返回唯一的value，如果map.size != 1则抛出异常
      */
     default Optional<V> getTheOnlyValue() {
-        if(size()!=1){
+        if (size() != 1) {
             return Optional.empty();
-        }else{
+        } else {
             return Optional.of(values().iterator().next());
         }
     }
 
-    default SafeMap<K, V> removeEmpty(){
-        entrySet().removeIf(entry -> Emptys.isAnyEmpty(entry.getKey(),entry.getValue()));
+    default SafeMap<K, V> removeEmpty() {
+        entrySet().removeIf(entry -> Emptys.isAnyEmpty(entry.getKey(), entry.getValue()));
         return this;
     }
 
-    default SafeMap<K, V> removeIf(BiPredicate<K,V> filter){
-        entrySet().removeIf(entry -> filter.test(entry.getKey(),entry.getValue()));
+    default SafeMap<K, V> removeIf(BiPredicate<K, V> filter) {
+        entrySet().removeIf(entry -> filter.test(entry.getKey(), entry.getValue()));
         return this;
     }
 
-    default boolean anySatisfied(BiPredicate<K,V> filter){
+    default boolean anySatisfied(BiPredicate<K, V> filter) {
         for (Entry<K, V> entry : entrySet()) {
-            if(filter.test(entry.getKey(), entry.getValue())){
+            if (filter.test(entry.getKey(), entry.getValue())) {
                 return true;
             }
         }
         return false;
     }
 
-    default SafeMap<K, V> forEach2(BiConsumer<K,V> consumer){
+    default SafeMap<K, V> forEach2(BiConsumer<K, V> consumer) {
         forEach(consumer);
         return this;
     }

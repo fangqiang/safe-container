@@ -107,15 +107,15 @@ public class MapsTest {
 
     @Test
     public void clearEmpty() {
-        Map<Integer, String> map = Maps.of(1, "1",  2, null, 3,"");
-        Assert.assertTrue(Maps.clearNull(map).size() ==2);
-        map = Maps.of(1, "1",  2, null, 3,"");
-        Assert.assertTrue(Maps.clearEmpty(map).size() ==1);
+        Map<Integer, String> map = Maps.of(1, "1", 2, null, 3, "");
+        Assert.assertTrue(Maps.clearNull(map).size() == 2);
+        map = Maps.of(1, "1", 2, null, 3, "");
+        Assert.assertTrue(Maps.clearEmpty(map).size() == 1);
     }
 
     @Test
     public void listToMap() {
-        Map<Integer, String> map = Maps.listToMap(Arrays.asList(1, 2), a -> a+"a");
-        Assert.assertTrue(map.size()==2);
+        Map<Integer, String> map = Maps.listToMap(Arrays.asList(1, 2), a -> a + "a");
+        Assert.assertTrue(map.size() == 2);
     }
 }

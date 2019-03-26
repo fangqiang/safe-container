@@ -51,15 +51,15 @@ public class Emptys {
     public static boolean isEmpty(Object object) {
         if (object == null) {
             return true;
-        }else if (object instanceof String) {
+        } else if (object instanceof String) {
             return "".equals(((String) object).trim());
-        }else if (object instanceof Collection) {
+        } else if (object instanceof Collection) {
             return ((Collection) object).isEmpty();
         } else if (object instanceof Map) {
             return ((Map) object).isEmpty();
-        }else if (object instanceof Object[]) {
+        } else if (object instanceof Object[]) {
             return ((Object[]) object).length == 0;
-        }else if (object instanceof byte[]) {
+        } else if (object instanceof byte[]) {
             return ((byte[]) object).length == 0;
         } else if (object instanceof char[]) {
             return ((char[]) object).length == 0;

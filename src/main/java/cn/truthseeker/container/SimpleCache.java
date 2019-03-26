@@ -12,22 +12,22 @@ import java.util.function.Supplier;
  * @email: lowping@163.com
  * @date: Created by on 19/3/19
  */
-public class SimpleCache<K,V> extends ConcurrentHashMap<K,V>{
+public class SimpleCache<K, V> extends ConcurrentHashMap<K, V> {
 
     @Override
     @Deprecated
     @Nullable
-    public V get(Object k){
+    public V get(Object k) {
         return super.get(k);
     }
 
-    public Optional<V> getNullable(K k){
+    public Optional<V> getNullable(K k) {
         return Optional.ofNullable(get(k));
     }
 
-    public V getOrCreate(K k, Supplier<V> supplier){
+    public V getOrCreate(K k, Supplier<V> supplier) {
         V v = get(k);
-        if(v == null){
+        if (v == null) {
             v = supplier.get();
             put(k, v);
         }

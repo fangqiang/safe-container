@@ -1,13 +1,11 @@
 package cn.truthseeker.container.safe.map;
 
-import cn.truthseeker.container.util.Assert;
 import cn.truthseeker.container.util.Emptys;
 
 import java.util.*;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 /**
  * @Description:
@@ -91,16 +89,16 @@ public final class Maps {
     }
 
     public static <K, V> Map<K, V> clearEmpty(Map<K, V> map) {
-        map.entrySet().removeIf(entry -> ! Emptys.isNoneEmpty(entry.getKey(),entry.getValue()));
+        map.entrySet().removeIf(entry -> !Emptys.isNoneEmpty(entry.getKey(), entry.getValue()));
         return map;
     }
 
     public static <K, V> Map<K, V> clearNull(Map<K, V> map) {
-        map.entrySet().removeIf(entry -> ! Emptys.isNoneNull(entry.getKey(),entry.getValue()));
+        map.entrySet().removeIf(entry -> !Emptys.isNoneNull(entry.getKey(), entry.getValue()));
         return map;
     }
 
-    public static <K,V> Map<K,V>listToMap(List<K> list, Function<K,V> function){
+    public static <K, V> Map<K, V> listToMap(List<K> list, Function<K, V> function) {
         HashMap ret = new HashMap();
         for (K k : list) {
             ret.put(k, function.apply(k));
@@ -108,7 +106,7 @@ public final class Maps {
         return ret;
     }
 
-    public static <K,V> Map<K,V>zip(List<K> keys, List<V> values){
+    public static <K, V> Map<K, V> zip(List<K> keys, List<V> values) {
         return CommonMaps.zip(keys, values, HashMap::new);
     }
 }

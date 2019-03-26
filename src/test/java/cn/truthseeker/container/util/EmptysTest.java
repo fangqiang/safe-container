@@ -5,7 +5,8 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 /**
  * @Description:
@@ -34,17 +35,17 @@ public class EmptysTest {
 
     @Test
     public void oneNull() {
-        assertTrue(Emptys.oneNull("a",null));
-        assertTrue(Emptys.oneNull(null,"a"));
-        assertFalse(Emptys.oneNull(null,null));
-        assertFalse(Emptys.oneNull("a","a"));
+        assertTrue(Emptys.oneNull("a", null));
+        assertTrue(Emptys.oneNull(null, "a"));
+        assertFalse(Emptys.oneNull(null, null));
+        assertFalse(Emptys.oneNull("a", "a"));
     }
 
     @Test
     public void oneEmpty() {
-        assertTrue(Emptys.oneEmpty("","a"));
-        assertTrue(Emptys.oneEmpty("a",""));
-        assertFalse(Emptys.oneEmpty("",null));
-        assertFalse(Emptys.oneEmpty("a","a"));
+        assertTrue(Emptys.oneEmpty("", "a"));
+        assertTrue(Emptys.oneEmpty("a", ""));
+        assertFalse(Emptys.oneEmpty("", null));
+        assertFalse(Emptys.oneEmpty("a", "a"));
     }
 }
