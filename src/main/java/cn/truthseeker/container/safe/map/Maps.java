@@ -107,4 +107,8 @@ public final class Maps {
         }
         return ret;
     }
+
+    public static <K,V> Map<K,V>zip(List<K> keys, List<V> values){
+        return CommonMaps.zip(keys, values, HashMap::new);
+    }
 }

@@ -29,9 +29,7 @@ public final class CommonMaps {
      */
     public static <K, V, RK, T extends Map<RK, V>> T mapKey(Map<K, V> map, Function<K, RK> kFun, Supplier<T> supplier) {
         T ret = supplier.get();
-        for (Map.Entry<K, V> entry : map.entrySet()) {
-            ret.put(kFun.apply(entry.getKey()), entry.getValue());
-        }
+        map.forEach((k, v) -> ret.put(kFun.apply(k), v));
         return ret;
     }
 
@@ -47,9 +45,7 @@ public final class CommonMaps {
      */
     public static <K, V, RV, T extends Map<K, RV>> T mapValue(Map<K, V> map, Function<V, RV> vFun, Supplier<T> supplier) {
         T ret = supplier.get();
-        for (Map.Entry<K, V> entry : map.entrySet()) {
-            ret.put(entry.getKey(), vFun.apply(entry.getValue()));
-        }
+        map.forEach((k, v) -> ret.put(k, vFun.apply(v)));
         return ret;
     }
 
@@ -67,9 +63,7 @@ public final class CommonMaps {
      */
     public static <K, V, RK, RV, T extends Map<RK, RV>> T mapKeyValue(Map<K, V> map, Function<K, RK> kFun, Function<V, RV> vFun, Supplier<T> supplier) {
         T ret = supplier.get();
-        for (Map.Entry<K, V> entry : map.entrySet()) {
-            ret.put(kFun.apply(entry.getKey()), vFun.apply(entry.getValue()));
-        }
+        map.forEach((k, v) -> ret.put(kFun.apply(k), vFun.apply(v)));
         return ret;
     }
 

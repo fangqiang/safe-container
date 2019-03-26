@@ -37,18 +37,6 @@ public class SafeHashMapTest {
 
         Assert.assertFalse(TestUtil.throwException(() -> hashMap.put("", "")));
         Assert.assertFalse(TestUtil.throwException(() -> hashMap.put("", "")));
-
-        hashMap.clear();
-        hashMap.put("a","a");
-        Assert.assertTrue(hashMap.size()==1);
-        hashMap.putIgnoreNull("b",null);
-        Assert.assertTrue(hashMap.size()==1);
-        hashMap.putIgnoreEmpty("b","");
-        Assert.assertTrue(hashMap.size()==1);
-        hashMap.putIgnoreNull("b","");
-        Assert.assertTrue(hashMap.size()==2);
-        hashMap.putIgnoreEmpty("c","c");
-        Assert.assertTrue(hashMap.size()==3);
     }
 
     @Test
@@ -153,22 +141,12 @@ public class SafeHashMapTest {
     }
 
     @Test
-    public void firstKeyValue() {
-        SafeHashMap<String, Integer> all = CommonMaps.of("a", 1, SafeHashMap::new);
-        Assert.assertTrue(all.getTheOnlyKey().equals("a"));
-        Assert.assertTrue(all.getTheOnlyValue() == 1);
-
-        all.put("b",1);
-        Assert.assertTrue(TestUtil.throwException(()->all.getTheOnlyKey()));
-    }
-
-    @Test
     public void removeIf() {
         SafeHashMap<String, Integer> all = CommonMaps.of("a", 1,"b", 2, SafeHashMap::new);
         Assert.assertTrue(all.size()==2);
         all.removeIf((k,v)-> k.equals("a") && v==1);
         Assert.assertTrue(all.size()==1);
-        Assert.assertTrue(all.getTheOnlyKey().equals("b"));
+        Assert.assertTrue(all.getTheOnlyKey().get().equals("b"));
     }
 
     @Test
@@ -178,13 +156,8 @@ public class SafeHashMapTest {
     }
 
     @Test
-    public void add2(){
-        Assert.assertTrue(Safes.newSafeMap().put2(1,1).size()==1);
-    }
-
-    @Test
     public void forEach2(){
-        Assert.assertTrue(Safes.newSafeMap().put2(1,1).forEach2((k,v)->System.out.println(k)).size()==1);
+        Assert.assertTrue(Safes.newSafeMap(1,1).forEach2((k,v)->System.out.println(k)).size()==1);
     }
 
 }

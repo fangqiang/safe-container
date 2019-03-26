@@ -54,16 +54,7 @@ public class SafeArrayListTest {
         SafeArrayList list = new SafeArrayList();
         list.add(1);
         list.set(0, 1);
-
         Assert.assertTrue(list.size()==1);
-        list.addIgnoreNull(null);
-        Assert.assertTrue(list.size()==1);
-        list.addIgnoreEmpty("");
-        Assert.assertTrue(list.size()==1);
-        list.addIgnoreNull("");
-        Assert.assertTrue(list.size()==2);
-        list.addIgnoreEmpty("1");
-        Assert.assertTrue(list.size()==3);
     }
 
     @Test
@@ -73,23 +64,17 @@ public class SafeArrayListTest {
     }
 
     @Test
-    public void add2(){
-        Assert.assertTrue(Safes.newSafeList().add2(1).size()==1);
+    public void listToMap(){
+        Assert.assertTrue(Safes.newSafeListIgnoreNull(Arrays.asList(1)).toSafeMapIgnoreNull(a->"").size()==1);
+        Assert.assertTrue(Safes.newSafeListIgnoreNull(Arrays.asList(1)).toSafeMapIgnoreNull(a->null).size()==0);
     }
 
     @Test
-    public void listToMap(){
-        Assert.assertTrue(Safes.newSafeList().add2(1).toMap(a->"a").size()==1);
-        Assert.assertTrue(Safes.newSafeList().add2(1).toMap(a->null).size()==1);
-        Assert.assertTrue(Safes.newSafeList().add2(1).toSafeMapIgnoreNull(a->"").size()==1);
-        Assert.assertTrue(Safes.newSafeList().add2(1).toSafeMapIgnoreNull(a->null).size()==0);
-    }
-    @Test
     public void forEach2(){
-        Assert.assertTrue(Safes.newSafeList().add2(1).forEach2(a-> System.out.println(a)).size()==1);
+        Assert.assertTrue(Safes.newSafeListIgnoreNull(Arrays.asList(1)).forEach2(a-> System.out.println(a)).size()==1);
     }
     @Test
     public void removeIf2(){
-        Assert.assertTrue(Safes.newSafeList().add2(1).removeIf2(a-> (int)a == 1).size()==0);
+        Assert.assertTrue(Safes.newSafeListIgnoreNull(Arrays.asList(1)).removeIf2(a-> (int)a == 1).size()==0);
     }
 }

@@ -29,11 +29,6 @@ public interface SafeList<E> extends List<E> ,SafeCollection<E>{
         return this;
     }
 
-    default SafeList<E> add2(E e){
-        add(e);
-        return this;
-    }
-
     default SafeList<E> forEach2(Consumer<E> consumer){
         for (E e : this) {
             consumer.accept(e);

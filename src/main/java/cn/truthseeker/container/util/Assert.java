@@ -16,10 +16,4 @@ public class Assert {
         }
     }
 
-    public static <T> void checkSafe(Collection<T> c) {
-        Objects.requireNonNull(c);
-        for (T e : c) {
-            Objects.requireNonNull(e);
-        }
-    }
 }

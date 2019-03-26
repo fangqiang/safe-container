@@ -80,10 +80,11 @@ public class SafeTreeMapTest {
     @Test
     public void firstKeyValue() {
         SafeTreeMap<String, Integer> all = CommonMaps.of("a", 1, SafeTreeMap::new);
-        Assert.assertTrue(all.getTheOnlyKey().equals("a"));
-        Assert.assertTrue(all.getTheOnlyValue() == 1);
+        Assert.assertTrue(all.getTheOnlyKey().get().equals("a"));
+        Assert.assertTrue(all.getTheOnlyValue().get() == 1);
 
         all.put("b",1);
-        Assert.assertTrue(TestUtil.throwException(()->all.getTheOnlyKey()));
+        Assert.assertFalse(all.getTheOnlyKey().isPresent());
+        Assert.assertFalse(all.getTheOnlyValue().isPresent());
     }
 }

@@ -24,11 +24,6 @@ public interface SafeSet<E> extends Set<E>, SafeCollection<E>{
         return this;
     }
 
-    default SafeSet<E> add2(E e){
-        add(e);
-        return this;
-    }
-
     default SafeSet<E> forEach2(Consumer<E> consumer){
         for (E e : this) {
             consumer.accept(e);

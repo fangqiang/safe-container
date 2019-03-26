@@ -28,18 +28,6 @@ public interface SafeMap<K, V> extends Map<K, V> {
     @Override
     V get(Object key);
 
-    default void putIgnoreNull(K k, V v){
-        if(Emptys.isNoneNull(k, v)){
-            put(k,v);
-        }
-    }
-
-    default void putIgnoreEmpty(K k, V v){
-        if(Emptys.isNoneEmpty(k, v)){
-            put(k,v);
-        }
-    }
-
     /**
      * 按key映射
      */
@@ -111,17 +99,23 @@ public interface SafeMap<K, V> extends Map<K, V> {
     /**
      * 返回唯一的key，如果map.size != 1则抛出异常
      */
-    default K getTheOnlyKey() {
-        Assert.isTrue(size() == 1, "map size must be 1");
-        return keySet().iterator().next();
+    default Optional<K> getTheOnlyKey() {
+        if(size()!=1){
+            return Optional.empty();
+        }else{
+            return Optional.of(keySet().iterator().next());
+        }
     }
 
     /**
      * 返回唯一的value，如果map.size != 1则抛出异常
      */
-    default V getTheOnlyValue() {
-        Assert.isTrue(size() == 1, "map size must be 1");
-        return values().iterator().next();
+    default Optional<V> getTheOnlyValue() {
+        if(size()!=1){
+            return Optional.empty();
+        }else{
+            return Optional.of(values().iterator().next());
+        }
     }
 
     default SafeMap<K, V> removeEmpty(){
@@ -141,11 +135,6 @@ public interface SafeMap<K, V> extends Map<K, V> {
             }
         }
         return false;
-    }
-
-    default SafeMap<K, V> put2(K k, V v){
-        put(k, v);
-        return this;
     }
 
     default SafeMap<K, V> forEach2(BiConsumer<K,V> consumer){

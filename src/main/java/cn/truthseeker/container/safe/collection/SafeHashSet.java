@@ -1,7 +1,5 @@
 package cn.truthseeker.container.safe.collection;
 
-import cn.truthseeker.container.util.Assert;
-
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
@@ -20,7 +18,7 @@ public class SafeHashSet<E> extends HashSet<E> implements SafeSet<E> {
     public SafeHashSet(Collection<? extends E> c) {
         super(c);
         if (!(c instanceof SafeSet)) {
-            Assert.checkSafe(c);
+            Collections2.checkSafe(c);
         }
     }
 
@@ -41,7 +39,7 @@ public class SafeHashSet<E> extends HashSet<E> implements SafeSet<E> {
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        Assert.checkSafe(c);
+        Collections2.checkSafe(c);
         return super.addAll(c);
     }
 

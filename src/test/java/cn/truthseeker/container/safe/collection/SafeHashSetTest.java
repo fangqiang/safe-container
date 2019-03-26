@@ -30,15 +30,6 @@ public class SafeHashSetTest {
 
         set.clear();
         set.add("a");
-        Assert.assertTrue(set.size()==1);
-        set.addIgnoreNull(null);
-        Assert.assertTrue(set.size()==1);
-        set.addIgnoreEmpty("");
-        Assert.assertTrue(set.size()==1);
-        set.addIgnoreNull("");
-        Assert.assertTrue(set.size()==2);
-        set.addIgnoreEmpty("1");
-        Assert.assertTrue(set.size()==3);
     }
 
     @Test
@@ -55,16 +46,16 @@ public class SafeHashSetTest {
 
     @Test
     public void add2(){
-        Assert.assertTrue(Safes.newSafeSet().add2(1).add2(1).size()==1);
+        Assert.assertTrue(Safes.newSafeSetIgnoreNull(Arrays.asList(1)).size()==1);
     }
 
     @Test
     public void forEach2(){
-        Assert.assertTrue(Safes.newSafeSet().add2(1).forEach2(a-> System.out.println(a)).size()==1);
+        Assert.assertTrue(Safes.newSafeSetIgnoreNull(Arrays.asList(1)).forEach2(a-> System.out.println(a)).size()==1);
     }
 
     @Test
     public void removeIf2(){
-        Assert.assertTrue(Safes.newSafeSet().add2(1).removeIf2(a-> (int)a == 1).size()==0);
+        Assert.assertTrue(Safes.newSafeSetIgnoreNull(Arrays.asList(1)).removeIf2(a-> (int)a == 1).size()==0);
     }
 }

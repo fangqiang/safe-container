@@ -99,7 +99,7 @@ public class MapsTest {
 
     @Test
     public void zip() {
-        HashMap<String, Integer> zip = CommonMaps.zip(Arrays.asList("a", "b"), Arrays.asList(1, 2), HashMap::new);
+        Map<String, Integer> zip = Maps.zip(Arrays.asList("a", "b"), Arrays.asList(1, 2));
         Assert.assertTrue(zip.size() == 2);
         Assert.assertTrue(zip.get("a") == 1);
         Assert.assertTrue(zip.get("b") == 2);
