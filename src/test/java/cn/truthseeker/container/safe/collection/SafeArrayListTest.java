@@ -78,4 +78,9 @@ public class SafeArrayListTest {
     public void removeIf2() {
         Assert.assertTrue(Safes.newSafeListIgnoreNull(Arrays.asList(1)).removeIf2(a -> (int) a == 1).size() == 0);
     }
+
+    @Test
+    public void map() {
+        Assert.assertTrue(Safes.newSafeListIgnoreNull(Arrays.asList(1)).map(a -> a).size() == 1);
+    }
 }

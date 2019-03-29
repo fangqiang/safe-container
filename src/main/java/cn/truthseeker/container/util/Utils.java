@@ -17,8 +17,7 @@ public class Utils {
     public static void sleep(long ms) {
         try {
             Thread.sleep(ms);
-        } catch (InterruptedException ignored) {
-        }
+        } catch (InterruptedException ignored) { }
     }
 
     public static <K, V> void mapAddList(Map<K, List<V>> map, K key, V item) {

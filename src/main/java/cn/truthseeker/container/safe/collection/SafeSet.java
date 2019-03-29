@@ -1,9 +1,11 @@
 package cn.truthseeker.container.safe.collection;
 
+import cn.truthseeker.container.safe.Safes;
 import cn.truthseeker.container.util.Emptys;
 
 import java.util.Set;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
@@ -29,5 +31,13 @@ public interface SafeSet<E> extends Set<E>, SafeCollection<E> {
             consumer.accept(e);
         }
         return this;
+    }
+
+    default <R> SafeSet<R> map(Function<E,R> function){
+        SafeSet<R> list = Safes.newSafeSet();
+        for (E e : this) {
+            list.add(function.apply(e));
+        }
+        return list;
     }
 }
