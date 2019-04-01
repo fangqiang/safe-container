@@ -160,4 +160,12 @@ public class SafeHashMapTest {
         Assert.assertTrue(Safes.newSafeMap(1, 1).forEach2((k, v) -> System.out.println(k)).size() == 1);
     }
 
+    @Test
+    public void getOrCreate() {
+        SafeMap<Object, Object> map = Safes.newSafeMap();
+        Object orCreate = map.getOrCreate(1, () -> 2);
+
+        Assert.assertTrue((int)orCreate == 2);
+        Assert.assertTrue(map.size() == 1);
+    }
 }

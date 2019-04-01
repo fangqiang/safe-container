@@ -1,5 +1,6 @@
 package cn.truthseeker.container;
 
+import cn.truthseeker.container.safe.map.CommonMaps;
 import cn.truthseeker.tags.Nullable;
 
 import java.util.Optional;
@@ -26,11 +27,6 @@ public class SimpleCache<K, V> extends ConcurrentHashMap<K, V> {
     }
 
     public V getOrCreate(K k, Supplier<V> supplier) {
-        V v = get(k);
-        if (v == null) {
-            v = supplier.get();
-            put(k, v);
-        }
-        return v;
+        return CommonMaps.getOrCreate(this, k, supplier);
     }
 }

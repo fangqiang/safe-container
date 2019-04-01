@@ -7,10 +7,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.BiConsumer;
-import java.util.function.BiPredicate;
-import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.function.*;
 
 /**
  * @Description:
@@ -28,6 +25,10 @@ public interface SafeMap<K, V> extends Map<K, V> {
     @Nullable
     @Override
     V get(Object key);
+
+    default V getOrCreate(K k, Supplier<V> supplier) {
+        return CommonMaps.getOrCreate(this, k, supplier);
+    }
 
     /**
      * 按key映射

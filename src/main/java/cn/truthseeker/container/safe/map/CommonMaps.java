@@ -185,4 +185,13 @@ public final class CommonMaps {
         }
         return ret;
     }
+
+    public static <K,V> V getOrCreate(Map<K,V> map, K k, Supplier<V> supplier) {
+        V v = map.get(k);
+        if (v == null) {
+            v = supplier.get();
+            map.put(k, v);
+        }
+        return v;
+    }
 }
