@@ -19,15 +19,6 @@ import static org.junit.Assert.assertTrue;
 public class Collections2Test {
 
     @Test
-    public void checkSafe() {
-        List list = Arrays.asList(1);
-        List list2 = Arrays.asList(1, null);
-
-        Assert.assertFalse(TestUtil.throwException(() -> Collections2.checkSafe(list)));
-        Assert.assertTrue(TestUtil.throwException(() -> Collections2.checkSafe(list2)));
-    }
-
-    @Test
     public void anySatisfy() {
         assertTrue(Collections2.anySatisfied(Arrays.asList(1, 2), a -> a == 1));
         assertTrue(Collections2.anySatisfied(Arrays.asList(1, 2).toArray(), a -> (int) a == 2));

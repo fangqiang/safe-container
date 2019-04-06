@@ -3,6 +3,8 @@ package cn.truthseeker.container.safe;
 import cn.truthseeker.container.safe.collection.SafeList;
 import cn.truthseeker.container.safe.collection.SafeSet;
 import cn.truthseeker.container.safe.map.CommonMaps;
+import cn.truthseeker.container.safe.map.Maps;
+import cn.truthseeker.container.safe.map.NoneEmptyMap;
 import cn.truthseeker.container.safe.map.SafeMap;
 import org.junit.Assert;
 import org.junit.Test;
@@ -121,5 +123,15 @@ public class SafesTest {
         Assert.assertTrue(l.size() == 1);
         l = Safes.newSafeSortSetIgnoreNull(list).cleanEmpty();
         Assert.assertTrue(l.size() == 1);
+    }
+    @Test
+    public void newNoneEmptyMap() {
+        NoneEmptyMap<String, String> neMap = Safes.newNoneEmptyMap(Maps.of("a", "a"));
+        Assert.assertTrue(neMap.size()==1);
+
+        neMap = Safes.newNoneEmptyMap(Maps.of("", ""));
+        Assert.assertTrue(neMap.size()==0);
+        neMap = Safes.newNoneEmptyMap(Maps.of("a", ""));
+        Assert.assertTrue(neMap.size()==0);
     }
 }

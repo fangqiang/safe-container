@@ -1,5 +1,8 @@
 package cn.truthseeker.container.safe.collection;
 
+import cn.truthseeker.container.util.Assert;
+import cn.truthseeker.container.util.Emptys;
+
 import java.util.*;
 
 /**
@@ -21,13 +24,13 @@ public class SafeTreeSet<E> extends TreeSet<E> implements SafeSet<E> {
     public SafeTreeSet(Collection<? extends E> c) {
         super(c);
         if (!(c instanceof SafeSet)) {
-            Collections2.checkSafe(c);
+            Assert.isTrue(Emptys.isNoneNull(c), "collection contains null");
         }
     }
 
     public SafeTreeSet(SortedSet<E> s) {
         super(s);
-        Collections2.checkSafe(s);
+        Assert.isTrue(Emptys.isNoneNull(s), "collection contains null");
     }
 
 
@@ -39,7 +42,7 @@ public class SafeTreeSet<E> extends TreeSet<E> implements SafeSet<E> {
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        Collections2.checkSafe(c);
+        Assert.isTrue(Emptys.isNoneNull(c), "collection contains null");
         return super.addAll(c);
     }
 

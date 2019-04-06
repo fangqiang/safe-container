@@ -25,12 +25,12 @@ public class SafeTreeSetTest {
     @Test
     public void add() {
         SafeTreeSet set = new SafeTreeSet();
-        Assert.assertTrue(TestUtil.throwException(() -> set.add(null)));
+        TestUtil.withException(() -> set.add(null));
     }
 
     @Test
     public void addAll() {
         SafeTreeSet set = new SafeTreeSet();
-        Assert.assertTrue(TestUtil.throwException(() -> set.addAll(Arrays.asList(null))));
+        TestUtil.withException(() -> set.addAll(Arrays.asList(null)));
     }
 }

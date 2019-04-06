@@ -22,7 +22,7 @@ public class SimpleCacheTest {
         Assert.assertTrue(cache.getOrCreate("b", () -> 2) == 2);
         Assert.assertTrue(cache.getOrCreate("b", this::throwException) == 2);
 
-        Assert.assertTrue(TestUtil.throwException(() -> cache.getOrCreate("c", this::throwException)));
+        TestUtil.withException(() -> cache.getOrCreate("c", this::throwException));
     }
 
     private int throwException() {

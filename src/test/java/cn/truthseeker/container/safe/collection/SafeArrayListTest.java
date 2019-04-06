@@ -22,9 +22,9 @@ public class SafeArrayListTest {
         List list = new ArrayList();
         list.add(null);
         list.add(null);
-        Assert.assertTrue(TestUtil.throwException(() -> new SafeArrayList(list)));
+        TestUtil.withException(() -> new SafeArrayList(list));
         list.clear();
-        Assert.assertFalse(TestUtil.throwException(() -> new SafeArrayList(list)));
+        TestUtil.noException(() -> new SafeArrayList(list));
 
         new SafeArrayList<>(1);
     }
@@ -32,21 +32,25 @@ public class SafeArrayListTest {
     @Test
     public void add() {
         SafeArrayList list = new SafeArrayList();
-        Assert.assertTrue(TestUtil.throwException(() -> list.add(null)));
-        Assert.assertTrue(TestUtil.throwException(() -> list.add(1, null)));
+        TestUtil.withException(() -> list.add(null));
+        TestUtil.withException(() -> list.add(1, null));
 
-        Assert.assertFalse(TestUtil.throwException(() -> list.add(1)));
-        Assert.assertFalse(TestUtil.throwException(() -> list.add(1, 1)));
+        TestUtil.noException(() -> list.add(1));
+        TestUtil.noException(() -> list.add(1, 1));
     }
 
     @Test
     public void addAll() {
         SafeArrayList list = new SafeArrayList();
-        Assert.assertTrue(TestUtil.throwException(() -> list.addAll(null)));
-        Assert.assertTrue(TestUtil.throwException(() -> list.addAll(1, null)));
 
-        Assert.assertFalse(TestUtil.throwException(() -> list.addAll(Arrays.asList(1))));
-        Assert.assertFalse(TestUtil.throwException(() -> list.addAll(1, Arrays.asList(1))));
+        List l = new ArrayList();
+        l.add(null);
+        l.add(null);
+        TestUtil.withException(() -> list.addAll(l));
+        TestUtil.withException(() -> list.addAll(1, l));
+
+        TestUtil.noException(() -> list.addAll(Arrays.asList(1)));
+        TestUtil.noException(() -> list.addAll(1, Arrays.asList(1)));
     }
 
     @Test
@@ -82,5 +86,11 @@ public class SafeArrayListTest {
     @Test
     public void map() {
         Assert.assertTrue(Safes.newSafeListIgnoreNull(Arrays.asList(1)).map(a -> a).size() == 1);
+    }
+
+    @Test
+    public void assertTrue(){
+        TestUtil.noException(()->Safes.newSafeListIgnoreNull(Arrays.asList(1,2)).assertTrue(e-> e<3, ""));
+        TestUtil.withException(()->Safes.newSafeListIgnoreNull(Arrays.asList(1,2)).assertTrue(e-> e<2, ""));
     }
 }

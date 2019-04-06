@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -47,5 +48,22 @@ public class EmptysTest {
         assertTrue(Emptys.oneEmpty("a", ""));
         assertFalse(Emptys.oneEmpty("", null));
         assertFalse(Emptys.oneEmpty("a", "a"));
+    }
+
+    @Test
+    public void anyEmpty() {
+        List l = new ArrayList();
+        l.add(null);
+        l.add(1);
+        l.add(2);
+        assertTrue(Emptys.isAnyEmpty(l));
+        assertTrue(Emptys.isAnyNull(l));
+
+        l.clear();
+        l.add("");
+        l.add(1);
+        l.add(2);
+        assertTrue(Emptys.isAnyEmpty(l));
+        assertFalse(Emptys.isAnyNull(l));
     }
 }

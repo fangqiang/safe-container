@@ -20,11 +20,11 @@ public class SafeTreeMapTest {
     public void init() {
         Map<Object, Object> map = Maps.of(null, null);
 
-        Assert.assertTrue(TestUtil.throwException(() -> new SafeTreeMap(map)));
+        TestUtil.withException(() -> new SafeTreeMap(map));
 
         map.clear();
         map.put("", "");
-        Assert.assertFalse(TestUtil.throwException(() -> new SafeTreeMap(map)));
+        TestUtil.noException(() -> new SafeTreeMap(map));
 
         new SafeTreeMap(new TreeMap<>());
         new SafeTreeMap((o1, o2) -> 0);
@@ -33,11 +33,11 @@ public class SafeTreeMapTest {
     @Test
     public void put() {
         SafeTreeMap hashMap = new SafeTreeMap();
-        Assert.assertTrue(TestUtil.throwException(() -> hashMap.put(null, "")));
-        Assert.assertTrue(TestUtil.throwException(() -> hashMap.put("", null)));
+        TestUtil.withException(() -> hashMap.put(null, ""));
+        TestUtil.withException(() -> hashMap.put("", null));
 
-        Assert.assertFalse(TestUtil.throwException(() -> hashMap.put("", "")));
-        Assert.assertFalse(TestUtil.throwException(() -> hashMap.put("", "")));
+        TestUtil.noException(() -> hashMap.put("", ""));
+        TestUtil.noException(() -> hashMap.put("", ""));
     }
 
     @Test
@@ -45,11 +45,11 @@ public class SafeTreeMapTest {
         Map<Object, Object> map = Maps.of(null, null);
 
         SafeTreeMap hashMap = new SafeTreeMap();
-        Assert.assertTrue(TestUtil.throwException(() -> hashMap.putAll(map)));
+        TestUtil.withException(() -> hashMap.putAll(map));
 
         map.clear();
         map.put("", "");
-        Assert.assertFalse(TestUtil.throwException(() -> hashMap.putAll(map)));
+        TestUtil.noException(() -> hashMap.putAll(map));
     }
 
     @Test

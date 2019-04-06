@@ -1,5 +1,6 @@
 package cn.truthseeker.container.util;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 
@@ -10,6 +11,19 @@ import java.util.Map;
  * @date: Created by on 19/3/17
  */
 public class Emptys {
+    public static boolean isAnyNull(Iterable objects) {
+        return !isNoneNull(objects);
+    }
+
+    public static boolean isNoneNull(Iterable objects) {
+        for (Object object : objects) {
+            if (object == null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static boolean isAnyNull(Object... objects) {
         return !isNoneNull(objects);
     }
@@ -17,6 +31,19 @@ public class Emptys {
     public static boolean isNoneNull(Object... objects) {
         for (Object object : objects) {
             if (object == null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean isAnyEmpty(Iterable objects) {
+        return !isNoneEmpty(objects);
+    }
+
+    public static boolean isNoneEmpty(Iterable objects) {
+        for (Object object : objects) {
+            if (isEmpty(object)) {
                 return false;
             }
         }

@@ -2,8 +2,10 @@ package cn.truthseeker.container.safe.collection;
 
 import cn.truthseeker.container.safe.Safes;
 import cn.truthseeker.container.safe.map.SafeMap;
+import cn.truthseeker.container.util.Assert;
 
 import java.util.Collection;
+import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -28,5 +30,9 @@ public interface SafeCollection<E> extends Collection<E> {
 
     default boolean anySatisfied(Predicate<E> predicate) {
         return Collections2.anySatisfied(this, predicate);
+    }
+
+    default void assertTrue(Predicate<E> predicate, String errMsg){
+        forEach((e)-> Assert.isTrue(predicate.test(e), errMsg));
     }
 }

@@ -13,12 +13,16 @@ public class TestUtil {
         void exceptException();
     }
 
-    public static boolean throwException(TestCode testCode) {
+    public static void noException(TestCode testCode) {
+        testCode.exceptException();
+    }
+
+    public static void withException(TestCode testCode) {
         try {
             testCode.exceptException();
-            return false;
         } catch (Throwable e) {
-            return true;
+            return;
         }
+        throw new RuntimeException("");
     }
 }

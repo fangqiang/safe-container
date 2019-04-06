@@ -1,5 +1,8 @@
 package cn.truthseeker.container.safe.collection;
 
+import cn.truthseeker.container.util.Assert;
+import cn.truthseeker.container.util.Emptys;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -46,12 +49,5 @@ public class Collections2 {
             }
         }
         return false;
-    }
-
-    public static <T> void checkSafe(Iterable<T> c) {
-        Objects.requireNonNull(c);
-        for (T e : c) {
-            Objects.requireNonNull(e);
-        }
     }
 }

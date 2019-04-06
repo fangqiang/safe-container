@@ -89,12 +89,12 @@ public final class Maps {
     }
 
     public static <K, V> Map<K, V> clearEmpty(Map<K, V> map) {
-        map.entrySet().removeIf(entry -> !Emptys.isNoneEmpty(entry.getKey(), entry.getValue()));
+        map.entrySet().removeIf(entry -> Emptys.isAnyEmpty(entry.getKey(), entry.getValue()));
         return map;
     }
 
     public static <K, V> Map<K, V> clearNull(Map<K, V> map) {
-        map.entrySet().removeIf(entry -> !Emptys.isNoneNull(entry.getKey(), entry.getValue()));
+        map.entrySet().removeIf(entry -> Emptys.isAnyNull(entry.getKey(), entry.getValue()));
         return map;
     }
 

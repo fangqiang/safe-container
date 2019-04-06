@@ -1,5 +1,8 @@
 package cn.truthseeker.container.safe.collection;
 
+import cn.truthseeker.container.util.Assert;
+import cn.truthseeker.container.util.Emptys;
+
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.Objects;
@@ -18,7 +21,7 @@ public class SafeLinkedList<E> extends LinkedList<E> implements SafeList<E> {
     public SafeLinkedList(Collection<? extends E> c) {
         super(c);
         if (!(c instanceof SafeList)) {
-            Collections2.checkSafe(c);
+            Assert.isTrue(Emptys.isNoneNull(c), "collection contains null");
         }
     }
 
@@ -42,13 +45,13 @@ public class SafeLinkedList<E> extends LinkedList<E> implements SafeList<E> {
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        Collections2.checkSafe(c);
+        Assert.isTrue(Emptys.isNoneNull(c), "collection contains null");
         return super.addAll(c);
     }
 
     @Override
     public boolean addAll(int index, Collection<? extends E> c) {
-        Collections2.checkSafe(c);
+        Assert.isTrue(Emptys.isNoneNull(c), "collection contains null");
         return super.addAll(index, c);
     }
 }

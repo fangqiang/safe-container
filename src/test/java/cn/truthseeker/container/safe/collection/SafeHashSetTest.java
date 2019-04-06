@@ -25,7 +25,7 @@ public class SafeHashSetTest {
     @Test
     public void add() {
         SafeHashSet set = new SafeHashSet();
-        Assert.assertTrue(TestUtil.throwException(() -> set.add(null)));
+        TestUtil.withException(() -> set.add(null));
 
         set.clear();
         set.add("a");
@@ -34,7 +34,7 @@ public class SafeHashSetTest {
     @Test
     public void addAll() {
         SafeHashSet set = new SafeHashSet();
-        Assert.assertTrue(TestUtil.throwException(() -> set.addAll(Arrays.asList(null))));
+        TestUtil.withException(() -> set.addAll(Arrays.asList(null)));
     }
 
     @Test

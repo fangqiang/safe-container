@@ -21,9 +21,9 @@ public class SafeLinkedListTest {
         List list = new ArrayList();
         list.add(null);
         list.add(null);
-        Assert.assertTrue(TestUtil.throwException(() -> new SafeLinkedList(list)));
+        TestUtil.withException(() -> new SafeLinkedList(list));
         list.clear();
-        Assert.assertFalse(TestUtil.throwException(() -> new SafeLinkedList(list)));
+        TestUtil.noException(() -> new SafeLinkedList(list));
 
         new SafeLinkedList(Arrays.asList(1));
     }
@@ -31,21 +31,21 @@ public class SafeLinkedListTest {
     @Test
     public void add() {
         SafeLinkedList list = new SafeLinkedList();
-        Assert.assertTrue(TestUtil.throwException(() -> list.add(null)));
-        Assert.assertTrue(TestUtil.throwException(() -> list.add(1, null)));
+        TestUtil.withException(() -> list.add(null));
+        TestUtil.withException(() -> list.add(1, null));
 
-        Assert.assertFalse(TestUtil.throwException(() -> list.add(1)));
-        Assert.assertFalse(TestUtil.throwException(() -> list.add(1, 1)));
+        TestUtil.noException(() -> list.add(1));
+        TestUtil.noException(() -> list.add(1, 1));
     }
 
     @Test
     public void addAll() {
         SafeLinkedList list = new SafeLinkedList();
-        Assert.assertTrue(TestUtil.throwException(() -> list.addAll(null)));
-        Assert.assertTrue(TestUtil.throwException(() -> list.addAll(1, null)));
+        TestUtil.withException(() -> list.addAll(null));
+        TestUtil.withException(() -> list.addAll(1, null));
 
-        Assert.assertFalse(TestUtil.throwException(() -> list.addAll(Arrays.asList(1))));
-        Assert.assertFalse(TestUtil.throwException(() -> list.addAll(1, Arrays.asList(1))));
+        TestUtil.noException(() -> list.addAll(Arrays.asList(1)));
+        TestUtil.noException(() -> list.addAll(1, Arrays.asList(1)));
     }
 
     @Test

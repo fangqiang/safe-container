@@ -1,5 +1,6 @@
 package cn.truthseeker.container.safe.map;
 
+import cn.truthseeker.container.util.Assert;
 import cn.truthseeker.container.util.Emptys;
 import cn.truthseeker.tags.Nullable;
 
@@ -142,5 +143,9 @@ public interface SafeMap<K, V> extends Map<K, V> {
     default SafeMap<K, V> forEach2(BiConsumer<K, V> consumer) {
         forEach(consumer);
         return this;
+    }
+
+    default SafeMap<K, V> assertTrue(BiPredicate<K,V> biPredicate, String errMsg){
+        return forEach2((k,v)-> Assert.isTrue(biPredicate.test(k,v), errMsg));
     }
 }

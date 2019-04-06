@@ -1,5 +1,8 @@
 package cn.truthseeker.container.safe.collection;
 
+import cn.truthseeker.container.util.Assert;
+import cn.truthseeker.container.util.Emptys;
+
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
@@ -18,7 +21,7 @@ public class SafeHashSet<E> extends HashSet<E> implements SafeSet<E> {
     public SafeHashSet(Collection<? extends E> c) {
         super(c);
         if (!(c instanceof SafeSet)) {
-            Collections2.checkSafe(c);
+            Assert.isTrue(Emptys.isNoneNull(c), "collection contains null");
         }
     }
 
@@ -39,7 +42,7 @@ public class SafeHashSet<E> extends HashSet<E> implements SafeSet<E> {
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        Collections2.checkSafe(c);
+        Assert.isTrue(Emptys.isNoneNull(c), "collection contains null");
         return super.addAll(c);
     }
 

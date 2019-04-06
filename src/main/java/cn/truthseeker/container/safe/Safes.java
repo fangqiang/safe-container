@@ -1,10 +1,7 @@
 package cn.truthseeker.container.safe;
 
 import cn.truthseeker.container.safe.collection.*;
-import cn.truthseeker.container.safe.map.CommonMaps;
-import cn.truthseeker.container.safe.map.SafeHashMap;
-import cn.truthseeker.container.safe.map.SafeMap;
-import cn.truthseeker.container.safe.map.SafeTreeMap;
+import cn.truthseeker.container.safe.map.*;
 import cn.truthseeker.container.util.Emptys;
 
 import java.util.Arrays;
@@ -65,6 +62,10 @@ public final class Safes {
      */
     public static <K, V> SafeMap<K, V> newSafeSortMapIgnoreNull(Map<K, V> map) {
         return CommonMaps.filterByKeyValue(map, (k, v) -> Emptys.isNoneNull(k, v), SafeTreeMap::new);
+    }
+
+    public static <K,V> NoneEmptyMap<K,V> newNoneEmptyMap(Map<K, V> map) {
+        return CommonMaps.filterByKeyValue(map, (k, v) -> Emptys.isNoneEmpty(k, v), NoneEmptyMap::new);
     }
 
     public static <E> SafeList<E> newSafeList() {
