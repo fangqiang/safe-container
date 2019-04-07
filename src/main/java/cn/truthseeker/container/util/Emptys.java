@@ -1,6 +1,5 @@
 package cn.truthseeker.container.util;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 
@@ -11,6 +10,30 @@ import java.util.Map;
  * @date: Created by on 19/3/17
  */
 public class Emptys {
+    public static void assertNotNull(Object o) {
+        if (o == null) {
+            throw new RuntimeException("can't be null");
+        }
+    }
+
+    public static void assertNotEmpty(Object o) {
+        if (isEmpty(o)) {
+            throw new RuntimeException("can't be null");
+        }
+    }
+
+    public static void assertNoneNull(Iterable objects) {
+        if (!isNoneNull(objects)) {
+            throw new RuntimeException("can't contains null");
+        }
+    }
+
+    public static void assertNoneEmpty(Iterable objects) {
+        if (!isNoneEmpty(objects)) {
+            throw new RuntimeException("can't contains null");
+        }
+    }
+
     public static boolean isAnyNull(Iterable objects) {
         return !isNoneNull(objects);
     }

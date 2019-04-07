@@ -1,10 +1,9 @@
-package cn.truthseeker.container.safe.map;
+package cn.truthseeker.container.safe;
 
 import cn.truthseeker.container.util.Assert;
+import cn.truthseeker.container.util.Emptys;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -16,7 +15,48 @@ import java.util.function.Supplier;
  * @email: lowping@163.com
  * @date: Created by on 19/3/14
  */
-public final class CommonMaps {
+public final class Maps {
+
+    /**
+     * 校验一个mapA是否完全包含mapB
+     *
+     * @param all  mapA
+     * @param part mapB
+     * @param <K>  参数的key类型
+     * @param <V>  参数的value类型
+     * @return 完全包含，返回true,否则返回false
+     */
+    public static <K, V> boolean containsMap(Map<K, V> all, Map<K, V> part) {
+        for (Map.Entry<K, V> entry : part.entrySet()) {
+            K key = entry.getKey();
+            V value = entry.getValue();
+            V value2 = all.get(key);
+            if (!Objects.equals(value, value2)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * @param map      操作的map
+     * @param keys     获取的字段集合
+     * @param supplier 提供一个容器，数据将放到这个容器中并返回
+     * @param <K>      参数的key类型
+     * @param <V>      参数的value类型
+     * @param <T>      返回值类型
+     * @return supplier函数的返回值
+     */
+    public static <K, V, T extends Map<K, V>> T getSubMap(Map<K, V> map, Collection<K> keys, Supplier<T> supplier) {
+        T ret = supplier.get();
+        for (K key : keys) {
+            V value = map.get(key);
+            if (value != null) {
+                ret.put(key, value);
+            }
+        }
+        return ret;
+    }
 
     /**
      * @param map      操作的map
@@ -125,24 +165,16 @@ public final class CommonMaps {
         return ret;
     }
 
-    /**
-     * @param map      操作的map
-     * @param keys     获取的字段集合
-     * @param supplier 提供一个容器，数据将放到这个容器中并返回
-     * @param <K>      参数的key类型
-     * @param <V>      参数的value类型
-     * @param <T>      返回值类型
-     * @return supplier函数的返回值
-     */
-    public static <K, V, T extends Map<K, V>> T getSubMap(Map<K, V> map, Collection<K> keys, Supplier<T> supplier) {
-        T ret = supplier.get();
-        for (K key : keys) {
-            V value = map.get(key);
-            if (value != null) {
-                ret.put(key, value);
-            }
-        }
-        return ret;
+    public static <K, V> Map<K, V> of(K k1, V v1) {
+        return of(k1, v1, HashMap::new);
+    }
+
+    public static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2) {
+        return of(k1, v1, k2, v2, HashMap::new);
+    }
+
+    public static <K, V> Map<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3) {
+        return of(k1, v1, k2, v2, k3, v3, HashMap::new);
     }
 
     public static <K, V, T extends Map<K, V>> T of(K k1, V v1, Supplier<T> supplier) {
@@ -166,6 +198,24 @@ public final class CommonMaps {
         return ret;
     }
 
+    public static <K, V> Map<K, V> clearEmpty(Map<K, V> map) {
+        map.entrySet().removeIf(entry -> Emptys.isAnyEmpty(entry.getKey(), entry.getValue()));
+        return map;
+    }
+
+    public static <K, V> Map<K, V> clearNull(Map<K, V> map) {
+        map.entrySet().removeIf(entry -> Emptys.isAnyNull(entry.getKey(), entry.getValue()));
+        return map;
+    }
+
+    public static <K, V, T extends Map<K, V>> T listToMap(List<K> list, Function<K, V> function, Supplier<T> supplier) {
+        T t = supplier.get();
+        for (K k : list) {
+            t.put(k, function.apply(k));
+        }
+        return t;
+    }
+
     /**
      * 将key的集合，value的集合映射成一个map
      *
@@ -186,7 +236,7 @@ public final class CommonMaps {
         return ret;
     }
 
-    public static <K,V> V getOrCreate(Map<K,V> map, K k, Supplier<V> supplier) {
+    public static <K, V> V getOrCreate(Map<K, V> map, K k, Supplier<V> supplier) {
         V v = map.get(k);
         if (v == null) {
             v = supplier.get();

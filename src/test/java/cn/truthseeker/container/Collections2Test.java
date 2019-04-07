@@ -1,12 +1,9 @@
 package cn.truthseeker.container;
 
-import cn.truthseeker.TestUtil;
-import cn.truthseeker.container.safe.collection.Collections2;
-import org.junit.Assert;
+import cn.truthseeker.container.safe.Collections2;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.junit.Assert.assertTrue;
 

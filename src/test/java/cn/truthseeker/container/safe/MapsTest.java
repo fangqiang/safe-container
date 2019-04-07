@@ -1,4 +1,4 @@
-package cn.truthseeker.container.safe.map;
+package cn.truthseeker.container.safe;
 
 import cn.truthseeker.TestUtil;
 import org.junit.Assert;
@@ -17,17 +17,6 @@ import java.util.Map;
 public class MapsTest {
 
     @Test
-    public void checkSafe() {
-        Map map = CommonMaps.of(null, null, HashMap::new);
-        TestUtil.withException(() -> Maps.checkSafe(map));
-        map.clear();
-        TestUtil.noException(() -> Maps.checkSafe(map));
-        map.put("1", "");
-        TestUtil.noException(() -> Maps.checkSafe(map));
-
-    }
-
-    @Test
     public void containsMap() {
         Map<String, Integer> all = Maps.of("a", 1, "b", 2, "c", 3);
         Map<String, Integer> part = Maps.of("a", 1, "b", 2);
@@ -44,50 +33,50 @@ public class MapsTest {
     @Test
     public void getSubMap() {
         Map<String, Integer> all = Maps.of("a", 1, "b", 2, "c", 3);
-        Map<String, Integer> subMap = Maps.getSubMap(all, Arrays.asList("a", "b"));
+        Map<String, Integer> subMap = Maps.getSubMap(all, Arrays.asList("a", "b"), HashMap::new);
         Assert.assertTrue(Maps.containsMap(all, subMap));
     }
 
     @Test
     public void mapKey() {
         Map<String, String> all = Maps.of("1", "1");
-        Map<Integer, String> ret = Maps.mapKey(all, (a) -> Integer.parseInt(a));
+        Map<Integer, String> ret = Maps.mapKey(all, Integer::parseInt, HashMap::new);
         Assert.assertTrue(ret.get(1).equals("1"));
     }
 
     @Test
     public void mapValue() {
         Map<String, String> all = Maps.of("1", "1");
-        Map<String, Integer> ret = Maps.mapValue(all, (a) -> Integer.parseInt(a));
+        Map<String, Integer> ret = Maps.mapValue(all, Integer::parseInt, HashMap::new);
         Assert.assertTrue(ret.get("1") == 1);
     }
 
     @Test
     public void mapKeyValue() {
         Map<String, String> all = Maps.of("1", "1");
-        Map<Integer, Integer> ret = Maps.mapKeyValue(all, (a) -> Integer.parseInt(a), (a) -> Integer.parseInt(a));
+        Map<Integer, Integer> ret = Maps.mapKeyValue(all, Integer::parseInt, Integer::parseInt, HashMap::new);
         Assert.assertTrue(ret.get(1) == 1);
     }
 
     @Test
     public void filterByKey() {
         Map<String, String> all = Maps.of("a", "1", "b", "1");
-        Assert.assertTrue(Maps.filterByKey(all, a -> a.equals("a")).size() == 1);
-        Assert.assertTrue(Maps.filterByKey(all, a -> a.equals("c")).size() == 0);
+        Assert.assertTrue(Maps.filterByKey(all, a -> a.equals("a"), HashMap::new).size() == 1);
+        Assert.assertTrue(Maps.filterByKey(all, a -> a.equals("c"), HashMap::new).size() == 0);
     }
 
     @Test
     public void filterByValue() {
         Map<String, String> all = Maps.of("a", "1", "b", "2");
-        Assert.assertTrue(Maps.filterByValue(all, a -> a.equals("1")).size() == 1);
-        Assert.assertTrue(Maps.filterByValue(all, a -> a.equals("3")).size() == 0);
+        Assert.assertTrue(Maps.filterByValue(all, a -> a.equals("1"), HashMap::new).size() == 1);
+        Assert.assertTrue(Maps.filterByValue(all, a -> a.equals("3"), HashMap::new).size() == 0);
     }
 
     @Test
     public void filterByKeyValue() {
         Map<String, String> all = Maps.of("a", "1", "b", "2");
-        Assert.assertTrue(Maps.filterByKeyValue(all, (a, b) -> a.equals("a") && b.equals("1")).size() == 1);
-        Assert.assertTrue(Maps.filterByKeyValue(all, (a, b) -> a.equals("a") && b.equals("2")).size() == 0);
+        Assert.assertTrue(Maps.filterByKeyValue(all, (a, b) -> a.equals("a") && b.equals("1"), HashMap::new).size() == 1);
+        Assert.assertTrue(Maps.filterByKeyValue(all, (a, b) -> a.equals("a") && b.equals("2"), HashMap::new).size() == 0);
     }
 
     @Test
@@ -98,24 +87,40 @@ public class MapsTest {
     }
 
     @Test
+    public void clearEmpty() {
+        Map<Integer, String> map = Maps.of(1, "1", 2, null, 3, "");
+        Assert.assertTrue(Maps.clearEmpty(map).size() == 1);
+        Assert.assertTrue(map.containsKey(1));
+    }
+
+    @Test
+    public void clearNull() {
+        Map<Integer, String> map = Maps.of(1, "1", 2, null, 3, "");
+        Assert.assertTrue(Maps.clearNull(map).size() == 2);
+        Assert.assertTrue(map.containsKey(1));
+        Assert.assertTrue(map.containsKey(3));
+    }
+
+    @Test
+    public void listToMap() {
+        Map<Integer, String> map = Maps.listToMap(Arrays.asList(1, 2), a -> a + "a", HashMap::new);
+        Assert.assertTrue(map.size() == 2);
+        Assert.assertEquals(map.get(1),"1a");
+        Assert.assertEquals(map.get(2),"2a");
+    }
+
+    @Test
     public void zip() {
-        Map<String, Integer> zip = Maps.zip(Arrays.asList("a", "b"), Arrays.asList(1, 2));
+        Map<String, Integer> zip = Maps.zip(Arrays.asList("a", "b"), Arrays.asList(1, 2), HashMap::new);
         Assert.assertTrue(zip.size() == 2);
         Assert.assertTrue(zip.get("a") == 1);
         Assert.assertTrue(zip.get("b") == 2);
     }
 
     @Test
-    public void clearEmpty() {
-        Map<Integer, String> map = Maps.of(1, "1", 2, null, 3, "");
-        Assert.assertTrue(Maps.clearNull(map).size() == 2);
-        map = Maps.of(1, "1", 2, null, 3, "");
-        Assert.assertTrue(Maps.clearEmpty(map).size() == 1);
-    }
-
-    @Test
-    public void listToMap() {
-        Map<Integer, String> map = Maps.listToMap(Arrays.asList(1, 2), a -> a + "a");
-        Assert.assertTrue(map.size() == 2);
+    public void getOrCreate() {
+        Map<String, Integer> map = Maps.of("a", 1);
+        Assert.assertTrue(Maps.getOrCreate(map, "b", ()->11) ==11);
+        Assert.assertTrue(map.get("b") == 11);
     }
 }

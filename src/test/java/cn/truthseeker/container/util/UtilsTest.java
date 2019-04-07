@@ -34,6 +34,13 @@ public class UtilsTest {
     @Test
     public void sleep() {
         Utils.sleep(1);
+
+        Thread thread = new Thread(() -> {
+            Utils.sleep(100);
+        });
+
+        thread.start();
+        thread.interrupt();
     }
 
     @Test
