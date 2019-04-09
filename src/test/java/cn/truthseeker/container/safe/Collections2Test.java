@@ -5,6 +5,7 @@ import cn.truthseeker.container.safe.Collections2;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -35,6 +36,9 @@ public class Collections2Test {
     public void toMap() {
         Assert.assertTrue(Collections2.toMap(Arrays.asList(1, 2), a -> a, HashMap::new).size() == 2);
         Assert.assertTrue(Collections2.toMap(new Integer[]{1, 2}, a -> a, HashMap::new).size() == 2);
+
+        Assert.assertTrue(Collections2.toMap(Arrays.asList(1, 2), Object::toString, a -> a + 10, HashMap::new).size() == 2);
+        Assert.assertTrue(Collections2.toMap(new Integer[]{1, 2}, Object::toString, a -> a + 10, HashMap::new).size() == 2);
     }
 
     @Test

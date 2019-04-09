@@ -63,10 +63,10 @@ public class NoneEmptyMap<K, V> extends HashMap<K, V> implements CommonMapOper<K
         return Maps.of(k1, v1, k2, v2, k3, v3, NoneEmptyMap::new);
     }
 
-    public static <K,V> Collector<Entry<K,V>, ?, NoneEmptyMap<K,V>> getCollector() {
+    public static <K, V> Collector<Entry<K, V>, ?, NoneEmptyMap<K, V>> getCollector() {
         return Collector.of(
                 NoneEmptyMap::new,
-                (map,entry) -> map.put(entry.getKey(),entry.getValue()),
+                (map, entry) -> map.put(entry.getKey(), entry.getValue()),
                 (left, right) -> {
                     left.putAll(right);
                     return left;

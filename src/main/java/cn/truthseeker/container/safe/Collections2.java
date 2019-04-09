@@ -39,10 +39,26 @@ public class Collections2 {
         return t;
     }
 
+    public static <K, RK, RV, T extends Map<RK, RV>> T toMap(Iterable<K> objects, Function<K, RK> kFun, Function<K, RV> vFun, Supplier<T> supplier) {
+        T t = supplier.get();
+        for (K k : objects) {
+            t.put(kFun.apply(k), vFun.apply(k));
+        }
+        return t;
+    }
+
     public static <K, V, T extends Map<K, V>> T toMap(K[] objects, Function<K, V> function, Supplier<T> supplier) {
         T t = supplier.get();
         for (K k : objects) {
             t.put(k, function.apply(k));
+        }
+        return t;
+    }
+
+    public static <K, RK, RV, T extends Map<RK, RV>> T toMap(K[] objects, Function<K, RK> kFun, Function<K, RV> vFun, Supplier<T> supplier) {
+        T t = supplier.get();
+        for (K k : objects) {
+            t.put(kFun.apply(k), vFun.apply(k));
         }
         return t;
     }

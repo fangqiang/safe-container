@@ -34,5 +34,9 @@ public class CommonCollectionOperTest {
         HashMap<Integer, String> map = NoneEmptyList.of(1, 2).toMap(Object::toString, HashMap::new);
         Assert.assertEquals(map.get(1),"1");
         Assert.assertEquals(map.get(2),"2");
+
+        HashMap<String, Integer> map1 = NoneEmptyList.of(1, 2).toMap(Object::toString, a -> a + 10, HashMap::new);
+        Assert.assertEquals(map1.get("1").intValue(),11);
+        Assert.assertEquals(map1.get("2").intValue(),12);
     }
 }

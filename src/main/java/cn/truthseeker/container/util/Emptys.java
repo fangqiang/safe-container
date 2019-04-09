@@ -18,7 +18,7 @@ public class Emptys {
 
     public static void assertNotEmpty(Object o) {
         if (isEmpty(o)) {
-            throw new RuntimeException("can't be null");
+            throw new RuntimeException("can't be empty");
         }
     }
 
@@ -30,7 +30,7 @@ public class Emptys {
 
     public static void assertNoneEmpty(Iterable objects) {
         if (!isNoneEmpty(objects)) {
-            throw new RuntimeException("can't contains null");
+            throw new RuntimeException("can't contains empty");
         }
     }
 
@@ -98,6 +98,12 @@ public class Emptys {
         return !isEmpty(object);
     }
 
+    /**
+     * 1. 不为null
+     * 2. String必须包含非空白字符
+     * 3. 集合不允许为空
+     * 3. 数组长度大于0
+     */
     public static boolean isEmpty(Object object) {
         if (object == null) {
             return true;

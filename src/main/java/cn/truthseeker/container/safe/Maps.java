@@ -198,6 +198,9 @@ public final class Maps {
         return ret;
     }
 
+    /**
+     * 删除key或者value为空的键值对
+     */
     public static <K, V> Map<K, V> clearEmpty(Map<K, V> map) {
         map.entrySet().removeIf(entry -> Emptys.isAnyEmpty(entry.getKey(), entry.getValue()));
         return map;
