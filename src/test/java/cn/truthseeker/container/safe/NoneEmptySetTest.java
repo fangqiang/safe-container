@@ -17,7 +17,6 @@ public class NoneEmptySetTest {
     @Test
     public void init() {
         NoneEmptySet<Object> m1 = new NoneEmptySet<>();
-        NoneEmptySet<Object> m2 = new NoneEmptySet<>(Arrays.asList(1));
         NoneEmptySet<Object> m3 = new NoneEmptySet<>(1);
     }
 
@@ -39,22 +38,31 @@ public class NoneEmptySetTest {
     }
 
     @Test
+    public void map() {
+        NoneEmptySet<String> map = NoneEmptySet.of(1, 2).map(a -> a.toString());
+        Assert.assertEquals(map.size(),2);
+
+        TestUtil.withException(()->NoneEmptySet.of(1, 2).map(a -> a==1? null:a).size());
+        Assert.assertEquals(NoneEmptySet.of(1, 2).mapIgnoreEmpty(a -> a==1? null:a).size(), 1);
+    }
+
+
+    @Test
     public void of() {
-        Assert.assertEquals(NoneEmptySet.of(1,2).size(),2);
+        Assert.assertEquals(NoneEmptySet.of(1,1,2).size(),2);
+        Assert.assertEquals(NoneEmptySet.of(Arrays.asList(1,1,2)).size(),2);
+        Assert.assertEquals(NoneEmptySet.ofIgnoreEmpty("","a").size(),1);
+        Assert.assertEquals(NoneEmptySet.ofIgnoreEmpty(Arrays.asList("","a")).size(),1);
     }
 
 
     @Test
     public void getCollector() {
-        NoneEmptySet<Integer> collect = NoneEmptySet.of(1, 2).stream().collect(NoneEmptySet.getCollector());
-        Assert.assertEquals(collect.size(),2);
+        Assert.assertEquals(NoneEmptySet.of(1,2).stream().collect(NoneEmptySet.collector()).size(),2);
+        Assert.assertEquals(NoneEmptySet.of(1,2).parallelStream().collect(NoneEmptySet.collector()).size(),2);
 
-        NoneEmptySet.of(1, 2).parallelStream().collect(NoneEmptySet.getCollector());
-    }
-
-    @Test
-    public void map() {
-        NoneEmptySet<String> map = NoneEmptySet.of(1, 2).map(a -> a.toString());
-        Assert.assertEquals(map.size(),2);
+        TestUtil.withException(()->Collections2.ofList("a","b","").stream().collect(NoneEmptySet.collector()).size());
+        Assert.assertEquals(Collections2.ofList("a","b","").stream().collect(NoneEmptySet.collectorIgnoreEmpty()).size(),2);
+        Assert.assertEquals(Collections2.ofList("a","b","").parallelStream().collect(NoneEmptySet.collectorIgnoreEmpty()).size(),2);
     }
 }

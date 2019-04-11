@@ -13,14 +13,9 @@ import java.util.stream.Collector;
  * @email: lowping@163.com
  * @date: Created by on 19/3/14
  */
-public class NoneEmptyList<E> extends ArrayList<E> implements CommonCollectionOper<E> {
+public class NoneEmptyList<E> extends ArrayList<E> implements CommonNoneEmptyOper<E> {
     public NoneEmptyList() {
         super();
-    }
-
-    public NoneEmptyList(Collection<? extends E> c) {
-        super();
-        addAll(c);
     }
 
     public NoneEmptyList(int initialCapacity) {
@@ -57,13 +52,37 @@ public class NoneEmptyList<E> extends ArrayList<E> implements CommonCollectionOp
         return super.addAll(index, c);
     }
 
+    // 简化操作
+    public <R> NoneEmptyList<R> map(Function<E, R> function) {
+        return stream().map(function).collect(collector());
+    }
+
+    public <R> NoneEmptyList<R> mapIgnoreEmpty(Function<E, R> function) {
+        return stream().map(function).collect(collectorIgnoreEmpty());
+    }
 
     // 构造工具
     public static <E> NoneEmptyList<E> of(E... e) {
         return Collections2.of(NoneEmptyList::new, e);
     }
 
-    public static <E> Collector<E, ?, NoneEmptyList<E>> getCollector() {
+    public static <E> NoneEmptyList<E> of(Iterable<E> e) {
+        return Collections2.of(NoneEmptyList::new, e);
+    }
+
+    public static <E> NoneEmptyList<E> ofIgnoreEmpty(E... e) {
+        NoneEmptyList<E> ret = new NoneEmptyList<>();
+        ret.addAllIgnoreEmpty(e);
+        return ret;
+    }
+
+    public static <E> NoneEmptyList<E> ofIgnoreEmpty(Iterable<E> e) {
+        NoneEmptyList<E> ret = new NoneEmptyList<>();
+        ret.addAllIgnoreEmpty(e);
+        return ret;
+    }
+
+    public static <E> Collector<E, ?, NoneEmptyList<E>> collector() {
         return Collector.of(
                 NoneEmptyList::new,
                 NoneEmptyList::add,
@@ -75,8 +94,15 @@ public class NoneEmptyList<E> extends ArrayList<E> implements CommonCollectionOp
         );
     }
 
-    // 简化操作
-    public <R> NoneEmptyList<R> map(Function<E, R> function) {
-        return stream().map(function).collect(getCollector());
+    public static <E> Collector<E, ?, NoneEmptyList<E>> collectorIgnoreEmpty() {
+        return Collector.of(
+                NoneEmptyList::new,
+                NoneEmptyList::addIgnoreEmpty,
+                (left, right) -> {
+                    left.addAllIgnoreEmpty(right);
+                    return left;
+                },
+                Collector.Characteristics.IDENTITY_FINISH
+        );
     }
 }

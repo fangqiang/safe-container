@@ -1,11 +1,13 @@
 package cn.truthseeker.container.safe;
 
 import cn.truthseeker.container.util.Assert;
+import cn.truthseeker.container.util.Emptys;
 
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.Collector;
 
 /**
  * @Description:
@@ -24,6 +26,14 @@ public class Collections2 {
     }
 
     public static <E, T extends Collection<E>> T of(Supplier<T> supplier, E... e) {
+        T t = supplier.get();
+        for (E e1 : e) {
+            t.add(e1);
+        }
+        return t;
+    }
+
+    public static <E, T extends Collection<E>> T of(Supplier<T> supplier, Iterable<E> e) {
         T t = supplier.get();
         for (E e1 : e) {
             t.add(e1);

@@ -24,7 +24,13 @@ public class NoneNullMap<K, V> extends HashMap<K, V> implements CommonMapOper<K,
 
     public NoneNullMap(Map<? extends K, ? extends V> m) {
         super();
-        putAll(m);
+        for (Entry<? extends K, ? extends V> entry : m.entrySet()) {
+            K key = entry.getKey();
+            V value = entry.getValue();
+            if(key!=null && value!=null) {
+                super.put(key, value);
+            }
+        }
     }
 
     public NoneNullMap(int initialCapacity) {
@@ -33,6 +39,11 @@ public class NoneNullMap<K, V> extends HashMap<K, V> implements CommonMapOper<K,
 
     @Override
     public void putAll(Map<? extends K, ? extends V> m) {
+        for (Entry<? extends K, ? extends V> entry : m.entrySet()) {
+            Emptys.assertNotNull(entry.getKey());
+            Emptys.assertNotNull(entry.getValue());
+        }
+
         for (Entry<? extends K, ? extends V> entry : m.entrySet()) {
             put(entry.getKey(), entry.getValue());
         }

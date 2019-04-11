@@ -23,7 +23,13 @@ public class NoneEmptyMap<K, V> extends HashMap<K, V> implements CommonMapOper<K
 
     public NoneEmptyMap(Map<? extends K, ? extends V> m) {
         super();
-        putAll(m);
+        for (Entry<? extends K, ? extends V> entry : m.entrySet()) {
+            K key = entry.getKey();
+            V value = entry.getValue();
+            if(Emptys.isNotEmpty(key) && Emptys.isNotEmpty(value)) {
+                super.put(key, value);
+            }
+        }
     }
 
     public NoneEmptyMap(int initialCapacity) {
@@ -32,6 +38,11 @@ public class NoneEmptyMap<K, V> extends HashMap<K, V> implements CommonMapOper<K
 
     @Override
     public void putAll(Map<? extends K, ? extends V> m) {
+        for (Entry<? extends K, ? extends V> entry : m.entrySet()) {
+            Emptys.assertNotEmpty(entry.getKey());
+            Emptys.assertNotEmpty(entry.getValue());
+        }
+
         for (Entry<? extends K, ? extends V> entry : m.entrySet()) {
             put(entry.getKey(), entry.getValue());
         }

@@ -18,8 +18,7 @@ public class NoneEmptyListTest {
     @Test
     public void init() {
         NoneEmptyList<Object> m1 = new NoneEmptyList<>();
-        NoneEmptyList<Object> m2 = new NoneEmptyList<>(Arrays.asList(1));
-        NoneEmptyList<Object> m3 = new NoneEmptyList<>(1);
+        NoneEmptyList<Object> m2 = new NoneEmptyList<>(1);
     }
 
     @Test
@@ -57,22 +56,29 @@ public class NoneEmptyListTest {
     }
 
     @Test
-    public void of() {
-        Assert.assertEquals(NoneEmptyList.of(1,2).size(),2);
-    }
-
-
-    @Test
-    public void getCollector() {
-        NoneEmptyList<Integer> collect = NoneEmptyList.of(1, 2).stream().collect(NoneEmptyList.getCollector());
-        Assert.assertEquals(collect.size(),2);
-
-        NoneEmptyList.of(1, 2).parallelStream().collect(NoneEmptyList.getCollector());
-    }
-
-    @Test
     public void map() {
         NoneEmptyList<String> map = NoneEmptyList.of(1, 2).map(a -> a.toString());
         Assert.assertEquals(map.size(),2);
+
+        TestUtil.withException(()->NoneEmptyList.of(1, 2).map(a -> a==1? null:a).size());
+        Assert.assertEquals(NoneEmptyList.of(1, 2).mapIgnoreEmpty(a -> a==1? null:a).size(), 1);
+    }
+
+    @Test
+    public void of() {
+        Assert.assertEquals(NoneEmptyList.of(1,1,2).size(),3);
+        Assert.assertEquals(NoneEmptyList.of(Arrays.asList(1,1,2)).size(),3);
+        Assert.assertEquals(NoneEmptyList.ofIgnoreEmpty("","a").size(),1);
+        Assert.assertEquals(NoneEmptyList.ofIgnoreEmpty(Arrays.asList("","a")).size(),1);
+    }
+
+    @Test
+    public void collector() {
+        Assert.assertEquals(NoneEmptyList.of(1,2).stream().collect(NoneEmptyList.collector()).size(),2);
+        Assert.assertEquals(NoneEmptyList.of(1,2).parallelStream().collect(NoneEmptyList.collector()).size(),2);
+
+        TestUtil.withException(()->Collections2.ofList("a","b","").stream().collect(NoneEmptyList.collector()).size());
+        Assert.assertEquals(Collections2.ofList("a","b","").stream().collect(NoneEmptyList.collectorIgnoreEmpty()).size(),2);
+        Assert.assertEquals(Collections2.ofList("a","b","").parallelStream().collect(NoneEmptyList.collectorIgnoreEmpty()).size(),2);
     }
 }
