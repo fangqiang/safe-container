@@ -55,11 +55,15 @@ public class NoneNullMapTest {
 
     @Test
     public void getCollector() {
-        NoneNullMap<String,Integer> collect = NoneNullMap.of("a", 2).entrySet().stream().collect(NoneNullMap.getCollector());
+        NoneNullMap<String,Integer> collect = NoneNullMap.of("a", 2).entrySet().stream().collect(NoneNullMap.collector());
         Assert.assertEquals(collect.size(),1);
 
-        NoneNullMap<Integer, Integer> collect1 = NoneNullMap.of(1, 2, 3, 4).entrySet().parallelStream().collect(NoneNullMap.getCollector());
+        NoneNullMap<Integer, Integer> collect1 = NoneNullMap.of(1, 2, 3, 4).entrySet().parallelStream().collect(NoneNullMap.collector());
         Assert.assertEquals(collect1.size(),2);
+
+        TestUtil.withException(()->Maps.of("a", "b", "b", null).entrySet().stream().collect(NoneNullMap.collector()));
+        Assert.assertEquals(Maps.of("a", "b", "b", null).entrySet().stream().collect(NoneNullMap.collectorIgnoreNull()).size(),1);
+        Assert.assertEquals(Maps.of("a", "b", "b", null).entrySet().parallelStream().collect(NoneNullMap.collectorIgnoreNull()).size(),1);
     }
 
     @Test

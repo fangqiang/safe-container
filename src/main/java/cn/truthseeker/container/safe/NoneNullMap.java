@@ -17,7 +17,7 @@ import java.util.stream.Collector;
  * @email: lowping@163.com
  * @date: Created by on 19/4/7
  */
-public class NoneNullMap<K, V> extends HashMap<K, V> implements CommonMapOper<K, V> {
+public class NoneNullMap<K, V> extends HashMap<K, V> implements CommonNoneNullMapOper<K, V> {
     public NoneNullMap() {
         super();
     }
@@ -75,12 +75,24 @@ public class NoneNullMap<K, V> extends HashMap<K, V> implements CommonMapOper<K,
         return Maps.of(k1, v1, k2, v2, k3, v3, NoneNullMap::new);
     }
 
-    public static <K, V> Collector<Entry<K, V>, ?, NoneNullMap<K, V>> getCollector() {
+    public static <K, V> Collector<Entry<K, V>, ?, NoneNullMap<K, V>> collector() {
         return Collector.of(
                 NoneNullMap::new,
                 (map, entry) -> map.put(entry.getKey(), entry.getValue()),
                 (left, right) -> {
                     left.putAll(right);
+                    return left;
+                },
+                Collector.Characteristics.IDENTITY_FINISH
+        );
+    }
+
+    public static <K, V> Collector<Entry<K, V>, ?, NoneNullMap<K, V>> collectorIgnoreNull() {
+        return Collector.of(
+                NoneNullMap::new,
+                (map, entry) -> map.putIgnoreNull(entry.getKey(), entry.getValue()),
+                (left, right) -> {
+                    left.putAllIgnoreNull(right);
                     return left;
                 },
                 Collector.Characteristics.IDENTITY_FINISH
