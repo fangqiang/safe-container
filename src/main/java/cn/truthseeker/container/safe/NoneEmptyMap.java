@@ -21,17 +21,6 @@ public class NoneEmptyMap<K, V> extends HashMap<K, V> implements CommonNoneEmpty
         super();
     }
 
-    public NoneEmptyMap(Map<? extends K, ? extends V> m) {
-        super();
-        for (Entry<? extends K, ? extends V> entry : m.entrySet()) {
-            K key = entry.getKey();
-            V value = entry.getValue();
-            if(Emptys.isNotEmpty(key) && Emptys.isNotEmpty(value)) {
-                super.put(key, value);
-            }
-        }
-    }
-
     public NoneEmptyMap(int initialCapacity) {
         super(initialCapacity);
     }
@@ -72,6 +61,12 @@ public class NoneEmptyMap<K, V> extends HashMap<K, V> implements CommonNoneEmpty
 
     public static <K, V> NoneEmptyMap<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3) {
         return Maps.of(k1, v1, k2, v2, k3, v3, NoneEmptyMap::new);
+    }
+
+    public static <K, V> NoneEmptyMap<K, V> ofIgnoreEmpty(Map<K,V> m) {
+        NoneEmptyMap<K,V> ret = new NoneEmptyMap<>();
+        ret.putAllIgnoreEmpty(m);
+        return ret;
     }
 
     public static <K, V> Collector<Entry<K, V>, ?, NoneEmptyMap<K, V>> collector() {

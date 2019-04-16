@@ -16,7 +16,6 @@ public class NoneNullMapTest {
     @Test
     public void init() {
         NoneNullMap m1 = new NoneNullMap<>();
-        NoneNullMap m2 = new NoneNullMap<>(Maps.of("a",1));
         NoneNullMap m3 = new NoneNullMap<>(1);
     }
 
@@ -51,6 +50,7 @@ public class NoneNullMapTest {
         Assert.assertEquals(NoneNullMap.of("a", 1).size(),1);
         Assert.assertEquals(NoneNullMap.of("a", 1,"b", 1).size(),2);
         Assert.assertEquals(NoneNullMap.of("a", 1,"b", 1,"c", 1).size(),3);
+        Assert.assertEquals(NoneNullMap.ofIgnoreNull(Maps.of("a","1","b",null)).size(),1);
     }
 
     @Test

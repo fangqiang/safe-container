@@ -50,12 +50,16 @@ public final class Maps {
     public static <K, V, T extends Map<K, V>> T getSubMap(Map<K, V> map, Collection<K> keys, Supplier<T> supplier) {
         T ret = supplier.get();
         for (K key : keys) {
-            V value = map.get(key);
-            if (value != null) {
+            if(map.containsKey(key)){
+                V value = map.get(key);
                 ret.put(key, value);
             }
         }
         return ret;
+    }
+
+    public static <K, V> Map<K,V> getSubMap(Map<K, V> map, Collection<K> keys) {
+        return getSubMap(map, keys, HashMap::new);
     }
 
     /**
@@ -74,6 +78,10 @@ public final class Maps {
         return ret;
     }
 
+    public static <K, V, RK> Map<RK,V> mapKey(Map<K, V> map, Function<K, RK> kFun) {
+        return mapKey(map, kFun, HashMap::new);
+    }
+
     /**
      * @param map      操作的map
      * @param vFun     value的映射方法
@@ -88,6 +96,10 @@ public final class Maps {
         T ret = supplier.get();
         map.forEach((k, v) -> ret.put(k, vFun.apply(v)));
         return ret;
+    }
+
+    public static <K, V, RV> Map<K, RV> mapValue(Map<K, V> map, Function<V, RV> vFun) {
+        return mapValue(map, vFun, HashMap::new);
     }
 
     /**
@@ -106,6 +118,10 @@ public final class Maps {
         T ret = supplier.get();
         map.forEach((k, v) -> ret.put(kFun.apply(k), vFun.apply(v)));
         return ret;
+    }
+
+    public static <K, V, RK, RV> Map<RK, RV> mapKeyValue(Map<K, V> map, Function<K, RK> kFun, Function<V, RV> vFun) {
+        return mapKeyValue(map, kFun, vFun, HashMap::new);
     }
 
     /**
@@ -127,6 +143,10 @@ public final class Maps {
         return ret;
     }
 
+    public static <K, V> Map<K, V> filterByKey(Map<K, V> map, Predicate<K> kFun) {
+        return filterByKey(map, kFun, HashMap::new);
+    }
+
     /**
      * @param map      操作的map
      * @param vFun     value的过滤条件
@@ -146,6 +166,10 @@ public final class Maps {
         return ret;
     }
 
+    public static <K, V> Map<K, V> filterByValue(Map<K, V> map, Predicate<V> vFun) {
+        return filterByValue(map, vFun, HashMap::new);
+    }
+
     /**
      * @param map       操作的map
      * @param predicate key,value的过滤条件
@@ -163,6 +187,10 @@ public final class Maps {
             }
         });
         return ret;
+    }
+
+    public static <K, V> Map<K, V> filterByKeyValue(Map<K, V> map, BiPredicate<K, V> predicate) {
+        return filterByKeyValue(map, predicate, HashMap::new);
     }
 
     public static <K, V> Map<K, V> of(K k1, V v1) {
@@ -219,6 +247,10 @@ public final class Maps {
         return t;
     }
 
+    public static <K, V> Map<K, V> listToMap(List<K> list, Function<K, V> function) {
+        return listToMap(list, function, HashMap::new);
+    }
+
     /**
      * 将key的集合，value的集合映射成一个map
      *
@@ -237,6 +269,10 @@ public final class Maps {
             ret.put(keys.get(i), values.get(i));
         }
         return ret;
+    }
+
+    public static <K, V> Map<K, V> zip(List<K> keys, List<V> values) {
+        return zip(keys, values, HashMap::new);
     }
 
     public static <K, V> V getOrCreate(Map<K, V> map, K k, Supplier<V> supplier) {

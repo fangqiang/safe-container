@@ -22,17 +22,6 @@ public class NoneNullMap<K, V> extends HashMap<K, V> implements CommonNoneNullMa
         super();
     }
 
-    public NoneNullMap(Map<? extends K, ? extends V> m) {
-        super();
-        for (Entry<? extends K, ? extends V> entry : m.entrySet()) {
-            K key = entry.getKey();
-            V value = entry.getValue();
-            if(key!=null && value!=null) {
-                super.put(key, value);
-            }
-        }
-    }
-
     public NoneNullMap(int initialCapacity) {
         super(initialCapacity);
     }
@@ -73,6 +62,12 @@ public class NoneNullMap<K, V> extends HashMap<K, V> implements CommonNoneNullMa
 
     public static <K, V> NoneNullMap<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3) {
         return Maps.of(k1, v1, k2, v2, k3, v3, NoneNullMap::new);
+    }
+
+    public static <K, V> NoneNullMap<K, V> ofIgnoreNull(Map<K,V> m) {
+        NoneNullMap<K,V> ret = new NoneNullMap<>();
+        ret.putAllIgnoreNull(m);
+        return ret;
     }
 
     public static <K, V> Collector<Entry<K, V>, ?, NoneNullMap<K, V>> collector() {
