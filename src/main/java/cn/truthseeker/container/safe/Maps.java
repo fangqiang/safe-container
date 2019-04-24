@@ -283,4 +283,8 @@ public final class Maps {
         }
         return v;
     }
+
+    public static <K,V> void assertTrue(Map<K, V> map, BiPredicate<K, V> biPredicate, String errMsg) {
+        map.forEach((k, v) -> Assert.isTrue(biPredicate.test(k, v), errMsg));
+    }
 }

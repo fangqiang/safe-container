@@ -5,10 +5,7 @@ import cn.truthseeker.container.safe.Collections2;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Description:
@@ -17,6 +14,16 @@ import java.util.Map;
  * @date: Created by on 19/3/26
  */
 public class Collections2Test {
+
+    @Test
+    public void clear() {
+        List<String> a = Collections2.ofList("a", "", null);
+        Collections2.clearNull(a);
+        Assert.assertTrue(a.size() == 2);
+        Collections2.clearEmpty(a);
+        Assert.assertTrue(a.size() == 1);
+        Assert.assertTrue(a.contains("a"));
+    }
 
     @Test
     public void ofList() {

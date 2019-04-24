@@ -17,6 +17,14 @@ import java.util.stream.Collector;
  */
 public class Collections2 {
 
+    public static <E> void clearEmpty(Collection<E> e) {
+        e.removeIf(Emptys::isEmpty);
+    }
+
+    public static <E> void clearNull(Collection<E> e) {
+        e.removeIf(Objects::isNull);
+    }
+
     public static <E> List<E> ofList(E... e) {
         return of(ArrayList::new, e);
     }

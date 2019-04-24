@@ -123,4 +123,11 @@ public class MapsTest {
         Assert.assertTrue(Maps.getOrCreate(map, "b", ()->11) ==11);
         Assert.assertTrue(map.get("b") == 11);
     }
+
+    @Test
+    public void assertTrue() {
+        Map<String, Integer> map = Maps.of("a", 1);
+        TestUtil.noException(()->Maps.assertTrue(map, (k,v)->k.equals("a"), "aa"));
+        TestUtil.withException(()->Maps.assertTrue(map, (k,v)->k.equals("b"), "aa"));
+    }
 }

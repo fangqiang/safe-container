@@ -75,6 +75,6 @@ public interface CommonMapOper<K, V> extends Map<K, V> {
     }
 
     default void assertTrue(BiPredicate<K, V> biPredicate, String errMsg) {
-        forEach((k, v) -> Assert.isTrue(biPredicate.test(k, v), errMsg));
+        Maps.assertTrue(this, biPredicate, errMsg);
     }
 }
