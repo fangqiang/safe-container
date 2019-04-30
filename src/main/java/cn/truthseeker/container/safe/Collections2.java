@@ -33,6 +33,22 @@ public class Collections2 {
         return of(HashSet::new, e);
     }
 
+    public static <E, V> List<V> map(Function<E, V> function, E... e) {
+        List<V> list = new ArrayList<>(e.length);
+        for (E e1 : e) {
+            list.add(function.apply(e1));
+        }
+        return list;
+    }
+
+    public static <E, V> List<V> map(Function<E, V> function, Collection<E> e) {
+        List<V> list = new ArrayList<>(e.size());
+        for (E e1 : e) {
+            list.add(function.apply(e1));
+        }
+        return list;
+    }
+
     public static <E, T extends Collection<E>> T of(Supplier<T> supplier, E... e) {
         T t = supplier.get();
         for (E e1 : e) {

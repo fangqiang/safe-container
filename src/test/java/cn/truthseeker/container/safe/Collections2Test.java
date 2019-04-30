@@ -40,6 +40,12 @@ public class Collections2Test {
     }
 
     @Test
+    public void map() {
+        Assert.assertTrue(Collections2.map(a -> a + 1, Arrays.asList(1)).get(0) == 2);
+        Assert.assertTrue(Collections2.map(a -> a + 1, 1).get(0) == 2);
+    }
+
+    @Test
     public void toMap() {
         Assert.assertTrue(Collections2.toMap(Arrays.asList(1, 2), a -> a, HashMap::new).size() == 2);
         Assert.assertTrue(Collections2.toMap(new Integer[]{1, 2}, a -> a, HashMap::new).size() == 2);
