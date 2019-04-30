@@ -1,6 +1,6 @@
 package cn.truthseeker.container.safe;
 
-import cn.truthseeker.container.util.Assert;
+import cn.truthseeker.util.Assert;
 
 import java.util.List;
 import java.util.Map;

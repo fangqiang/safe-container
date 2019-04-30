@@ -1,7 +1,7 @@
 package cn.truthseeker.container.safe;
 
 
-import cn.truthseeker.container.util.Emptys;
+import cn.truthseeker.util.Emptys;
 
 import java.util.Collection;
 import java.util.HashMap;

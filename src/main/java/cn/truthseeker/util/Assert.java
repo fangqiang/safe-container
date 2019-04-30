@@ -1,4 +1,4 @@
-package cn.truthseeker.container.util;
+package cn.truthseeker.util;
 
 /**
  * @Description:

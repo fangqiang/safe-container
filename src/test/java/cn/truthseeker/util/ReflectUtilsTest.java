@@ -1,11 +1,7 @@
-package cn.truthseeker.container.util;
+package cn.truthseeker.util;
 
 import org.junit.Assert;
 import org.junit.Test;
-
-import java.util.HashMap;
-
-import static org.junit.Assert.*;
 
 /**
  * @Description:

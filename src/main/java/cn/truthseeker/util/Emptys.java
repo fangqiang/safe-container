@@ -1,4 +1,4 @@
-package cn.truthseeker.container.util;
+package cn.truthseeker.util;
 
 import java.util.Collection;
 import java.util.Map;

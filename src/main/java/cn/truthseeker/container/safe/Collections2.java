@@ -1,13 +1,12 @@
 package cn.truthseeker.container.safe;
 
-import cn.truthseeker.container.util.Assert;
-import cn.truthseeker.container.util.Emptys;
+import cn.truthseeker.util.Assert;
+import cn.truthseeker.util.Emptys;
 
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
-import java.util.stream.Collector;
 
 /**
  * @Description:
