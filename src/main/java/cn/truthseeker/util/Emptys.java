@@ -2,6 +2,7 @@ package cn.truthseeker.util;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.function.Function;
 
 /**
  * @Description:
@@ -134,5 +135,9 @@ public class Emptys {
         }
 
         return false;
+    }
+
+    public static <T,R> R ifNotNullApply(T object, Function<T,R> function) {
+        return object == null ? null : function.apply(object);
     }
 }
