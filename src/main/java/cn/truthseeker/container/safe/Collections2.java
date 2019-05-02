@@ -64,12 +64,20 @@ public class Collections2 {
         return t;
     }
 
+    public static <K, V> Map<K, V> toHashMap(Iterable<K> objects, Function<K, V> function) {
+        return toMap(objects, function, HashMap::new);
+    }
+
     public static <K, V, T extends Map<K, V>> T toMap(Iterable<K> objects, Function<K, V> function, Supplier<T> supplier) {
         T t = supplier.get();
         for (K k : objects) {
             t.put(k, function.apply(k));
         }
         return t;
+    }
+
+    public static <K, RK, RV> Map<RK, RV> toHashMap(Iterable<K> objects, Function<K, RK> kFun, Function<K, RV> vFun) {
+        return toMap(objects, kFun, vFun, HashMap::new);
     }
 
     public static <K, RK, RV, T extends Map<RK, RV>> T toMap(Iterable<K> objects, Function<K, RK> kFun, Function<K, RV> vFun, Supplier<T> supplier) {
@@ -80,12 +88,20 @@ public class Collections2 {
         return t;
     }
 
+    public static <K, V> Map<K, V> toHashMap(K[] objects, Function<K, V> function) {
+        return toMap(objects, function, HashMap::new);
+    }
+
     public static <K, V, T extends Map<K, V>> T toMap(K[] objects, Function<K, V> function, Supplier<T> supplier) {
         T t = supplier.get();
         for (K k : objects) {
             t.put(k, function.apply(k));
         }
         return t;
+    }
+
+    public static <K, RK, RV> Map<RK, RV> toHashMap(K[] objects, Function<K, RK> kFun, Function<K, RV> vFun) {
+        return toMap(objects, kFun, vFun, HashMap::new);
     }
 
     public static <K, RK, RV, T extends Map<RK, RV>> T toMap(K[] objects, Function<K, RK> kFun, Function<K, RV> vFun, Supplier<T> supplier) {

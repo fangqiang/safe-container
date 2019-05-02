@@ -52,6 +52,12 @@ public class Collections2Test {
 
         Assert.assertTrue(Collections2.toMap(Arrays.asList(1, 2), Object::toString, a -> a + 10, HashMap::new).size() == 2);
         Assert.assertTrue(Collections2.toMap(new Integer[]{1, 2}, Object::toString, a -> a + 10, HashMap::new).size() == 2);
+
+        Assert.assertTrue(Collections2.toHashMap(Arrays.asList(1, 2), a -> a).size() == 2);
+        Assert.assertTrue(Collections2.toHashMap(new Integer[]{1, 2}, a -> a).size() == 2);
+
+        Assert.assertTrue(Collections2.toHashMap(Arrays.asList(1, 2), Object::toString, a -> a + 10).size() == 2);
+        Assert.assertTrue(Collections2.toHashMap(new Integer[]{1, 2}, Object::toString, a -> a + 10).size() == 2);
     }
 
     @Test
