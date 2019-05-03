@@ -91,7 +91,7 @@ public class EmptysTest {
 
     @Test
     public void ifNotNullApply() {
-        assertTrue(Emptys.ifNotNullApply("a ", String::trim).equals("a"));
-        assertTrue(Emptys.ifNotNullApply(null, String::trim)== null);
+        assertTrue(Emptys.ApplyIfNotNull("a ", String::trim).equals("a"));
+        assertTrue(Emptys.ApplyIfNotNull(null, String::trim)== null);
     }
 }
