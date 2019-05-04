@@ -86,24 +86,12 @@ public class NoneEmptyList<E> extends ArrayList<E> implements CommonNoneEmptyOpe
         return ret;
     }
 
-    public static <E> Collector<E, ?, NoneEmptyList<E>> collector() {
+    public static <E> Collector<E, ?, NoneEmptyList<E>> toList() {
         return Collector.of(
                 NoneEmptyList::new,
                 NoneEmptyList::add,
                 (left, right) -> {
                     left.addAll(right);
-                    return left;
-                },
-                Collector.Characteristics.IDENTITY_FINISH
-        );
-    }
-
-    public static <E> Collector<E, ?, NoneEmptyList<E>> collectorIgnoreEmpty() {
-        return Collector.of(
-                NoneEmptyList::new,
-                NoneEmptyList::addIgnoreEmpty,
-                (left, right) -> {
-                    left.addAllIgnoreEmpty(right);
                     return left;
                 },
                 Collector.Characteristics.IDENTITY_FINISH

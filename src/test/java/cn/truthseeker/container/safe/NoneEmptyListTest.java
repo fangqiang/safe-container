@@ -74,11 +74,9 @@ public class NoneEmptyListTest {
 
     @Test
     public void collector() {
-        Assert.assertEquals(NoneEmptyList.of(1,2).stream().collect(NoneEmptyList.collector()).size(),2);
-        Assert.assertEquals(NoneEmptyList.of(1,2).parallelStream().collect(NoneEmptyList.collector()).size(),2);
+        Assert.assertEquals(NoneEmptyList.of(1,2).stream().collect(NoneEmptyList.toList()).size(),2);
+        Assert.assertEquals(NoneEmptyList.of(1,2).parallelStream().collect(NoneEmptyList.toList()).size(),2);
 
-        TestUtil.withException(()->Collections2.ofList("a","b","").stream().collect(NoneEmptyList.collector()).size());
-        Assert.assertEquals(Collections2.ofList("a","b","").stream().collect(NoneEmptyList.collectorIgnoreEmpty()).size(),2);
-        Assert.assertEquals(Collections2.ofList("a","b","").parallelStream().collect(NoneEmptyList.collectorIgnoreEmpty()).size(),2);
+        TestUtil.withException(()->Collections2.ofList("a","b","").stream().collect(NoneEmptyList.toList()).size());
     }
 }

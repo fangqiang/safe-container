@@ -87,24 +87,12 @@ public class NoneNullList<E> extends ArrayList<E> implements CommonNoneNullOper<
         return ret;
     }
 
-    public static <E> Collector<E, ?, NoneNullList<E>> collector() {
+    public static <E> Collector<E, ?, NoneNullList<E>> toList() {
         return Collector.of(
                 NoneNullList::new,
                 NoneNullList::add,
                 (left, right) -> {
                     left.addAll(right);
-                    return left;
-                },
-                Collector.Characteristics.IDENTITY_FINISH
-        );
-    }
-
-    public static <E> Collector<E, ?, NoneNullList<E>> collectorIgnoreNull() {
-        return Collector.of(
-                NoneNullList::new,
-                NoneNullList::addIgnoreNull,
-                (left, right) -> {
-                    left.addAllIgnoreNull(right);
                     return left;
                 },
                 Collector.Characteristics.IDENTITY_FINISH

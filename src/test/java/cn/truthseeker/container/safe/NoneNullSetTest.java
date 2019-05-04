@@ -58,11 +58,9 @@ public class NoneNullSetTest {
 
     @Test
     public void getCollector() {
-        Assert.assertEquals(NoneNullSet.of(1,2).stream().collect(NoneNullSet.collector()).size(),2);
-        Assert.assertEquals(NoneNullSet.of(1,2).parallelStream().collect(NoneNullSet.collector()).size(),2);
+        Assert.assertEquals(NoneNullSet.of(1,2).stream().collect(NoneNullSet.toSet()).size(),2);
+        Assert.assertEquals(NoneNullSet.of(1,2).parallelStream().collect(NoneNullSet.toSet()).size(),2);
 
-        TestUtil.withException(()->Collections2.ofList("a","b",null).stream().collect(NoneNullSet.collector()).size());
-        Assert.assertEquals(Collections2.ofList("a","b",null).stream().collect(NoneNullSet.collectorIgnoreEmpty()).size(),2);
-        Assert.assertEquals(Collections2.ofList("a","b",null).parallelStream().collect(NoneNullSet.collectorIgnoreEmpty()).size(),2);
+        TestUtil.withException(()->Collections2.ofList("a","b",null).stream().collect(NoneNullSet.toSet()).size());
     }
 }
