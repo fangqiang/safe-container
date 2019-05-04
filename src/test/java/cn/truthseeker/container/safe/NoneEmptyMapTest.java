@@ -54,19 +54,6 @@ public class NoneEmptyMapTest {
     }
 
     @Test
-    public void getCollector() {
-        NoneEmptyMap<String,Integer> collect = NoneEmptyMap.of("a", 2).entrySet().stream().collect(NoneEmptyMap.collector());
-        Assert.assertEquals(collect.size(),1);
-
-        NoneEmptyMap<Integer, Integer> collect1 = NoneEmptyMap.of(1, 2, 3, 4).entrySet().parallelStream().collect(NoneEmptyMap.collector());
-        Assert.assertEquals(collect1.size(),2);
-
-        TestUtil.withException(()->Maps.of("a", "b", "b", "").entrySet().stream().collect(NoneEmptyMap.collector()));
-        Assert.assertEquals(Maps.of("a", "b", "b", "").entrySet().stream().collect(NoneEmptyMap.collectorIgnoreEmpty()).size(),1);
-        Assert.assertEquals(Maps.of("a", "b", "b", "").entrySet().parallelStream().collect(NoneEmptyMap.collectorIgnoreEmpty()).size(),1);
-    }
-
-    @Test
     public void mapKey() {
         NoneEmptyMap<String, Integer> map = NoneEmptyMap.of("a", 1).mapKey(a -> a + "1");
         Assert.assertEquals(map.get("a1").intValue(),1);

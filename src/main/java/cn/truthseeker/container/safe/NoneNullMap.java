@@ -70,30 +70,6 @@ public class NoneNullMap<K, V> extends HashMap<K, V> implements CommonNoneNullMa
         return ret;
     }
 
-    public static <K, V> Collector<Entry<K, V>, ?, NoneNullMap<K, V>> collector() {
-        return Collector.of(
-                NoneNullMap::new,
-                (map, entry) -> map.put(entry.getKey(), entry.getValue()),
-                (left, right) -> {
-                    left.putAll(right);
-                    return left;
-                },
-                Collector.Characteristics.IDENTITY_FINISH
-        );
-    }
-
-    public static <K, V> Collector<Entry<K, V>, ?, NoneNullMap<K, V>> collectorIgnoreNull() {
-        return Collector.of(
-                NoneNullMap::new,
-                (map, entry) -> map.putIgnoreNull(entry.getKey(), entry.getValue()),
-                (left, right) -> {
-                    left.putAllIgnoreNull(right);
-                    return left;
-                },
-                Collector.Characteristics.IDENTITY_FINISH
-        );
-    }
-
     // 简化操作
 
     /**

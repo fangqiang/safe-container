@@ -69,30 +69,6 @@ public class NoneEmptyMap<K, V> extends HashMap<K, V> implements CommonNoneEmpty
         return ret;
     }
 
-    public static <K, V> Collector<Entry<K, V>, ?, NoneEmptyMap<K, V>> collector() {
-        return Collector.of(
-                NoneEmptyMap::new,
-                (map, entry) -> map.put(entry.getKey(), entry.getValue()),
-                (left, right) -> {
-                    left.putAll(right);
-                    return left;
-                },
-                Collector.Characteristics.IDENTITY_FINISH
-        );
-    }
-
-    public static <K, V> Collector<Entry<K, V>, ?, NoneEmptyMap<K, V>> collectorIgnoreEmpty() {
-        return Collector.of(
-                NoneEmptyMap::new,
-                (map, entry) -> map.putIgnoreEmpty(entry.getKey(), entry.getValue()),
-                (left, right) -> {
-                    left.putAllIgnoreEmpty(right);
-                    return left;
-                },
-                Collector.Characteristics.IDENTITY_FINISH
-        );
-    }
-
     // 简化操作
 
     /**

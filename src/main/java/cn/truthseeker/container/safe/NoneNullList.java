@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collector;
+import java.util.stream.Stream;
 
 /**
  * @Description:
@@ -54,12 +55,16 @@ public class NoneNullList<E> extends ArrayList<E> implements CommonNoneNullOper<
     }
 
     // 简化操作
-    public <R> NoneNullList<R> map(Function<E, R> function) {
-        return stream().map(function).collect(collector());
+    public <R> NoneNullList<R> map(Function<E, R> map) {
+        NoneNullList<R> ret = new NoneNullList<>();
+        this.forEach(e -> ret.add(map.apply(e)));
+        return ret;
     }
 
-    public <R> NoneNullList<R> mapIgnoreNull(Function<E, R> function) {
-        return stream().map(function).collect(collectorIgnoreNull());
+    public <R> NoneNullList<R> mapIgnoreNull(Function<E, R> map) {
+        NoneNullList<R> ret = new NoneNullList<>();
+        this.forEach(e -> ret.addIgnoreNull(map.apply(e)));
+        return ret;
     }
 
     // 构造工具
@@ -83,27 +88,9 @@ public class NoneNullList<E> extends ArrayList<E> implements CommonNoneNullOper<
         return ret;
     }
 
-    public static <E> Collector<E, ?, NoneNullList<E>> collector() {
-        return Collector.of(
-                NoneNullList::new,
-                NoneNullList::add,
-                (left, right) -> {
-                    left.addAll(right);
-                    return left;
-                },
-                Collector.Characteristics.IDENTITY_FINISH
-        );
-    }
-
-    public static <E> Collector<E, ?, NoneNullList<E>> collectorIgnoreNull() {
-        return Collector.of(
-                NoneNullList::new,
-                NoneNullList::addIgnoreNull,
-                (left, right) -> {
-                    left.addAllIgnoreNull(right);
-                    return left;
-                },
-                Collector.Characteristics.IDENTITY_FINISH
-        );
+    public static <E> NoneNullList<E> ofIgnoreNull(Stream<E> stream) {
+        NoneNullList<E> ret = new NoneNullList<>();
+        stream.forEach(ret::addIgnoreNull);
+        return ret;
     }
 }
