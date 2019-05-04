@@ -5,7 +5,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.stream.Stream;
 
 /**
  * @Description:
@@ -54,6 +53,16 @@ public class NoneEmptySetTest {
         Assert.assertEquals(NoneEmptySet.of(Arrays.asList(1,1,2)).size(),2);
         Assert.assertEquals(NoneEmptySet.ofIgnoreEmpty("","a").size(),1);
         Assert.assertEquals(NoneEmptySet.ofIgnoreEmpty(Arrays.asList("","a")).size(),1);
-        Assert.assertEquals(NoneEmptySet.ofIgnoreEmpty(Stream.of("","a")).size(),1);
+    }
+
+
+    @Test
+    public void getCollector() {
+        Assert.assertEquals(NoneEmptySet.of(1,2).stream().collect(NoneEmptySet.collector()).size(),2);
+        Assert.assertEquals(NoneEmptySet.of(1,2).parallelStream().collect(NoneEmptySet.collector()).size(),2);
+
+        TestUtil.withException(()->Collections2.ofList("a","b","").stream().collect(NoneEmptySet.collector()).size());
+        Assert.assertEquals(Collections2.ofList("a","b","").stream().collect(NoneEmptySet.collectorIgnoreEmpty()).size(),2);
+        Assert.assertEquals(Collections2.ofList("a","b","").parallelStream().collect(NoneEmptySet.collectorIgnoreEmpty()).size(),2);
     }
 }

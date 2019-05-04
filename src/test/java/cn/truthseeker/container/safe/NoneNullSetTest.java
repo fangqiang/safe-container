@@ -5,7 +5,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.stream.Stream;
 
 /**
  * @Description:
@@ -54,6 +53,16 @@ public class NoneNullSetTest {
         Assert.assertEquals(NoneNullSet.of(Arrays.asList(1,1,2)).size(),2);
         Assert.assertEquals(NoneNullSet.ofIgnoreNull(null,"a").size(),1);
         Assert.assertEquals(NoneNullSet.ofIgnoreNull(Arrays.asList(null,"a")).size(),1);
-        Assert.assertEquals(NoneNullSet.ofIgnoreNull(Stream.of(null,"a")).size(),1);
+    }
+
+
+    @Test
+    public void getCollector() {
+        Assert.assertEquals(NoneNullSet.of(1,2).stream().collect(NoneNullSet.collector()).size(),2);
+        Assert.assertEquals(NoneNullSet.of(1,2).parallelStream().collect(NoneNullSet.collector()).size(),2);
+
+        TestUtil.withException(()->Collections2.ofList("a","b",null).stream().collect(NoneNullSet.collector()).size());
+        Assert.assertEquals(Collections2.ofList("a","b",null).stream().collect(NoneNullSet.collectorIgnoreEmpty()).size(),2);
+        Assert.assertEquals(Collections2.ofList("a","b",null).parallelStream().collect(NoneNullSet.collectorIgnoreEmpty()).size(),2);
     }
 }

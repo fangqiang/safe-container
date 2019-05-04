@@ -4,7 +4,6 @@ import cn.truthseeker.TestUtil;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.stream.Stream;
 
 import org.junit.Assert;
 
@@ -71,6 +70,15 @@ public class NoneEmptyListTest {
         Assert.assertEquals(NoneEmptyList.of(Arrays.asList(1,1,2)).size(),3);
         Assert.assertEquals(NoneEmptyList.ofIgnoreEmpty("","a").size(),1);
         Assert.assertEquals(NoneEmptyList.ofIgnoreEmpty(Arrays.asList("","a")).size(),1);
-        Assert.assertEquals(NoneEmptyList.ofIgnoreEmpty(Stream.of("","a")).size(),1);
+    }
+
+    @Test
+    public void collector() {
+        Assert.assertEquals(NoneEmptyList.of(1,2).stream().collect(NoneEmptyList.collector()).size(),2);
+        Assert.assertEquals(NoneEmptyList.of(1,2).parallelStream().collect(NoneEmptyList.collector()).size(),2);
+
+        TestUtil.withException(()->Collections2.ofList("a","b","").stream().collect(NoneEmptyList.collector()).size());
+        Assert.assertEquals(Collections2.ofList("a","b","").stream().collect(NoneEmptyList.collectorIgnoreEmpty()).size(),2);
+        Assert.assertEquals(Collections2.ofList("a","b","").parallelStream().collect(NoneEmptyList.collectorIgnoreEmpty()).size(),2);
     }
 }

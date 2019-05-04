@@ -6,7 +6,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.function.Function;
 import java.util.stream.Collector;
-import java.util.stream.Stream;
 
 /**
  * @Description:
@@ -69,9 +68,20 @@ public class NoneEmptySet<E> extends HashSet<E> implements CommonNoneEmptyOper<E
         return ret;
     }
 
-    public static <E> NoneEmptySet<E> ofIgnoreEmpty(Stream<E> stream) {
-        NoneEmptySet<E> ret = new NoneEmptySet<>();
-        stream.forEach(ret::addIgnoreEmpty);
-        return ret;
+    public static <E> Collector<E, ?, NoneEmptySet<E>> collector() {
+        return Collector.of(NoneEmptySet::new, NoneEmptySet::add, (left, right) -> {
+            left.addAll(right);
+            return left;
+        }, Collector.Characteristics.IDENTITY_FINISH);
     }
+
+    public static <E> Collector<E, ?, NoneEmptySet<E>> collectorIgnoreEmpty() {
+        return Collector.of(NoneEmptySet::new,
+                NoneEmptySet::addIgnoreEmpty,
+                (left, right) -> {
+                    left.addAllIgnoreEmpty(right);
+                    return left;
+                }, Collector.Characteristics.IDENTITY_FINISH);
+    }
+
 }

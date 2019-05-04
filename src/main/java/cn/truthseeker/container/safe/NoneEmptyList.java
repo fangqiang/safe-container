@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Function;
 import java.util.stream.Collector;
-import java.util.stream.Stream;
 
 /**
  * @Description:
@@ -87,9 +86,27 @@ public class NoneEmptyList<E> extends ArrayList<E> implements CommonNoneEmptyOpe
         return ret;
     }
 
-    public static <E> NoneEmptyList<E> ofIgnoreEmpty(Stream<E> stream) {
-        NoneEmptyList<E> ret = new NoneEmptyList<>();
-        stream.forEach(ret::addIgnoreEmpty);
-        return ret;
+    public static <E> Collector<E, ?, NoneEmptyList<E>> collector() {
+        return Collector.of(
+                NoneEmptyList::new,
+                NoneEmptyList::add,
+                (left, right) -> {
+                    left.addAll(right);
+                    return left;
+                },
+                Collector.Characteristics.IDENTITY_FINISH
+        );
+    }
+
+    public static <E> Collector<E, ?, NoneEmptyList<E>> collectorIgnoreEmpty() {
+        return Collector.of(
+                NoneEmptyList::new,
+                NoneEmptyList::addIgnoreEmpty,
+                (left, right) -> {
+                    left.addAllIgnoreEmpty(right);
+                    return left;
+                },
+                Collector.Characteristics.IDENTITY_FINISH
+        );
     }
 }
