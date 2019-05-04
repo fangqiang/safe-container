@@ -50,7 +50,7 @@ public final class Maps {
     public static <K, V, T extends Map<K, V>> T getSubMap(Map<K, V> map, Collection<K> keys, Supplier<T> supplier) {
         T ret = supplier.get();
         for (K key : keys) {
-            if(map.containsKey(key)){
+            if (map.containsKey(key)) {
                 V value = map.get(key);
                 ret.put(key, value);
             }
@@ -58,7 +58,7 @@ public final class Maps {
         return ret;
     }
 
-    public static <K, V> Map<K,V> getSubMap(Map<K, V> map, Collection<K> keys) {
+    public static <K, V> Map<K, V> getSubMap(Map<K, V> map, Collection<K> keys) {
         return getSubMap(map, keys, HashMap::new);
     }
 
@@ -78,7 +78,7 @@ public final class Maps {
         return ret;
     }
 
-    public static <K, V, RK> Map<RK,V> mapKey(Map<K, V> map, Function<K, RK> kFun) {
+    public static <K, V, RK> Map<RK, V> mapKey(Map<K, V> map, Function<K, RK> kFun) {
         return mapKey(map, kFun, HashMap::new);
     }
 
@@ -284,7 +284,7 @@ public final class Maps {
         return v;
     }
 
-    public static <K,V> void assertTrue(Map<K, V> map, BiPredicate<K, V> biPredicate, String errMsg) {
+    public static <K, V> void assertTrue(Map<K, V> map, BiPredicate<K, V> biPredicate, String errMsg) {
         map.forEach((k, v) -> Assert.isTrue(biPredicate.test(k, v), errMsg));
     }
 }

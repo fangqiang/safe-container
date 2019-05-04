@@ -13,10 +13,10 @@ import java.util.Map;
 public interface CommonNoneNullMapOper<K, V> extends CommonMapOper<K, V> {
 
     default boolean putIgnoreNull(K key, V value) {
-        if(Emptys.isNoneNull(key, value)){
+        if (Emptys.isNoneNull(key, value)) {
             put(key, value);
             return true;
-        }else{
+        } else {
             return false;
         }
     }

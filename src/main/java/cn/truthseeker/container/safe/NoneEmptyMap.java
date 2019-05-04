@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Collector;
 
 /**
  * @Description:
@@ -63,8 +62,8 @@ public class NoneEmptyMap<K, V> extends HashMap<K, V> implements CommonNoneEmpty
         return Maps.of(k1, v1, k2, v2, k3, v3, NoneEmptyMap::new);
     }
 
-    public static <K, V> NoneEmptyMap<K, V> ofIgnoreEmpty(Map<K,V> m) {
-        NoneEmptyMap<K,V> ret = new NoneEmptyMap<>();
+    public static <K, V> NoneEmptyMap<K, V> ofIgnoreEmpty(Map<K, V> m) {
+        NoneEmptyMap<K, V> ret = new NoneEmptyMap<>();
         ret.putAllIgnoreEmpty(m);
         return ret;
     }

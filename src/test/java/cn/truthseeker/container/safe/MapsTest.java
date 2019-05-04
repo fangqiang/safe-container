@@ -5,7 +5,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -105,8 +104,8 @@ public class MapsTest {
     public void listToMap() {
         Map<Integer, String> map = Maps.listToMap(Arrays.asList(1, 2), a -> a + "a");
         Assert.assertTrue(map.size() == 2);
-        Assert.assertEquals(map.get(1),"1a");
-        Assert.assertEquals(map.get(2),"2a");
+        Assert.assertEquals(map.get(1), "1a");
+        Assert.assertEquals(map.get(2), "2a");
     }
 
     @Test
@@ -120,14 +119,14 @@ public class MapsTest {
     @Test
     public void getOrCreate() {
         Map<String, Integer> map = Maps.of("a", 1);
-        Assert.assertTrue(Maps.getOrCreate(map, "b", ()->11) ==11);
+        Assert.assertTrue(Maps.getOrCreate(map, "b", () -> 11) == 11);
         Assert.assertTrue(map.get("b") == 11);
     }
 
     @Test
     public void assertTrue() {
         Map<String, Integer> map = Maps.of("a", 1);
-        TestUtil.noException(()->Maps.assertTrue(map, (k,v)->k.equals("a"), "aa"));
-        TestUtil.withException(()->Maps.assertTrue(map, (k,v)->k.equals("b"), "aa"));
+        TestUtil.noException(() -> Maps.assertTrue(map, (k, v) -> k.equals("a"), "aa"));
+        TestUtil.withException(() -> Maps.assertTrue(map, (k, v) -> k.equals("b"), "aa"));
     }
 }

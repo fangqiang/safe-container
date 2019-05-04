@@ -13,12 +13,12 @@ public class ReflectUtilsTest {
 
     A a = new A();
 
-    static class A{
+    static class A {
         B b = new B();
     }
 
-    static class B{
-        String s="hello";
+    static class B {
+        String s = "hello";
     }
 
     @Test
