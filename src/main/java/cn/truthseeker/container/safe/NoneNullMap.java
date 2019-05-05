@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Collector;
 
 /**
  * @Description:
@@ -64,8 +63,8 @@ public class NoneNullMap<K, V> extends HashMap<K, V> implements CommonNoneNullMa
         return Maps.of(k1, v1, k2, v2, k3, v3, NoneNullMap::new);
     }
 
-    public static <K, V> NoneNullMap<K, V> ofIgnoreNull(Map<K,V> m) {
-        NoneNullMap<K,V> ret = new NoneNullMap<>();
+    public static <K, V> NoneNullMap<K, V> ofIgnoreNull(Map<K, V> m) {
+        NoneNullMap<K, V> ret = new NoneNullMap<>();
         ret.putAllIgnoreNull(m);
         return ret;
     }

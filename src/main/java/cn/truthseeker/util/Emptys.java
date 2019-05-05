@@ -137,7 +137,7 @@ public class Emptys {
         return false;
     }
 
-    public static <T,R> R ApplyIfNotNull(T object, Function<T,R> function) {
+    public static <T, R> R ApplyIfNotNull(T object, Function<T, R> function) {
         return object == null ? null : function.apply(object);
     }
 }

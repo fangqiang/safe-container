@@ -1,7 +1,5 @@
 package cn.truthseeker.container.safe;
 
-import java.util.Collection;
-
 /**
  * @Description:
  * @author: qiang.fang
@@ -9,12 +7,12 @@ import java.util.Collection;
  * @date: Created by on 19/3/21
  */
 public interface CommonNoneNullOper<E> extends CommonCollectionOper<E> {
-    
+
     default boolean addIgnoreNull(E element) {
-        if(element != null){
+        if (element != null) {
             add(element);
             return true;
-        }else{
+        } else {
             return false;
         }
     }

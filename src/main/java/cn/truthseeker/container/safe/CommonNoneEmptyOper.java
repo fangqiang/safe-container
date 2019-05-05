@@ -11,10 +11,10 @@ import cn.truthseeker.util.Emptys;
 public interface CommonNoneEmptyOper<E> extends CommonCollectionOper<E> {
 
     default boolean addIgnoreEmpty(E element) {
-        if(Emptys.isNotEmpty(element)){
+        if (Emptys.isNotEmpty(element)) {
             add(element);
             return true;
-        }else{
+        } else {
             return false;
         }
     }

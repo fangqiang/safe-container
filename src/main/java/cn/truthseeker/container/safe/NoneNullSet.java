@@ -69,19 +69,10 @@ public class NoneNullSet<E> extends HashSet<E> implements CommonNoneNullOper<E> 
         return ret;
     }
 
-    public static <E> Collector<E, ?, NoneNullSet<E>> collector() {
+    public static <E> Collector<E, ?, NoneNullSet<E>> toSet() {
         return Collector.of(NoneNullSet::new, NoneNullSet::add, (left, right) -> {
             left.addAll(right);
             return left;
         }, Collector.Characteristics.IDENTITY_FINISH);
-    }
-
-    public static <E> Collector<E, ?, NoneNullSet<E>> collectorIgnoreEmpty() {
-        return Collector.of(NoneNullSet::new,
-                NoneNullSet::addIgnoreNull,
-                (left, right) -> {
-                    left.addAllIgnoreNull(right);
-                    return left;
-                }, Collector.Characteristics.IDENTITY_FINISH);
     }
 }

@@ -10,7 +10,7 @@ import java.lang.reflect.Field;
  */
 public class ReflectUtils {
 
-    public static <T> T reflectInnerInstance(Object instance, String point, Class<T> t) throws Exception{
+    public static <T> T reflectInnerInstance(Object instance, String point, Class<T> t) throws Exception {
         Object ret = instance;
 
         String[] split = point.split("\\.");

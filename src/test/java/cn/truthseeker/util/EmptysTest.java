@@ -71,27 +71,27 @@ public class EmptysTest {
 
     @Test
     public void assertEmpty() {
-        TestUtil.noException(()->Emptys.assertNotNull("a"));
-        TestUtil.noException(()->Emptys.assertNotNull(""));
-        TestUtil.withException(()->Emptys.assertNotNull(null));
+        TestUtil.noException(() -> Emptys.assertNotNull("a"));
+        TestUtil.noException(() -> Emptys.assertNotNull(""));
+        TestUtil.withException(() -> Emptys.assertNotNull(null));
 
-        TestUtil.noException(()->Emptys.assertNotEmpty("a"));
-        TestUtil.withException(()->Emptys.assertNotEmpty(""));
-        TestUtil.withException(()->Emptys.assertNotEmpty(null));
+        TestUtil.noException(() -> Emptys.assertNotEmpty("a"));
+        TestUtil.withException(() -> Emptys.assertNotEmpty(""));
+        TestUtil.withException(() -> Emptys.assertNotEmpty(null));
 
-        TestUtil.noException(()->Emptys.assertNoneNull(Collections2.ofList("a","a")));
-        TestUtil.noException(()->Emptys.assertNoneNull(Collections2.ofList("a","")));
-        TestUtil.withException(()->Emptys.assertNoneNull(Collections2.ofList("a",null)));
+        TestUtil.noException(() -> Emptys.assertNoneNull(Collections2.ofList("a", "a")));
+        TestUtil.noException(() -> Emptys.assertNoneNull(Collections2.ofList("a", "")));
+        TestUtil.withException(() -> Emptys.assertNoneNull(Collections2.ofList("a", null)));
 
-        TestUtil.noException(()->Emptys.assertNoneEmpty(Collections2.ofList("a","a")));
-        TestUtil.withException(()->Emptys.assertNoneEmpty(Collections2.ofList("a","")));
-        TestUtil.withException(()->Emptys.assertNoneEmpty(Collections2.ofList("a",null)));
+        TestUtil.noException(() -> Emptys.assertNoneEmpty(Collections2.ofList("a", "a")));
+        TestUtil.withException(() -> Emptys.assertNoneEmpty(Collections2.ofList("a", "")));
+        TestUtil.withException(() -> Emptys.assertNoneEmpty(Collections2.ofList("a", null)));
 
     }
 
     @Test
     public void ifNotNullApply() {
         assertTrue(Emptys.ApplyIfNotNull("a ", String::trim).equals("a"));
-        assertTrue(Emptys.ApplyIfNotNull(null, String::trim)== null);
+        assertTrue(Emptys.ApplyIfNotNull(null, String::trim) == null);
     }
 }

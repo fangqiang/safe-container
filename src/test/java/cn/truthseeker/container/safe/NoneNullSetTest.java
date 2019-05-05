@@ -23,46 +23,44 @@ public class NoneNullSetTest {
     @Test
     public void add() {
         NoneNullSet<Object> m = new NoneNullSet<>();
-        TestUtil.noException(()->m.add(1));
-        TestUtil.noException(()->m.add(""));
-        TestUtil.withException(()->m.add(null));
+        TestUtil.noException(() -> m.add(1));
+        TestUtil.noException(() -> m.add(""));
+        TestUtil.withException(() -> m.add(null));
     }
 
     @Test
     public void addAll() {
         NoneNullSet<Object> m = new NoneNullSet<>();
 
-        TestUtil.noException(()->m.addAll(Collections2.ofList(1)));
-        TestUtil.noException(()->m.addAll(Collections2.ofList("",1)));
-        TestUtil.withException(()->m.addAll(Collections2.ofList(null,1)));
+        TestUtil.noException(() -> m.addAll(Collections2.ofList(1)));
+        TestUtil.noException(() -> m.addAll(Collections2.ofList("", 1)));
+        TestUtil.withException(() -> m.addAll(Collections2.ofList(null, 1)));
     }
 
     @Test
     public void map() {
         NoneNullSet<String> map = NoneNullSet.of(1, 2).map(a -> a.toString());
-        Assert.assertEquals(map.size(),2);
+        Assert.assertEquals(map.size(), 2);
 
-        TestUtil.withException(()->NoneNullSet.of(1, 2).map(a -> a==1? null:a).size());
-        Assert.assertEquals(NoneNullSet.of(1, 2).mapIgnoreEmpty(a -> a==1? null:a).size(), 1);
+        TestUtil.withException(() -> NoneNullSet.of(1, 2).map(a -> a == 1 ? null : a).size());
+        Assert.assertEquals(NoneNullSet.of(1, 2).mapIgnoreEmpty(a -> a == 1 ? null : a).size(), 1);
     }
 
 
     @Test
     public void of() {
-        Assert.assertEquals(NoneNullSet.of(1,1,2).size(),2);
-        Assert.assertEquals(NoneNullSet.of(Arrays.asList(1,1,2)).size(),2);
-        Assert.assertEquals(NoneNullSet.ofIgnoreNull(null,"a").size(),1);
-        Assert.assertEquals(NoneNullSet.ofIgnoreNull(Arrays.asList(null,"a")).size(),1);
+        Assert.assertEquals(NoneNullSet.of(1, 1, 2).size(), 2);
+        Assert.assertEquals(NoneNullSet.of(Arrays.asList(1, 1, 2)).size(), 2);
+        Assert.assertEquals(NoneNullSet.ofIgnoreNull(null, "a").size(), 1);
+        Assert.assertEquals(NoneNullSet.ofIgnoreNull(Arrays.asList(null, "a")).size(), 1);
     }
 
 
     @Test
     public void getCollector() {
-        Assert.assertEquals(NoneNullSet.of(1,2).stream().collect(NoneNullSet.collector()).size(),2);
-        Assert.assertEquals(NoneNullSet.of(1,2).parallelStream().collect(NoneNullSet.collector()).size(),2);
+        Assert.assertEquals(NoneNullSet.of(1, 2).stream().collect(NoneNullSet.toSet()).size(), 2);
+        Assert.assertEquals(NoneNullSet.of(1, 2).parallelStream().collect(NoneNullSet.toSet()).size(), 2);
 
-        TestUtil.withException(()->Collections2.ofList("a","b",null).stream().collect(NoneNullSet.collector()).size());
-        Assert.assertEquals(Collections2.ofList("a","b",null).stream().collect(NoneNullSet.collectorIgnoreEmpty()).size(),2);
-        Assert.assertEquals(Collections2.ofList("a","b",null).parallelStream().collect(NoneNullSet.collectorIgnoreEmpty()).size(),2);
+        TestUtil.withException(() -> Collections2.ofList("a", "b", null).stream().collect(NoneNullSet.toSet()).size());
     }
 }
