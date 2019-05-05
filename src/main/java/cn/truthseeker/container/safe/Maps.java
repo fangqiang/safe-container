@@ -239,18 +239,6 @@ public final class Maps {
         return map;
     }
 
-    public static <K, V, T extends Map<K, V>> T listToMap(List<K> list, Function<K, V> function, Supplier<T> supplier) {
-        T t = supplier.get();
-        for (K k : list) {
-            t.put(k, function.apply(k));
-        }
-        return t;
-    }
-
-    public static <K, V> Map<K, V> listToMap(List<K> list, Function<K, V> function) {
-        return listToMap(list, function, HashMap::new);
-    }
-
     /**
      * 将key的集合，value的集合映射成一个map
      *

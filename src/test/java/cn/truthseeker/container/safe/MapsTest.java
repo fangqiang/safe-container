@@ -101,14 +101,6 @@ public class MapsTest {
     }
 
     @Test
-    public void listToMap() {
-        Map<Integer, String> map = Maps.listToMap(Arrays.asList(1, 2), a -> a + "a");
-        Assert.assertTrue(map.size() == 2);
-        Assert.assertEquals(map.get(1), "1a");
-        Assert.assertEquals(map.get(2), "2a");
-    }
-
-    @Test
     public void zip() {
         Map<String, Integer> zip = Maps.zip(Arrays.asList("a", "b"), Arrays.asList(1, 2));
         Assert.assertTrue(zip.size() == 2);
