@@ -36,6 +36,7 @@ public class NoneNullSet<E> extends HashSet<E> implements CommonNoneNullOper<E> 
     }
 
     // 简化操作
+
     /**
      * NoneNullSet<E> -> NoneNullSet<R>
      */
@@ -50,11 +51,12 @@ public class NoneNullSet<E> extends HashSet<E> implements CommonNoneNullOper<E> 
      */
     public <R> NoneNullSet<R> mapIgnoreEmpty(Function<E, R> map) {
         NoneNullSet<R> ret = new NoneNullSet<>();
-        this.forEach(e -> ret.addIgnoreNull(map.apply(e)));
+        this.forEach(e -> ret.addIfNotNull(map.apply(e)));
         return ret;
     }
 
     // 构造工具
+
     /**
      * 快速构建方法
      */
@@ -74,7 +76,7 @@ public class NoneNullSet<E> extends HashSet<E> implements CommonNoneNullOper<E> 
      */
     public static <E> NoneNullSet<E> ofIgnoreNull(E... e) {
         NoneNullSet<E> ret = new NoneNullSet<>();
-        ret.addAllIgnoreNull(e);
+        ret.addAllIfNotNull(e);
         return ret;
     }
 
@@ -83,7 +85,7 @@ public class NoneNullSet<E> extends HashSet<E> implements CommonNoneNullOper<E> 
      */
     public static <E> NoneNullSet<E> ofIgnoreNull(Iterable<E> e) {
         NoneNullSet<E> ret = new NoneNullSet<>();
-        ret.addAllIgnoreNull(e);
+        ret.addAllIfNotNull(e);
         return ret;
     }
 

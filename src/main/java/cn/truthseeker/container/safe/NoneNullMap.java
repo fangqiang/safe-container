@@ -1,9 +1,9 @@
 package cn.truthseeker.container.safe;
 
 
-import cn.truthseeker.tags.Nullable;
 import cn.truthseeker.util.Emptys;
 
+import javax.annotation.CheckForNull;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -45,14 +45,14 @@ public class NoneNullMap<K, V> extends HashMap<K, V> implements CommonNoneNullMa
         return super.put(key, value);
     }
 
-    @Deprecated
     @Override
-    @Nullable
+    @CheckForNull
     public V get(Object key) {
         return super.get(key);
     }
 
     // 构造工具
+
     /**
      * 快速构建方法
      */
@@ -79,7 +79,7 @@ public class NoneNullMap<K, V> extends HashMap<K, V> implements CommonNoneNullMa
      */
     public static <K, V> NoneNullMap<K, V> ofIgnoreNull(Map<K, V> m) {
         NoneNullMap<K, V> ret = new NoneNullMap<>();
-        ret.putAllIgnoreNull(m);
+        ret.putAllIfNotNull(m);
         return ret;
     }
 

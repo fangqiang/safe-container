@@ -53,6 +53,7 @@ public class NoneEmptyList<E> extends ArrayList<E> implements CommonNoneEmptyOpe
     }
 
     // 简化操作
+
     /**
      * NoneEmptyList<E> -> NoneEmptyList<R>
      */
@@ -67,11 +68,12 @@ public class NoneEmptyList<E> extends ArrayList<E> implements CommonNoneEmptyOpe
      */
     public <R> NoneEmptyList<R> mapIgnoreEmpty(Function<E, R> map) {
         NoneEmptyList<R> ret = new NoneEmptyList<>();
-        this.forEach(e -> ret.addIgnoreEmpty(map.apply(e)));
+        this.forEach(e -> ret.addIfNotEmpty(map.apply(e)));
         return ret;
     }
 
     // 构造工具
+
     /**
      * 快速构建方法
      */
@@ -91,7 +93,7 @@ public class NoneEmptyList<E> extends ArrayList<E> implements CommonNoneEmptyOpe
      */
     public static <E> NoneEmptyList<E> ofIgnoreEmpty(E... e) {
         NoneEmptyList<E> ret = new NoneEmptyList<>();
-        ret.addAllIgnoreEmpty(e);
+        ret.addAllIfNotEmpty(e);
         return ret;
     }
 
@@ -100,7 +102,7 @@ public class NoneEmptyList<E> extends ArrayList<E> implements CommonNoneEmptyOpe
      */
     public static <E> NoneEmptyList<E> ofIgnoreEmpty(Iterable<E> e) {
         NoneEmptyList<E> ret = new NoneEmptyList<>();
-        ret.addAllIgnoreEmpty(e);
+        ret.addAllIfNotEmpty(e);
         return ret;
     }
 

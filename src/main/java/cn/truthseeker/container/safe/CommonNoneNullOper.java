@@ -8,7 +8,7 @@ package cn.truthseeker.container.safe;
  */
 public interface CommonNoneNullOper<E> extends CommonCollectionOper<E> {
 
-    default boolean addIgnoreNull(E element) {
+    default boolean addIfNotNull(E element) {
         if (element != null) {
             add(element);
             return true;
@@ -17,15 +17,15 @@ public interface CommonNoneNullOper<E> extends CommonCollectionOper<E> {
         }
     }
 
-    default void addAllIgnoreNull(Iterable<? extends E> c) {
+    default void addAllIfNotNull(Iterable<? extends E> c) {
         for (E e : c) {
-            addIgnoreNull(e);
+            addIfNotNull(e);
         }
     }
 
-    default void addAllIgnoreNull(E[] c) {
+    default void addAllIfNotNull(E[] c) {
         for (E e : c) {
-            addIgnoreNull(e);
+            addIfNotNull(e);
         }
     }
 }

@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public interface CommonNoneEmptyMapOper<K, V> extends CommonMapOper<K, V> {
 
-    default boolean putIgnoreEmpty(K key, V value) {
+    default boolean putIfNotEmpty(K key, V value) {
         if (Emptys.isNoneEmpty(key, value)) {
             put(key, value);
             return true;
@@ -21,7 +21,7 @@ public interface CommonNoneEmptyMapOper<K, V> extends CommonMapOper<K, V> {
         }
     }
 
-    default void putAllIgnoreEmpty(Map<K, V> map) {
-        map.forEach(this::putIgnoreEmpty);
+    default void putAllIfNotEmpty(Map<K, V> map) {
+        map.forEach(this::putIfNotEmpty);
     }
 }

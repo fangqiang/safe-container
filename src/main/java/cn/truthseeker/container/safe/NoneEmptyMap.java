@@ -1,8 +1,8 @@
 package cn.truthseeker.container.safe;
 
-import cn.truthseeker.tags.Nullable;
 import cn.truthseeker.util.Emptys;
 
+import javax.annotation.CheckForNull;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,14 +44,14 @@ public class NoneEmptyMap<K, V> extends HashMap<K, V> implements CommonNoneEmpty
         return super.put(key, value);
     }
 
-    @Deprecated
     @Override
-    @Nullable
+    @CheckForNull
     public V get(Object key) {
         return super.get(key);
     }
 
     // 构造工具
+
     /**
      * 快速构建方法
      */
@@ -78,11 +78,12 @@ public class NoneEmptyMap<K, V> extends HashMap<K, V> implements CommonNoneEmpty
      */
     public static <K, V> NoneEmptyMap<K, V> ofIgnoreEmpty(Map<K, V> m) {
         NoneEmptyMap<K, V> ret = new NoneEmptyMap<>();
-        ret.putAllIgnoreEmpty(m);
+        ret.putAllIfNotEmpty(m);
         return ret;
     }
 
     // 简化操作
+
     /**
      * Map<K,V> -> Map<RK,V>
      */

@@ -92,7 +92,7 @@ public class Collections2 {
      * Iterable<K> -> HashMap<K, V>
      *
      * @param objects 数据源
-     * @param vFun 根据K成V
+     * @param vFun    根据K成V
      */
     public static <K, V> Map<K, V> toHashMap(Iterable<K> objects, Function<K, V> vFun) {
         return toMap(objects, vFun, HashMap::new);
@@ -101,8 +101,8 @@ public class Collections2 {
     /**
      * Iterable<K> -> Map<K, V>
      *
-     * @param objects 数据源
-     * @param vFun 根据K成V
+     * @param objects  数据源
+     * @param vFun     根据K成V
      * @param supplier 目标map
      */
     public static <K, V, T extends Map<K, V>> T toMap(Iterable<K> objects, Function<K, V> vFun, Supplier<T> supplier) {
@@ -118,8 +118,8 @@ public class Collections2 {
      * Iterable<K> -> HashMap<RK, RV>
      *
      * @param objects 数据源
-     * @param kFun 根据K生成RK
-     * @param vFun 根据K生成RV
+     * @param kFun    根据K生成RK
+     * @param vFun    根据K生成RV
      */
     public static <K, RK, RV> Map<RK, RV> toHashMap(Iterable<K> objects, Function<K, RK> kFun, Function<K, RV> vFun) {
         return toMap(objects, kFun, vFun, HashMap::new);
@@ -128,9 +128,9 @@ public class Collections2 {
     /**
      * Iterable<K> -> Map<RK, RV>
      *
-     * @param objects 数据源
-     * @param kFun 根据K生成RK
-     * @param vFun 根据K生成RV
+     * @param objects  数据源
+     * @param kFun     根据K生成RK
+     * @param vFun     根据K生成RV
      * @param supplier 目标map
      */
     public static <K, RK, RV, T extends Map<RK, RV>> T toMap(Iterable<K> objects, Function<K, RK> kFun, Function<K, RV> vFun, Supplier<T> supplier) {
@@ -145,7 +145,7 @@ public class Collections2 {
      * K[] -> HashMap<K, V>
      *
      * @param objects 数据源
-     * @param vFun 根据K成V
+     * @param vFun    根据K成V
      */
     public static <K, V> Map<K, V> toHashMap(K[] objects, Function<K, V> vFun) {
         return toMap(objects, vFun, HashMap::new);
@@ -154,8 +154,8 @@ public class Collections2 {
     /**
      * K[] -> Map<K, V>
      *
-     * @param objects 数据源
-     * @param vFun 根据K成V
+     * @param objects  数据源
+     * @param vFun     根据K成V
      * @param supplier 目标map
      */
     public static <K, V, T extends Map<K, V>> T toMap(K[] objects, Function<K, V> vFun, Supplier<T> supplier) {
@@ -170,8 +170,8 @@ public class Collections2 {
      * K[] -> HashMap<RK, RV>
      *
      * @param objects 数据源
-     * @param kFun 根据K生成RK
-     * @param vFun 根据K生成RV
+     * @param kFun    根据K生成RK
+     * @param vFun    根据K生成RV
      */
     public static <K, RK, RV> Map<RK, RV> toHashMap(K[] objects, Function<K, RK> kFun, Function<K, RV> vFun) {
         return toMap(objects, kFun, vFun, HashMap::new);
@@ -180,9 +180,9 @@ public class Collections2 {
     /**
      * K[] -> Map<RK, RV>
      *
-     * @param objects 数据源
-     * @param kFun 根据K生成RK
-     * @param vFun 根据K生成RV
+     * @param objects  数据源
+     * @param kFun     根据K生成RK
+     * @param vFun     根据K生成RV
      * @param supplier 目标map
      */
     public static <K, RK, RV, T extends Map<RK, RV>> T toMap(K[] objects, Function<K, RK> kFun, Function<K, RV> vFun, Supplier<T> supplier) {

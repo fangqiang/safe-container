@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public interface CommonNoneNullMapOper<K, V> extends CommonMapOper<K, V> {
 
-    default boolean putIgnoreNull(K key, V value) {
+    default boolean putIfNotNull(K key, V value) {
         if (Emptys.isNoneNull(key, value)) {
             put(key, value);
             return true;
@@ -21,7 +21,7 @@ public interface CommonNoneNullMapOper<K, V> extends CommonMapOper<K, V> {
         }
     }
 
-    default void putAllIgnoreNull(Map<K, V> map) {
-        map.forEach(this::putIgnoreNull);
+    default void putAllIfNotNull(Map<K, V> map) {
+        map.forEach(this::putIfNotNull);
     }
 }

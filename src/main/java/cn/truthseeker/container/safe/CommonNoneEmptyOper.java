@@ -10,7 +10,7 @@ import cn.truthseeker.util.Emptys;
  */
 public interface CommonNoneEmptyOper<E> extends CommonCollectionOper<E> {
 
-    default boolean addIgnoreEmpty(E element) {
+    default boolean addIfNotEmpty(E element) {
         if (Emptys.isNotEmpty(element)) {
             add(element);
             return true;
@@ -19,15 +19,15 @@ public interface CommonNoneEmptyOper<E> extends CommonCollectionOper<E> {
         }
     }
 
-    default void addAllIgnoreEmpty(Iterable<? extends E> c) {
+    default void addAllIfNotEmpty(Iterable<? extends E> c) {
         for (E e : c) {
-            addIgnoreEmpty(e);
+            addIfNotEmpty(e);
         }
     }
 
-    default void addAllIgnoreEmpty(E[] c) {
+    default void addAllIfNotEmpty(E[] c) {
         for (E e : c) {
-            addIgnoreEmpty(e);
+            addIfNotEmpty(e);
         }
     }
 }

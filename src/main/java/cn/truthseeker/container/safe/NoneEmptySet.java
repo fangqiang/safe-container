@@ -35,6 +35,7 @@ public class NoneEmptySet<E> extends HashSet<E> implements CommonNoneEmptyOper<E
     }
 
     // 简化操作
+
     /**
      * NoneEmptySet<E> -> NoneEmptySet<R>
      */
@@ -49,11 +50,12 @@ public class NoneEmptySet<E> extends HashSet<E> implements CommonNoneEmptyOper<E
      */
     public <R> NoneEmptySet<R> mapIgnoreEmpty(Function<E, R> map) {
         NoneEmptySet<R> ret = new NoneEmptySet<>();
-        this.forEach(e -> ret.addIgnoreEmpty(map.apply(e)));
+        this.forEach(e -> ret.addIfNotEmpty(map.apply(e)));
         return ret;
     }
 
     // 构造工具
+
     /**
      * 快速构建方法
      */
@@ -73,7 +75,7 @@ public class NoneEmptySet<E> extends HashSet<E> implements CommonNoneEmptyOper<E
      */
     public static <E> NoneEmptySet<E> ofIgnoreEmpty(E... e) {
         NoneEmptySet<E> ret = new NoneEmptySet<>();
-        ret.addAllIgnoreEmpty(e);
+        ret.addAllIfNotEmpty(e);
         return ret;
     }
 
@@ -82,7 +84,7 @@ public class NoneEmptySet<E> extends HashSet<E> implements CommonNoneEmptyOper<E
      */
     public static <E> NoneEmptySet<E> ofIgnoreEmpty(Iterable<E> e) {
         NoneEmptySet<E> ret = new NoneEmptySet<>();
-        ret.addAllIgnoreEmpty(e);
+        ret.addAllIfNotEmpty(e);
         return ret;
     }
 

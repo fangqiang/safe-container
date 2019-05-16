@@ -54,6 +54,7 @@ public class NoneNullList<E> extends ArrayList<E> implements CommonNoneNullOper<
     }
 
     // 简化操作
+
     /**
      * NoneNullList<E> -> NoneNullList<R>
      */
@@ -68,11 +69,12 @@ public class NoneNullList<E> extends ArrayList<E> implements CommonNoneNullOper<
      */
     public <R> NoneNullList<R> mapIgnoreNull(Function<E, R> map) {
         NoneNullList<R> ret = new NoneNullList<>();
-        this.forEach(e -> ret.addIgnoreNull(map.apply(e)));
+        this.forEach(e -> ret.addIfNotNull(map.apply(e)));
         return ret;
     }
 
     // 构造工具
+
     /**
      * 快速构建方法
      */
@@ -92,7 +94,7 @@ public class NoneNullList<E> extends ArrayList<E> implements CommonNoneNullOper<
      */
     public static <E> NoneNullList<E> ofIgnoreNull(E... e) {
         NoneNullList<E> ret = new NoneNullList<>();
-        ret.addAllIgnoreNull(e);
+        ret.addAllIfNotNull(e);
         return ret;
     }
 
@@ -101,7 +103,7 @@ public class NoneNullList<E> extends ArrayList<E> implements CommonNoneNullOper<
      */
     public static <E> NoneNullList<E> ofIgnoreNull(Iterable<E> e) {
         NoneNullList<E> ret = new NoneNullList<>();
-        ret.addAllIgnoreNull(e);
+        ret.addAllIfNotNull(e);
         return ret;
     }
 
