@@ -51,8 +51,8 @@ public class NoneEmptySetTest {
     public void of() {
         Assert.assertEquals(NoneEmptySet.of(1, 1, 2).size(), 2);
         Assert.assertEquals(NoneEmptySet.of(Arrays.asList(1, 1, 2)).size(), 2);
-        Assert.assertEquals(NoneEmptySet.ofOmitEmptyElement("", "a").size(), 1);
-        Assert.assertEquals(NoneEmptySet.ofOmitEmptyElement(Arrays.asList("", "a")).size(), 1);
+        Assert.assertEquals(NoneEmptySet.extractNotEmptyFrom("", "a").size(), 1);
+        Assert.assertEquals(NoneEmptySet.extractNotEmptyFrom(Arrays.asList("", "a")).size(), 1);
     }
 
 

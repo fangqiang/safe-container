@@ -50,7 +50,7 @@ public class NoneNullMapTest {
         Assert.assertEquals(NoneNullMap.of("a", 1).size(), 1);
         Assert.assertEquals(NoneNullMap.of("a", 1, "b", 1).size(), 2);
         Assert.assertEquals(NoneNullMap.of("a", 1, "b", 1, "c", 1).size(), 3);
-        Assert.assertEquals(NoneNullMap.ofOmitNullElement(Maps.of("a", "1", "b", null)).size(), 1);
+        Assert.assertEquals(NoneNullMap.extractNotNullFrom(Maps.of("a", "1", "b", null)).size(), 1);
     }
 
     @Test

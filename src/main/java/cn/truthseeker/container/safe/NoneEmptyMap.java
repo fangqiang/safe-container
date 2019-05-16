@@ -11,9 +11,15 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
- * @Description:
+ * 不能存放任何empty元素(key,value任意一个不能为empty)的Map
+ * <p>
+ * empty的定义如下：
+ * 1. 不为null
+ * 2. String类型的值必须包含非空白字符
+ * 3. 集合类型至少包含一个元素
+ * 3. 数组类型长度必须大于0
+ *
  * @author: qiang.fang
- * @email: lowping@163.com
  * @date: Created by on 19/4/7
  */
 public class NoneEmptyMap<K, V> extends HashMap<K, V> implements CommonNoneEmptyMapOper<K, V> {
@@ -27,20 +33,16 @@ public class NoneEmptyMap<K, V> extends HashMap<K, V> implements CommonNoneEmpty
 
     @Override
     public void putAll(Map<? extends K, ? extends V> m) {
-        for (Entry<? extends K, ? extends V> entry : m.entrySet()) {
-            Emptys.assertNotEmpty(entry.getKey());
-            Emptys.assertNotEmpty(entry.getValue());
+        if (!(m instanceof NoneEmptyMap)) {
+            m.forEach((k, v) -> Emptys.assertNoneEmpty(k, v));
         }
 
-        for (Entry<? extends K, ? extends V> entry : m.entrySet()) {
-            put(entry.getKey(), entry.getValue());
-        }
+        super.putAll(m);
     }
 
     @Override
     public V put(K key, V value) {
-        Emptys.assertNotEmpty(key);
-        Emptys.assertNotEmpty(value);
+        Emptys.assertNoneEmpty(key, value);
         return super.put(key, value);
     }
 
@@ -74,11 +76,11 @@ public class NoneEmptyMap<K, V> extends HashMap<K, V> implements CommonNoneEmpty
     }
 
     /**
-     * 快速构建方法，忽略empty元素
+     * 快速构建方法，从集合中抽取非empty元素
      */
-    public static <K, V> NoneEmptyMap<K, V> ofOmitEmptyElement(Map<K, V> m) {
+    public static <K, V> NoneEmptyMap<K, V> extractNotEmptyFrom(Map<K, V> m) {
         NoneEmptyMap<K, V> ret = new NoneEmptyMap<>();
-        ret.putAllIfNotEmpty(m);
+        ret.putAllOmitEmpty(m);
         return ret;
     }
 

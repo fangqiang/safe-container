@@ -9,10 +9,11 @@ import java.util.function.Function;
 import java.util.stream.Collector;
 
 /**
- * @Description:
- * @author: qiang.fang
- * @email: lowping@163.com
- * @date: Created by on 19/3/14
+ * 不能存放任何null元素的List
+ * <p>
+ *
+ * @author qiang.fang
+ * @date Created by on 19/3/14
  */
 public class NoneNullList<E> extends ArrayList<E> implements CommonNoneNullOper<E> {
     public NoneNullList() {
@@ -43,13 +44,17 @@ public class NoneNullList<E> extends ArrayList<E> implements CommonNoneNullOper<
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        Emptys.assertNoneNull(c);
+        if (!(c instanceof NoneNullList) && !(c instanceof NoneEmptyList)) {
+            Emptys.assertNoneNull(c);
+        }
         return super.addAll(c);
     }
 
     @Override
     public boolean addAll(int index, Collection<? extends E> c) {
-        Emptys.assertNoneNull(c);
+        if (!(c instanceof NoneNullList) && !(c instanceof NoneEmptyList)) {
+            Emptys.assertNoneNull(c);
+        }
         return super.addAll(index, c);
     }
 
@@ -90,20 +95,20 @@ public class NoneNullList<E> extends ArrayList<E> implements CommonNoneNullOper<
     }
 
     /**
-     * 快速构建方法，忽略null元素
+     * 快速构建方法，从集合中抽取非null元素
      */
-    public static <E> NoneNullList<E> ofOmitNullElement(E... e) {
+    public static <E> NoneNullList<E> extractNotNullFrom(E... e) {
         NoneNullList<E> ret = new NoneNullList<>();
-        ret.addAllIfNotNull(e);
+        ret.addAllOmitNull(e);
         return ret;
     }
 
     /**
-     * 快速构建方法，忽略null元素
+     * 快速构建方法，从集合中抽取非null元素
      */
-    public static <E> NoneNullList<E> ofOmitNullElement(Iterable<E> e) {
+    public static <E> NoneNullList<E> extractNotNullFrom(Iterable<E> e) {
         NoneNullList<E> ret = new NoneNullList<>();
-        ret.addAllIfNotNull(e);
+        ret.addAllOmitNull(e);
         return ret;
     }
 

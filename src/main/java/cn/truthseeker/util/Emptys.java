@@ -13,29 +13,45 @@ import java.util.function.Function;
 public class Emptys {
     public static void assertNotNull(Object o) {
         if (o == null) {
-            throw new RuntimeException("can't be null");
-        }
-    }
-
-    public static void assertNotEmpty(Object o) {
-        if (isEmpty(o)) {
-            throw new RuntimeException("can't be empty");
+            throw new RuntimeException("NullValueException");
         }
     }
 
     public static void assertNoneNull(Iterable objects) {
         if (!isNoneNull(objects)) {
-            throw new RuntimeException("can't contains null");
+            throw new RuntimeException("NullValueException");
+        }
+    }
+
+    public static void assertNoneNull(Object... objects) {
+        if (!isNoneNull(objects)) {
+            throw new RuntimeException("NullValueException");
+        }
+    }
+
+    public static void assertNotEmpty(Object o) {
+        if (isEmpty(o)) {
+            throw new RuntimeException("EmptyValueException");
         }
     }
 
     public static void assertNoneEmpty(Iterable objects) {
         if (!isNoneEmpty(objects)) {
-            throw new RuntimeException("can't contains empty");
+            throw new RuntimeException("EmptyValueException");
+        }
+    }
+
+    public static void assertNoneEmpty(Object... objects) {
+        if (!isNoneEmpty(objects)) {
+            throw new RuntimeException("EmptyValueException");
         }
     }
 
     public static boolean isAnyNull(Iterable objects) {
+        return !isNoneNull(objects);
+    }
+
+    public static boolean isAnyNull(Object... objects) {
         return !isNoneNull(objects);
     }
 
@@ -46,10 +62,6 @@ public class Emptys {
             }
         }
         return true;
-    }
-
-    public static boolean isAnyNull(Object... objects) {
-        return !isNoneNull(objects);
     }
 
     public static boolean isNoneNull(Object... objects) {
@@ -65,6 +77,10 @@ public class Emptys {
         return !isNoneEmpty(objects);
     }
 
+    public static boolean isAnyEmpty(Object... objects) {
+        return !isNoneEmpty(objects);
+    }
+
     public static boolean isNoneEmpty(Iterable objects) {
         for (Object object : objects) {
             if (isEmpty(object)) {
@@ -72,10 +88,6 @@ public class Emptys {
             }
         }
         return true;
-    }
-
-    public static boolean isAnyEmpty(Object... objects) {
-        return !isNoneEmpty(objects);
     }
 
     public static boolean isNoneEmpty(Object... objects) {

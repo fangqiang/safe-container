@@ -12,6 +12,10 @@ import java.util.Map;
  */
 public interface CommonNoneEmptyMapOper<K, V> extends CommonMapOper<K, V> {
 
+    /**
+     * 如果key和value都不为empty，put成功，返回true
+     * 否则，忽略，返回false
+     */
     default boolean putIfNotEmpty(K key, V value) {
         if (Emptys.isNoneEmpty(key, value)) {
             put(key, value);
@@ -21,7 +25,10 @@ public interface CommonNoneEmptyMapOper<K, V> extends CommonMapOper<K, V> {
         }
     }
 
-    default void putAllIfNotEmpty(Map<K, V> map) {
+    /**
+     * putAll，忽略map中key为empty或者value为empty的键值对
+     */
+    default void putAllOmitEmpty(Map<K, V> map) {
         map.forEach(this::putIfNotEmpty);
     }
 }

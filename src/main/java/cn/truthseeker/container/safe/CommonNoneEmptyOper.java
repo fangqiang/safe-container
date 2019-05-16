@@ -10,6 +10,10 @@ import cn.truthseeker.util.Emptys;
  */
 public interface CommonNoneEmptyOper<E> extends CommonCollectionOper<E> {
 
+    /**
+     * 如果element为empty，add成功，返回true
+     * 否则，忽略，返回false
+     */
     default boolean addIfNotEmpty(E element) {
         if (Emptys.isNotEmpty(element)) {
             add(element);
@@ -19,13 +23,19 @@ public interface CommonNoneEmptyOper<E> extends CommonCollectionOper<E> {
         }
     }
 
-    default void addAllIfNotEmpty(Iterable<? extends E> c) {
+    /**
+     * addAll，忽略集合中的empty元素
+     */
+    default void addAllOmitEmpty(Iterable<? extends E> c) {
         for (E e : c) {
             addIfNotEmpty(e);
         }
     }
 
-    default void addAllIfNotEmpty(E[] c) {
+    /**
+     * addAll，忽略集合中的empty元素
+     */
+    default void addAllOmitEmpty(E[] c) {
         for (E e : c) {
             addIfNotEmpty(e);
         }

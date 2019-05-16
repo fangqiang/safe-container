@@ -12,10 +12,11 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 /**
- * @Description:
- * @author: qiang.fang
- * @email: lowping@163.com
- * @date: Created by on 19/4/7
+ * 不能存放任何null元素(key,value任意一个不能为null)的Map
+ * <p>
+ *
+ * @author qiang.fang
+ * @date Created by on 19/3/14
  */
 public class NoneNullMap<K, V> extends HashMap<K, V> implements CommonNoneNullMapOper<K, V> {
     public NoneNullMap() {
@@ -28,20 +29,16 @@ public class NoneNullMap<K, V> extends HashMap<K, V> implements CommonNoneNullMa
 
     @Override
     public void putAll(Map<? extends K, ? extends V> m) {
-        for (Entry<? extends K, ? extends V> entry : m.entrySet()) {
-            Emptys.assertNotNull(entry.getKey());
-            Emptys.assertNotNull(entry.getValue());
+        if (!(m instanceof NoneNullMap) && !(m instanceof NoneEmptyMap)) {
+            m.forEach((k, v) -> Emptys.assertNoneNull(k, v));
         }
 
-        for (Entry<? extends K, ? extends V> entry : m.entrySet()) {
-            put(entry.getKey(), entry.getValue());
-        }
+        super.putAll(m);
     }
 
     @Override
     public V put(K key, V value) {
-        Emptys.assertNotNull(key);
-        Emptys.assertNotNull(value);
+        Emptys.assertNoneNull(key, value);
         return super.put(key, value);
     }
 
@@ -75,11 +72,11 @@ public class NoneNullMap<K, V> extends HashMap<K, V> implements CommonNoneNullMa
     }
 
     /**
-     * 快速构建方法，忽略null元素
+     * 快速构建方法，从集合中抽取非null元素
      */
-    public static <K, V> NoneNullMap<K, V> ofOmitNullElement(Map<K, V> m) {
+    public static <K, V> NoneNullMap<K, V> extractNotNullFrom(Map<K, V> m) {
         NoneNullMap<K, V> ret = new NoneNullMap<>();
-        ret.putAllIfNotNull(m);
+        ret.putAllOmitNull(m);
         return ret;
     }
 

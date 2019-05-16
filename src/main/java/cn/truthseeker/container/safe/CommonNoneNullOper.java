@@ -8,6 +8,10 @@ package cn.truthseeker.container.safe;
  */
 public interface CommonNoneNullOper<E> extends CommonCollectionOper<E> {
 
+    /**
+     * 如果element为null，add成功，返回true
+     * 否则，忽略，返回false
+     */
     default boolean addIfNotNull(E element) {
         if (element != null) {
             add(element);
@@ -17,13 +21,19 @@ public interface CommonNoneNullOper<E> extends CommonCollectionOper<E> {
         }
     }
 
-    default void addAllIfNotNull(Iterable<? extends E> c) {
+    /**
+     * addAll，忽略集合中的empty元素
+     */
+    default void addAllOmitNull(Iterable<? extends E> c) {
         for (E e : c) {
             addIfNotNull(e);
         }
     }
 
-    default void addAllIfNotNull(E[] c) {
+    /**
+     * addAll，忽略集合中的empty元素
+     */
+    default void addAllOmitNull(E[] c) {
         for (E e : c) {
             addIfNotNull(e);
         }

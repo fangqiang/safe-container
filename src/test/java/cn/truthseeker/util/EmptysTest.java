@@ -79,10 +79,12 @@ public class EmptysTest {
         TestUtil.withException(() -> Emptys.assertNotEmpty(""));
         TestUtil.withException(() -> Emptys.assertNotEmpty(null));
 
+        TestUtil.noException(() -> Emptys.assertNoneNull("a", "a"));
         TestUtil.noException(() -> Emptys.assertNoneNull(Collections2.ofList("a", "a")));
         TestUtil.noException(() -> Emptys.assertNoneNull(Collections2.ofList("a", "")));
         TestUtil.withException(() -> Emptys.assertNoneNull(Collections2.ofList("a", null)));
 
+        TestUtil.noException(() -> Emptys.assertNoneEmpty("a", "a"));
         TestUtil.noException(() -> Emptys.assertNoneEmpty(Collections2.ofList("a", "a")));
         TestUtil.withException(() -> Emptys.assertNoneEmpty(Collections2.ofList("a", "")));
         TestUtil.withException(() -> Emptys.assertNoneEmpty(Collections2.ofList("a", null)));

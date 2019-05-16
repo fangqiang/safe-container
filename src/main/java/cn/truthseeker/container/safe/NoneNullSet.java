@@ -9,10 +9,11 @@ import java.util.function.Function;
 import java.util.stream.Collector;
 
 /**
- * @Description:
- * @author: qiang.fang
- * @email: lowping@163.com
- * @date: Created by on 19/3/14
+ * 不能存放任何null元素的Set
+ * <p>
+ *
+ * @author qiang.fang
+ * @date Created by on 19/3/14
  */
 public class NoneNullSet<E> extends HashSet<E> implements CommonNoneNullOper<E> {
     public NoneNullSet() {
@@ -31,7 +32,9 @@ public class NoneNullSet<E> extends HashSet<E> implements CommonNoneNullOper<E> 
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        Emptys.assertNoneNull(c);
+        if (!(c instanceof NoneNullSet) && !(c instanceof NoneEmptySet)) {
+            Emptys.assertNoneNull(c);
+        }
         return super.addAll(c);
     }
 
@@ -72,20 +75,20 @@ public class NoneNullSet<E> extends HashSet<E> implements CommonNoneNullOper<E> 
     }
 
     /**
-     * 快速构建方法，忽略null元素
+     * 快速构建方法，从集合中抽取非null元素
      */
-    public static <E> NoneNullSet<E> ofOmitNullElement(E... e) {
+    public static <E> NoneNullSet<E> extractNotNullFrom(E... e) {
         NoneNullSet<E> ret = new NoneNullSet<>();
-        ret.addAllIfNotNull(e);
+        ret.addAllOmitNull(e);
         return ret;
     }
 
     /**
-     * 快速构建方法，忽略null元素
+     * 快速构建方法，从集合中抽取非null元素
      */
-    public static <E> NoneNullSet<E> ofOmitNullElement(Iterable<E> e) {
+    public static <E> NoneNullSet<E> extractNotNullFrom(Iterable<E> e) {
         NoneNullSet<E> ret = new NoneNullSet<>();
-        ret.addAllIfNotNull(e);
+        ret.addAllOmitNull(e);
         return ret;
     }
 

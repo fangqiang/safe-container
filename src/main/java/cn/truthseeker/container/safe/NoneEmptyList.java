@@ -8,10 +8,16 @@ import java.util.function.Function;
 import java.util.stream.Collector;
 
 /**
- * @Description:
- * @author: qiang.fang
- * @email: lowping@163.com
- * @date: Created by on 19/3/14
+ * 不能存放任何empty元素的List
+ * <p>
+ * empty的定义如下：
+ * 1. 不为null
+ * 2. String类型的值必须包含非空白字符
+ * 3. 集合类型至少包含一个元素
+ * 3. 数组类型长度必须大于0
+ *
+ * @author qiang.fang
+ * @date Created by on 19/3/14
  */
 public class NoneEmptyList<E> extends ArrayList<E> implements CommonNoneEmptyOper<E> {
     public NoneEmptyList() {
@@ -42,13 +48,17 @@ public class NoneEmptyList<E> extends ArrayList<E> implements CommonNoneEmptyOpe
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        Emptys.assertNoneEmpty(c);
+        if (!(c instanceof NoneEmptyList)) {
+            Emptys.assertNoneEmpty(c);
+        }
         return super.addAll(c);
     }
 
     @Override
     public boolean addAll(int index, Collection<? extends E> c) {
-        Emptys.assertNoneEmpty(c);
+        if (!(c instanceof NoneEmptyList)) {
+            Emptys.assertNoneEmpty(c);
+        }
         return super.addAll(index, c);
     }
 
@@ -89,20 +99,20 @@ public class NoneEmptyList<E> extends ArrayList<E> implements CommonNoneEmptyOpe
     }
 
     /**
-     * 快速构建方法，忽略empty元素
+     * 快速构建方法，从集合中抽取非empty元素
      */
-    public static <E> NoneEmptyList<E> ofOmitEmptyElement(E... e) {
+    public static <E> NoneEmptyList<E> extractNotEmptyFrom(E... e) {
         NoneEmptyList<E> ret = new NoneEmptyList<>();
-        ret.addAllIfNotEmpty(e);
+        ret.addAllOmitEmpty(e);
         return ret;
     }
 
     /**
-     * 快速构建方法，忽略empty元素
+     * 快速构建方法，从集合中抽取非empty元素
      */
-    public static <E> NoneEmptyList<E> ofOmitEmptyElement(Iterable<E> e) {
+    public static <E> NoneEmptyList<E> extractNotEmptyFrom(Iterable<E> e) {
         NoneEmptyList<E> ret = new NoneEmptyList<>();
-        ret.addAllIfNotEmpty(e);
+        ret.addAllOmitEmpty(e);
         return ret;
     }
 

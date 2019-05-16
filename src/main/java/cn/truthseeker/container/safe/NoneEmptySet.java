@@ -8,10 +8,16 @@ import java.util.function.Function;
 import java.util.stream.Collector;
 
 /**
- * @Description:
+ * 不能存放任何empty元素的Set
+ * <p>
+ * empty的定义如下：
+ * 1. 不为null
+ * 2. String类型的值必须包含非空白字符
+ * 3. 集合类型至少包含一个元素
+ * 3. 数组类型长度必须大于0
+ *
  * @author: qiang.fang
- * @email: lowping@163.com
- * @date: Created by on 19/3/14
+ * @date: Created by on 19/4/7
  */
 public class NoneEmptySet<E> extends HashSet<E> implements CommonNoneEmptyOper<E> {
     public NoneEmptySet() {
@@ -30,7 +36,9 @@ public class NoneEmptySet<E> extends HashSet<E> implements CommonNoneEmptyOper<E
 
     @Override
     public boolean addAll(Collection<? extends E> c) {
-        Emptys.assertNoneEmpty(c);
+        if (!(c instanceof NoneEmptySet)) {
+            Emptys.assertNoneEmpty(c);
+        }
         return super.addAll(c);
     }
 
@@ -71,20 +79,20 @@ public class NoneEmptySet<E> extends HashSet<E> implements CommonNoneEmptyOper<E
     }
 
     /**
-     * 快速构建方法，忽略empty元素
+     * 快速构建方法，从集合中抽取非empty元素
      */
-    public static <E> NoneEmptySet<E> ofOmitEmptyElement(E... e) {
+    public static <E> NoneEmptySet<E> extractNotEmptyFrom(E... e) {
         NoneEmptySet<E> ret = new NoneEmptySet<>();
-        ret.addAllIfNotEmpty(e);
+        ret.addAllOmitEmpty(e);
         return ret;
     }
 
     /**
-     * 快速构建方法，忽略empty元素
+     * 快速构建方法，从集合中抽取非empty元素
      */
-    public static <E> NoneEmptySet<E> ofOmitEmptyElement(Iterable<E> e) {
+    public static <E> NoneEmptySet<E> extractNotEmptyFrom(Iterable<E> e) {
         NoneEmptySet<E> ret = new NoneEmptySet<>();
-        ret.addAllIfNotEmpty(e);
+        ret.addAllOmitEmpty(e);
         return ret;
     }
 
