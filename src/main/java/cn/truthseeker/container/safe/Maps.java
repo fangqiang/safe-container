@@ -56,7 +56,7 @@ public final class Maps {
     /**
      * Map<K,V> -> Map<RK,V>
      */
-    public static <K, V, RK, T extends Map<RK, V>> T mapKey(Map<K, V> map, Function<K, RK> kFun, Supplier<T> supplier) {
+    public static <K, V, RK, T extends Map<RK, V>> T mapByKey(Map<K, V> map, Function<K, RK> kFun, Supplier<T> supplier) {
         T ret = supplier.get();
         map.forEach((k, v) -> ret.put(kFun.apply(k), v));
         return ret;
@@ -65,14 +65,14 @@ public final class Maps {
     /**
      * Map<K,V> -> HashMap<RK,V>
      */
-    public static <K, V, RK> Map<RK, V> mapKey(Map<K, V> map, Function<K, RK> kFun) {
-        return mapKey(map, kFun, HashMap::new);
+    public static <K, V, RK> Map<RK, V> mapByKey(Map<K, V> map, Function<K, RK> kFun) {
+        return mapByKey(map, kFun, HashMap::new);
     }
 
     /**
      * Map<K,V> -> Map<K,RV>
      */
-    public static <K, V, RV, T extends Map<K, RV>> T mapValue(Map<K, V> map, Function<V, RV> vFun, Supplier<T> supplier) {
+    public static <K, V, RV, T extends Map<K, RV>> T mapByValue(Map<K, V> map, Function<V, RV> vFun, Supplier<T> supplier) {
         T ret = supplier.get();
         map.forEach((k, v) -> ret.put(k, vFun.apply(v)));
         return ret;
@@ -81,14 +81,14 @@ public final class Maps {
     /**
      * Map<K,V> -> HashMap<RK,V>
      */
-    public static <K, V, RV> Map<K, RV> mapValue(Map<K, V> map, Function<V, RV> vFun) {
-        return mapValue(map, vFun, HashMap::new);
+    public static <K, V, RV> Map<K, RV> mapByValue(Map<K, V> map, Function<V, RV> vFun) {
+        return mapByValue(map, vFun, HashMap::new);
     }
 
     /**
      * Map<K,V> -> Map<RK,RV>
      */
-    public static <K, V, RK, RV, T extends Map<RK, RV>> T mapKeyValue(Map<K, V> map, Function<K, RK> kFun, Function<V, RV> vFun, Supplier<T> supplier) {
+    public static <K, V, RK, RV, T extends Map<RK, RV>> T mapByKeyValue(Map<K, V> map, Function<K, RK> kFun, Function<V, RV> vFun, Supplier<T> supplier) {
         T ret = supplier.get();
         map.forEach((k, v) -> ret.put(kFun.apply(k), vFun.apply(v)));
         return ret;
@@ -97,8 +97,8 @@ public final class Maps {
     /**
      * Map<K,V> -> HashMap<RK,RV>
      */
-    public static <K, V, RK, RV> Map<RK, RV> mapKeyValue(Map<K, V> map, Function<K, RK> kFun, Function<V, RV> vFun) {
-        return mapKeyValue(map, kFun, vFun, HashMap::new);
+    public static <K, V, RK, RV> Map<RK, RV> mapByKeyValue(Map<K, V> map, Function<K, RK> kFun, Function<V, RV> vFun) {
+        return mapByKeyValue(map, kFun, vFun, HashMap::new);
     }
 
     /**
@@ -215,7 +215,7 @@ public final class Maps {
     /**
      * 删除key或者value为空的键值对
      */
-    public static <K, V> Map<K, V> clearEmpty(Map<K, V> map) {
+    public static <K, V> Map<K, V> removeEmpty(Map<K, V> map) {
         map.entrySet().removeIf(entry -> Emptys.isAnyEmpty(entry.getKey(), entry.getValue()));
         return map;
     }
@@ -223,7 +223,7 @@ public final class Maps {
     /**
      * 删除key或者value为null的键值对
      */
-    public static <K, V> Map<K, V> clearNull(Map<K, V> map) {
+    public static <K, V> Map<K, V> removeNull(Map<K, V> map) {
         map.entrySet().removeIf(entry -> Emptys.isAnyNull(entry.getKey(), entry.getValue()));
         return map;
     }

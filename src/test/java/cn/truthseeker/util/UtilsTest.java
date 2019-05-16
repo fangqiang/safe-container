@@ -51,11 +51,11 @@ public class UtilsTest {
     }
 
     @Test
-    public void splitIgnoreEmpty() {
-        List<String> strings = Utils.splitIgnoreEmpty(",, a ,b ,\r \t,c,,", ",");
+    public void splitOmitEmpty() {
+        List<String> strings = Utils.splitOmitEmpty(",, a ,b ,\r \t,c,,", ",");
         assertTrue(strings.size() == 3);
         assertTrue(strings.containsAll(Arrays.asList("a", "b", "c")));
-        strings = Utils.splitIgnoreEmpty(" , ", ",");
+        strings = Utils.splitOmitEmpty(" , ", ",");
         assertTrue(strings.size() == 0);
     }
 }

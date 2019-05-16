@@ -76,7 +76,7 @@ public class NoneEmptyMap<K, V> extends HashMap<K, V> implements CommonNoneEmpty
     /**
      * 快速构建方法，忽略empty元素
      */
-    public static <K, V> NoneEmptyMap<K, V> ofIgnoreEmpty(Map<K, V> m) {
+    public static <K, V> NoneEmptyMap<K, V> ofOmitEmptyElement(Map<K, V> m) {
         NoneEmptyMap<K, V> ret = new NoneEmptyMap<>();
         ret.putAllIfNotEmpty(m);
         return ret;
@@ -87,22 +87,22 @@ public class NoneEmptyMap<K, V> extends HashMap<K, V> implements CommonNoneEmpty
     /**
      * Map<K,V> -> Map<RK,V>
      */
-    public <RK> NoneEmptyMap<RK, V> mapKey(Function<K, RK> kFun) {
-        return Maps.mapKey(this, kFun, NoneEmptyMap::new);
+    public <RK> NoneEmptyMap<RK, V> mapByKey(Function<K, RK> kFun) {
+        return Maps.mapByKey(this, kFun, NoneEmptyMap::new);
     }
 
     /**
      * Map<K,V> -> Map<K,RV>
      */
-    public <RV> NoneEmptyMap<K, RV> mapValue(Function<V, RV> vFun) {
-        return Maps.mapValue(this, vFun, NoneEmptyMap::new);
+    public <RV> NoneEmptyMap<K, RV> mapByValue(Function<V, RV> vFun) {
+        return Maps.mapByValue(this, vFun, NoneEmptyMap::new);
     }
 
     /**
      * Map<K,V> -> Map<RK,RV>
      */
-    public <RK, RV> NoneEmptyMap<RK, RV> mapKeyValue(Function<K, RK> kFun, Function<V, RV> vFun) {
-        return Maps.mapKeyValue(this, kFun, vFun, NoneEmptyMap::new);
+    public <RK, RV> NoneEmptyMap<RK, RV> mapByKeyValue(Function<K, RK> kFun, Function<V, RV> vFun) {
+        return Maps.mapByKeyValue(this, kFun, vFun, NoneEmptyMap::new);
     }
 
     /**

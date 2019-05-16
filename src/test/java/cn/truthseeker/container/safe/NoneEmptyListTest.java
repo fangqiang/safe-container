@@ -60,15 +60,15 @@ public class NoneEmptyListTest {
         Assert.assertEquals(map.size(), 2);
 
         TestUtil.withException(() -> NoneEmptyList.of(1, 2).map(a -> a == 1 ? null : a).size());
-        Assert.assertEquals(NoneEmptyList.of(1, 2).mapIgnoreEmpty(a -> a == 1 ? null : a).size(), 1);
+        Assert.assertEquals(NoneEmptyList.of(1, 2).mapOmitEmptyElement(a -> a == 1 ? null : a).size(), 1);
     }
 
     @Test
     public void of() {
         Assert.assertEquals(NoneEmptyList.of(1, 1, 2).size(), 3);
         Assert.assertEquals(NoneEmptyList.of(Arrays.asList(1, 1, 2)).size(), 3);
-        Assert.assertEquals(NoneEmptyList.ofIgnoreEmpty("", "a").size(), 1);
-        Assert.assertEquals(NoneEmptyList.ofIgnoreEmpty(Arrays.asList("", "a")).size(), 1);
+        Assert.assertEquals(NoneEmptyList.ofOmitEmptyElement("", "a").size(), 1);
+        Assert.assertEquals(NoneEmptyList.ofOmitEmptyElement(Arrays.asList("", "a")).size(), 1);
     }
 
     @Test

@@ -50,24 +50,24 @@ public class NoneNullMapTest {
         Assert.assertEquals(NoneNullMap.of("a", 1).size(), 1);
         Assert.assertEquals(NoneNullMap.of("a", 1, "b", 1).size(), 2);
         Assert.assertEquals(NoneNullMap.of("a", 1, "b", 1, "c", 1).size(), 3);
-        Assert.assertEquals(NoneNullMap.ofIgnoreNull(Maps.of("a", "1", "b", null)).size(), 1);
+        Assert.assertEquals(NoneNullMap.ofOmitNullElement(Maps.of("a", "1", "b", null)).size(), 1);
     }
 
     @Test
     public void mapKey() {
-        NoneNullMap<String, Integer> map = NoneNullMap.of("a", 1).mapKey(a -> a + "1");
+        NoneNullMap<String, Integer> map = NoneNullMap.of("a", 1).mapByKey(a -> a + "1");
         Assert.assertEquals(map.get("a1").intValue(), 1);
     }
 
     @Test
     public void mapValue() {
-        NoneNullMap<String, String> map = NoneNullMap.of("a", 1).mapValue(a -> a + "1");
+        NoneNullMap<String, String> map = NoneNullMap.of("a", 1).mapByValue(a -> a + "1");
         Assert.assertEquals(map.get("a"), "11");
     }
 
     @Test
     public void mapKeyValue() {
-        NoneNullMap<String, String> map = NoneNullMap.of("a", 1).mapKeyValue(a -> a + "1", a -> a + "1");
+        NoneNullMap<String, String> map = NoneNullMap.of("a", 1).mapByKeyValue(a -> a + "1", a -> a + "1");
         Assert.assertEquals(map.get("a1"), "11");
     }
 

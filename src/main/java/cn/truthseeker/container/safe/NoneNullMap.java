@@ -77,7 +77,7 @@ public class NoneNullMap<K, V> extends HashMap<K, V> implements CommonNoneNullMa
     /**
      * 快速构建方法，忽略null元素
      */
-    public static <K, V> NoneNullMap<K, V> ofIgnoreNull(Map<K, V> m) {
+    public static <K, V> NoneNullMap<K, V> ofOmitNullElement(Map<K, V> m) {
         NoneNullMap<K, V> ret = new NoneNullMap<>();
         ret.putAllIfNotNull(m);
         return ret;
@@ -88,22 +88,22 @@ public class NoneNullMap<K, V> extends HashMap<K, V> implements CommonNoneNullMa
     /**
      * Map<K,V> -> Map<RK,V>
      */
-    public <RK> NoneNullMap<RK, V> mapKey(Function<K, RK> kFun) {
-        return Maps.mapKey(this, kFun, NoneNullMap::new);
+    public <RK> NoneNullMap<RK, V> mapByKey(Function<K, RK> kFun) {
+        return Maps.mapByKey(this, kFun, NoneNullMap::new);
     }
 
     /**
      * Map<K,V> -> Map<K,RV>
      */
-    public <RV> NoneNullMap<K, RV> mapValue(Function<V, RV> vFun) {
-        return Maps.mapValue(this, vFun, NoneNullMap::new);
+    public <RV> NoneNullMap<K, RV> mapByValue(Function<V, RV> vFun) {
+        return Maps.mapByValue(this, vFun, NoneNullMap::new);
     }
 
     /**
      * Map<K,V> -> Map<RK,RV>
      */
-    public <RK, RV> NoneNullMap<RK, RV> mapKeyValue(Function<K, RK> kFun, Function<V, RV> vFun) {
-        return Maps.mapKeyValue(this, kFun, vFun, NoneNullMap::new);
+    public <RK, RV> NoneNullMap<RK, RV> mapByKeyValue(Function<K, RK> kFun, Function<V, RV> vFun) {
+        return Maps.mapByKeyValue(this, kFun, vFun, NoneNullMap::new);
     }
 
     /**

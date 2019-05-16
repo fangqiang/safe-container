@@ -49,7 +49,7 @@ public class NoneNullSet<E> extends HashSet<E> implements CommonNoneNullOper<E> 
     /**
      * NoneNullSet<E> -> NoneNullSet<R> 跳过为null的元素
      */
-    public <R> NoneNullSet<R> mapIgnoreEmpty(Function<E, R> map) {
+    public <R> NoneNullSet<R> mapOmitEmptyElement(Function<E, R> map) {
         NoneNullSet<R> ret = new NoneNullSet<>();
         this.forEach(e -> ret.addIfNotNull(map.apply(e)));
         return ret;
@@ -74,7 +74,7 @@ public class NoneNullSet<E> extends HashSet<E> implements CommonNoneNullOper<E> 
     /**
      * 快速构建方法，忽略null元素
      */
-    public static <E> NoneNullSet<E> ofIgnoreNull(E... e) {
+    public static <E> NoneNullSet<E> ofOmitNullElement(E... e) {
         NoneNullSet<E> ret = new NoneNullSet<>();
         ret.addAllIfNotNull(e);
         return ret;
@@ -83,7 +83,7 @@ public class NoneNullSet<E> extends HashSet<E> implements CommonNoneNullOper<E> 
     /**
      * 快速构建方法，忽略null元素
      */
-    public static <E> NoneNullSet<E> ofIgnoreNull(Iterable<E> e) {
+    public static <E> NoneNullSet<E> ofOmitNullElement(Iterable<E> e) {
         NoneNullSet<E> ret = new NoneNullSet<>();
         ret.addAllIfNotNull(e);
         return ret;

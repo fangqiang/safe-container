@@ -60,15 +60,15 @@ public class NoneNullListTest {
         Assert.assertEquals(map.size(), 2);
 
         TestUtil.withException(() -> NoneNullList.of(1, 2).map(a -> a == 1 ? null : a).size());
-        Assert.assertEquals(NoneNullList.of(1, 2).mapIgnoreNull(a -> a == 1 ? null : a).size(), 1);
+        Assert.assertEquals(NoneNullList.of(1, 2).mapOmitNullElement(a -> a == 1 ? null : a).size(), 1);
     }
 
     @Test
     public void of() {
         Assert.assertEquals(NoneNullList.of(1, 2).size(), 2);
         Assert.assertEquals(NoneNullList.of(Arrays.asList(1, 2)).size(), 2);
-        Assert.assertEquals(NoneNullList.ofIgnoreNull(null, "a").size(), 1);
-        Assert.assertEquals(NoneNullList.ofIgnoreNull(Arrays.asList(null, "a")).size(), 1);
+        Assert.assertEquals(NoneNullList.ofOmitNullElement(null, "a").size(), 1);
+        Assert.assertEquals(NoneNullList.ofOmitNullElement(Arrays.asList(null, "a")).size(), 1);
     }
 
     @Test

@@ -67,7 +67,7 @@ public class NoneNullList<E> extends ArrayList<E> implements CommonNoneNullOper<
     /**
      * NoneNullList<E> -> NoneNullList<R> 跳过为null的元素
      */
-    public <R> NoneNullList<R> mapIgnoreNull(Function<E, R> map) {
+    public <R> NoneNullList<R> mapOmitNullElement(Function<E, R> map) {
         NoneNullList<R> ret = new NoneNullList<>();
         this.forEach(e -> ret.addIfNotNull(map.apply(e)));
         return ret;
@@ -92,7 +92,7 @@ public class NoneNullList<E> extends ArrayList<E> implements CommonNoneNullOper<
     /**
      * 快速构建方法，忽略null元素
      */
-    public static <E> NoneNullList<E> ofIgnoreNull(E... e) {
+    public static <E> NoneNullList<E> ofOmitNullElement(E... e) {
         NoneNullList<E> ret = new NoneNullList<>();
         ret.addAllIfNotNull(e);
         return ret;
@@ -101,7 +101,7 @@ public class NoneNullList<E> extends ArrayList<E> implements CommonNoneNullOper<
     /**
      * 快速构建方法，忽略null元素
      */
-    public static <E> NoneNullList<E> ofIgnoreNull(Iterable<E> e) {
+    public static <E> NoneNullList<E> ofOmitNullElement(Iterable<E> e) {
         NoneNullList<E> ret = new NoneNullList<>();
         ret.addAllIfNotNull(e);
         return ret;

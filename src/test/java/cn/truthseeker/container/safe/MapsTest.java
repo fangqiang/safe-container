@@ -39,21 +39,21 @@ public class MapsTest {
     @Test
     public void mapKey() {
         Map<String, String> all = Maps.of("1", "1");
-        Map<Integer, String> ret = Maps.mapKey(all, Integer::parseInt);
+        Map<Integer, String> ret = Maps.mapByKey(all, Integer::parseInt);
         Assert.assertTrue(ret.get(1).equals("1"));
     }
 
     @Test
     public void mapValue() {
         Map<String, String> all = Maps.of("1", "1");
-        Map<String, Integer> ret = Maps.mapValue(all, Integer::parseInt);
+        Map<String, Integer> ret = Maps.mapByValue(all, Integer::parseInt);
         Assert.assertTrue(ret.get("1") == 1);
     }
 
     @Test
     public void mapKeyValue() {
         Map<String, String> all = Maps.of("1", "1");
-        Map<Integer, Integer> ret = Maps.mapKeyValue(all, Integer::parseInt, Integer::parseInt);
+        Map<Integer, Integer> ret = Maps.mapByKeyValue(all, Integer::parseInt, Integer::parseInt);
         Assert.assertTrue(ret.get(1) == 1);
     }
 
@@ -88,14 +88,14 @@ public class MapsTest {
     @Test
     public void clearEmpty() {
         Map<Integer, String> map = Maps.of(1, "1", 2, null, 3, "");
-        Assert.assertTrue(Maps.clearEmpty(map).size() == 1);
+        Assert.assertTrue(Maps.removeEmpty(map).size() == 1);
         Assert.assertTrue(map.containsKey(1));
     }
 
     @Test
     public void clearNull() {
         Map<Integer, String> map = Maps.of(1, "1", 2, null, 3, "");
-        Assert.assertTrue(Maps.clearNull(map).size() == 2);
+        Assert.assertTrue(Maps.removeNull(map).size() == 2);
         Assert.assertTrue(map.containsKey(1));
         Assert.assertTrue(map.containsKey(3));
     }

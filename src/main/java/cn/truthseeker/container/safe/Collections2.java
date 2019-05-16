@@ -19,14 +19,14 @@ public class Collections2 {
     /**
      * 删除集合中empty的元素
      */
-    public static <E> void clearEmpty(Collection<E> e) {
+    public static <E> void removeEmpty(Collection<E> e) {
         e.removeIf(Emptys::isEmpty);
     }
 
     /**
      * 删除集合中null元素
      */
-    public static <E> void clearNull(Collection<E> e) {
+    public static <E> void removeNull(Collection<E> e) {
         e.removeIf(Objects::isNull);
     }
 

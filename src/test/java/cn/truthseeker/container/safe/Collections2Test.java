@@ -19,9 +19,9 @@ public class Collections2Test {
     @Test
     public void clear() {
         List<String> a = Collections2.ofList("a", "", null);
-        Collections2.clearNull(a);
+        Collections2.removeNull(a);
         Assert.assertTrue(a.size() == 2);
-        Collections2.clearEmpty(a);
+        Collections2.removeEmpty(a);
         Assert.assertTrue(a.size() == 1);
         Assert.assertTrue(a.contains("a"));
     }

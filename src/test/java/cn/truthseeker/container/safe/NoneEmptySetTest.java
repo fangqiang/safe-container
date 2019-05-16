@@ -43,7 +43,7 @@ public class NoneEmptySetTest {
         Assert.assertEquals(map.size(), 2);
 
         TestUtil.withException(() -> NoneEmptySet.of(1, 2).map(a -> a == 1 ? null : a).size());
-        Assert.assertEquals(NoneEmptySet.of(1, 2).mapIgnoreEmpty(a -> a == 1 ? null : a).size(), 1);
+        Assert.assertEquals(NoneEmptySet.of(1, 2).mapOmitEmptyElement(a -> a == 1 ? null : a).size(), 1);
     }
 
 
@@ -51,8 +51,8 @@ public class NoneEmptySetTest {
     public void of() {
         Assert.assertEquals(NoneEmptySet.of(1, 1, 2).size(), 2);
         Assert.assertEquals(NoneEmptySet.of(Arrays.asList(1, 1, 2)).size(), 2);
-        Assert.assertEquals(NoneEmptySet.ofIgnoreEmpty("", "a").size(), 1);
-        Assert.assertEquals(NoneEmptySet.ofIgnoreEmpty(Arrays.asList("", "a")).size(), 1);
+        Assert.assertEquals(NoneEmptySet.ofOmitEmptyElement("", "a").size(), 1);
+        Assert.assertEquals(NoneEmptySet.ofOmitEmptyElement(Arrays.asList("", "a")).size(), 1);
     }
 
 
