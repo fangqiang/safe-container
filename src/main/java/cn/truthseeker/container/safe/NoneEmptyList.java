@@ -53,12 +53,18 @@ public class NoneEmptyList<E> extends ArrayList<E> implements CommonNoneEmptyOpe
     }
 
     // 简化操作
+    /**
+     * NoneEmptyList<E> -> NoneEmptyList<R>
+     */
     public <R> NoneEmptyList<R> map(Function<E, R> map) {
         NoneEmptyList<R> ret = new NoneEmptyList<>();
         this.forEach(e -> ret.add(map.apply(e)));
         return ret;
     }
 
+    /**
+     * NoneEmptyList<E> -> NoneEmptyList<R> 跳过为empty的元素
+     */
     public <R> NoneEmptyList<R> mapIgnoreEmpty(Function<E, R> map) {
         NoneEmptyList<R> ret = new NoneEmptyList<>();
         this.forEach(e -> ret.addIgnoreEmpty(map.apply(e)));
@@ -66,26 +72,41 @@ public class NoneEmptyList<E> extends ArrayList<E> implements CommonNoneEmptyOpe
     }
 
     // 构造工具
+    /**
+     * 快速构建方法
+     */
     public static <E> NoneEmptyList<E> of(E... e) {
         return Collections2.of(NoneEmptyList::new, e);
     }
 
+    /**
+     * 快速构建方法
+     */
     public static <E> NoneEmptyList<E> of(Iterable<E> e) {
         return Collections2.of(NoneEmptyList::new, e);
     }
 
+    /**
+     * 快速构建方法，忽略empty元素
+     */
     public static <E> NoneEmptyList<E> ofIgnoreEmpty(E... e) {
         NoneEmptyList<E> ret = new NoneEmptyList<>();
         ret.addAllIgnoreEmpty(e);
         return ret;
     }
 
+    /**
+     * 快速构建方法，忽略empty元素
+     */
     public static <E> NoneEmptyList<E> ofIgnoreEmpty(Iterable<E> e) {
         NoneEmptyList<E> ret = new NoneEmptyList<>();
         ret.addAllIgnoreEmpty(e);
         return ret;
     }
 
+    /**
+     * 快速构建方法，Stream<E> -> NoneEmptyList<E>
+     */
     public static <E> Collector<E, ?, NoneEmptyList<E>> toList() {
         return Collector.of(
                 NoneEmptyList::new,

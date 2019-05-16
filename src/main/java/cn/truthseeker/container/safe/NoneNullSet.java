@@ -36,12 +36,18 @@ public class NoneNullSet<E> extends HashSet<E> implements CommonNoneNullOper<E> 
     }
 
     // 简化操作
+    /**
+     * NoneNullSet<E> -> NoneNullSet<R>
+     */
     public <R> NoneNullSet<R> map(Function<E, R> map) {
         NoneNullSet<R> ret = new NoneNullSet<>();
         this.forEach(e -> ret.add(map.apply(e)));
         return ret;
     }
 
+    /**
+     * NoneNullSet<E> -> NoneNullSet<R> 跳过为null的元素
+     */
     public <R> NoneNullSet<R> mapIgnoreEmpty(Function<E, R> map) {
         NoneNullSet<R> ret = new NoneNullSet<>();
         this.forEach(e -> ret.addIgnoreNull(map.apply(e)));
@@ -49,26 +55,41 @@ public class NoneNullSet<E> extends HashSet<E> implements CommonNoneNullOper<E> 
     }
 
     // 构造工具
+    /**
+     * 快速构建方法
+     */
     public static <E> NoneNullSet<E> of(E... e) {
         return Collections2.of(NoneNullSet::new, e);
     }
 
+    /**
+     * 快速构建方法
+     */
     public static <E> NoneNullSet<E> of(Iterable<E> e) {
         return Collections2.of(NoneNullSet::new, e);
     }
 
+    /**
+     * 快速构建方法，忽略null元素
+     */
     public static <E> NoneNullSet<E> ofIgnoreNull(E... e) {
         NoneNullSet<E> ret = new NoneNullSet<>();
         ret.addAllIgnoreNull(e);
         return ret;
     }
 
+    /**
+     * 快速构建方法，忽略null元素
+     */
     public static <E> NoneNullSet<E> ofIgnoreNull(Iterable<E> e) {
         NoneNullSet<E> ret = new NoneNullSet<>();
         ret.addAllIgnoreNull(e);
         return ret;
     }
 
+    /**
+     * 快速构建方法，Stream<E> -> NoneNullSet<E>
+     */
     public static <E> Collector<E, ?, NoneNullSet<E>> toSet() {
         return Collector.of(NoneNullSet::new, NoneNullSet::add, (left, right) -> {
             left.addAll(right);

@@ -1,5 +1,6 @@
 package cn.truthseeker.container.safe;
 
+import cn.truthseeker.tags.Nullable;
 import cn.truthseeker.util.Emptys;
 
 import java.util.Collection;
@@ -45,23 +46,36 @@ public class NoneEmptyMap<K, V> extends HashMap<K, V> implements CommonNoneEmpty
 
     @Deprecated
     @Override
+    @Nullable
     public V get(Object key) {
         return super.get(key);
     }
 
     // 构造工具
+    /**
+     * 快速构建方法
+     */
     public static <K, V> NoneEmptyMap<K, V> of(K k1, V v1) {
         return Maps.of(k1, v1, NoneEmptyMap::new);
     }
 
+    /**
+     * 快速构建方法
+     */
     public static <K, V> NoneEmptyMap<K, V> of(K k1, V v1, K k2, V v2) {
         return Maps.of(k1, v1, k2, v2, NoneEmptyMap::new);
     }
 
+    /**
+     * 快速构建方法
+     */
     public static <K, V> NoneEmptyMap<K, V> of(K k1, V v1, K k2, V v2, K k3, V v3) {
         return Maps.of(k1, v1, k2, v2, k3, v3, NoneEmptyMap::new);
     }
 
+    /**
+     * 快速构建方法，忽略empty元素
+     */
     public static <K, V> NoneEmptyMap<K, V> ofIgnoreEmpty(Map<K, V> m) {
         NoneEmptyMap<K, V> ret = new NoneEmptyMap<>();
         ret.putAllIgnoreEmpty(m);
@@ -69,51 +83,50 @@ public class NoneEmptyMap<K, V> extends HashMap<K, V> implements CommonNoneEmpty
     }
 
     // 简化操作
-
     /**
-     * 按key映射
+     * Map<K,V> -> Map<RK,V>
      */
     public <RK> NoneEmptyMap<RK, V> mapKey(Function<K, RK> kFun) {
         return Maps.mapKey(this, kFun, NoneEmptyMap::new);
     }
 
     /**
-     * 按value映射
+     * Map<K,V> -> Map<K,RV>
      */
     public <RV> NoneEmptyMap<K, RV> mapValue(Function<V, RV> vFun) {
         return Maps.mapValue(this, vFun, NoneEmptyMap::new);
     }
 
     /**
-     * 按key,value映射
+     * Map<K,V> -> Map<RK,RV>
      */
     public <RK, RV> NoneEmptyMap<RK, RV> mapKeyValue(Function<K, RK> kFun, Function<V, RV> vFun) {
         return Maps.mapKeyValue(this, kFun, vFun, NoneEmptyMap::new);
     }
 
     /**
-     * 按key过滤
+     * Map1 (按key过滤) -> Map2
      */
     public NoneEmptyMap<K, V> filterByKey(Predicate<K> kFun) {
         return Maps.filterByKey(this, kFun, NoneEmptyMap::new);
     }
 
     /**
-     * 按value过滤
+     * Map1 (按value过滤) -> Map2
      */
     public NoneEmptyMap<K, V> filterByValue(Predicate<V> vFun) {
         return Maps.filterByValue(this, vFun, NoneEmptyMap::new);
     }
 
     /**
-     * 按key,value过滤
+     * Map1 (按key和value过滤) -> Map2
      */
     public NoneEmptyMap<K, V> filterByKeyValue(BiPredicate<K, V> predicate) {
         return Maps.filterByKeyValue(this, predicate, NoneEmptyMap::new);
     }
 
     /**
-     * 按keys返回子map
+     * 对keys中每个元素从map中提取出value，并放入一个新的map
      */
     public NoneEmptyMap<K, V> getSubMap(Collection<K> keys) {
         return Maps.getSubMap(this, keys, NoneEmptyMap::new);

@@ -54,12 +54,18 @@ public class NoneNullList<E> extends ArrayList<E> implements CommonNoneNullOper<
     }
 
     // 简化操作
+    /**
+     * NoneNullList<E> -> NoneNullList<R>
+     */
     public <R> NoneNullList<R> map(Function<E, R> map) {
         NoneNullList<R> ret = new NoneNullList<>();
         this.forEach(e -> ret.add(map.apply(e)));
         return ret;
     }
 
+    /**
+     * NoneNullList<E> -> NoneNullList<R> 跳过为null的元素
+     */
     public <R> NoneNullList<R> mapIgnoreNull(Function<E, R> map) {
         NoneNullList<R> ret = new NoneNullList<>();
         this.forEach(e -> ret.addIgnoreNull(map.apply(e)));
@@ -67,26 +73,41 @@ public class NoneNullList<E> extends ArrayList<E> implements CommonNoneNullOper<
     }
 
     // 构造工具
+    /**
+     * 快速构建方法
+     */
     public static <E> NoneNullList<E> of(E... e) {
         return Collections2.of(NoneNullList::new, e);
     }
 
+    /**
+     * 快速构建方法
+     */
     public static <E> NoneNullList<E> of(Iterable<E> e) {
         return Collections2.of(NoneNullList::new, e);
     }
 
+    /**
+     * 快速构建方法，忽略null元素
+     */
     public static <E> NoneNullList<E> ofIgnoreNull(E... e) {
         NoneNullList<E> ret = new NoneNullList<>();
         ret.addAllIgnoreNull(e);
         return ret;
     }
 
+    /**
+     * 快速构建方法，忽略null元素
+     */
     public static <E> NoneNullList<E> ofIgnoreNull(Iterable<E> e) {
         NoneNullList<E> ret = new NoneNullList<>();
         ret.addAllIgnoreNull(e);
         return ret;
     }
 
+    /**
+     * 快速构建方法，Stream<E> -> NoneNullList<E>
+     */
     public static <E> Collector<E, ?, NoneNullList<E>> toList() {
         return Collector.of(
                 NoneNullList::new,

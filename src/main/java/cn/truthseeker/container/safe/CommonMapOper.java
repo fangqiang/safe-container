@@ -1,6 +1,5 @@
 package cn.truthseeker.container.safe;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.BiPredicate;
@@ -18,6 +17,9 @@ public interface CommonMapOper<K, V> extends Map<K, V> {
         return Optional.ofNullable(get(key));
     }
 
+    /**
+     * 返回key对应的value，如果value不存在则通过supplier生成value
+     */
     default V getOrCreate(K k, Supplier<V> supplier) {
         return Maps.getOrCreate(this, k, supplier);
     }
@@ -30,9 +32,9 @@ public interface CommonMapOper<K, V> extends Map<K, V> {
     }
 
     /**
-     * 是否包含这些key的集合
+     * 是否包含集合中所有key
      */
-    default boolean containsKeys(List<K> keys) {
+    default boolean containsKeys(Iterable<K> keys) {
         for (K key : keys) {
             if (!this.containsKey(key)) {
                 return false;
@@ -63,6 +65,9 @@ public interface CommonMapOper<K, V> extends Map<K, V> {
         }
     }
 
+    /**
+     * 集合中至少有一个元素满足条件则返回true，否则返回false
+     */
     default boolean anySatisfied(BiPredicate<K, V> filter) {
         for (Entry<K, V> entry : entrySet()) {
             if (filter.test(entry.getKey(), entry.getValue())) {
@@ -72,6 +77,9 @@ public interface CommonMapOper<K, V> extends Map<K, V> {
         return false;
     }
 
+    /**
+     * 校验集合中每个元素是否满足条件，否则抛出异常
+     */
     default void assertTrue(BiPredicate<K, V> biPredicate, String errMsg) {
         Maps.assertTrue(this, biPredicate, errMsg);
     }

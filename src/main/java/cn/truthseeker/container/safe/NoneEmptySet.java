@@ -35,12 +35,18 @@ public class NoneEmptySet<E> extends HashSet<E> implements CommonNoneEmptyOper<E
     }
 
     // 简化操作
+    /**
+     * NoneEmptySet<E> -> NoneEmptySet<R>
+     */
     public <R> NoneEmptySet<R> map(Function<E, R> map) {
         NoneEmptySet<R> ret = new NoneEmptySet<>();
         this.forEach(e -> ret.add(map.apply(e)));
         return ret;
     }
 
+    /**
+     * NoneEmptySet<E> -> NoneEmptySet<R> 跳过为empty的元素
+     */
     public <R> NoneEmptySet<R> mapIgnoreEmpty(Function<E, R> map) {
         NoneEmptySet<R> ret = new NoneEmptySet<>();
         this.forEach(e -> ret.addIgnoreEmpty(map.apply(e)));
@@ -48,26 +54,41 @@ public class NoneEmptySet<E> extends HashSet<E> implements CommonNoneEmptyOper<E
     }
 
     // 构造工具
+    /**
+     * 快速构建方法
+     */
     public static <E> NoneEmptySet<E> of(E... e) {
         return Collections2.of(NoneEmptySet::new, e);
     }
 
+    /**
+     * 快速构建方法
+     */
     public static <E> NoneEmptySet<E> of(Iterable<E> e) {
         return Collections2.of(NoneEmptySet::new, e);
     }
 
+    /**
+     * 快速构建方法，忽略empty元素
+     */
     public static <E> NoneEmptySet<E> ofIgnoreEmpty(E... e) {
         NoneEmptySet<E> ret = new NoneEmptySet<>();
         ret.addAllIgnoreEmpty(e);
         return ret;
     }
 
+    /**
+     * 快速构建方法，忽略empty元素
+     */
     public static <E> NoneEmptySet<E> ofIgnoreEmpty(Iterable<E> e) {
         NoneEmptySet<E> ret = new NoneEmptySet<>();
         ret.addAllIgnoreEmpty(e);
         return ret;
     }
 
+    /**
+     * 快速构建方法，Stream<E> -> NoneEmptySet<E>
+     */
     public static <E> Collector<E, ?, NoneEmptySet<E>> toSet() {
         return Collector.of(NoneEmptySet::new, NoneEmptySet::add, (left, right) -> {
             left.addAll(right);
