@@ -230,6 +230,7 @@ public final class Maps {
 
     /**
      * List1<K> List2<V> -> Map<K,V>
+     * 必要条件：List1.size() == List2.size()
      */
     public static <K, V, T extends Map<K, V>> T zip(List<K> keys, List<V> values, Supplier<T> supplier) {
         Assert.isTrue(keys.size() == values.size(), "key,value size not match");
@@ -242,6 +243,7 @@ public final class Maps {
 
     /**
      * List1<K> List2<V> -> HashMap<K,V>
+     * 必要条件：List1.size() == List2.size()
      */
     public static <K, V> Map<K, V> zip(List<K> keys, List<V> values) {
         return zip(keys, values, HashMap::new);
