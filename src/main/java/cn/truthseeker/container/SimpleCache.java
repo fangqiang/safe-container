@@ -2,7 +2,6 @@ package cn.truthseeker.container;
 
 import cn.truthseeker.container.safe.Maps;
 
-import javax.annotation.CheckForNull;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
@@ -15,8 +14,11 @@ import java.util.function.Supplier;
  */
 public class SimpleCache<K, V> extends ConcurrentHashMap<K, V> {
 
+    /**
+     * @Deprecated 推荐使用getNullable
+     */
     @Override
-    @CheckForNull
+    @Deprecated
     public V get(Object k) {
         return super.get(k);
     }

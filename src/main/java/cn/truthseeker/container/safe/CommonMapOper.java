@@ -13,6 +13,10 @@ import java.util.function.Supplier;
  */
 public interface CommonMapOper<K, V> extends Map<K, V> {
 
+    /**
+     * @param key
+     * @return
+     */
     default Optional<V> getNullable(K key) {
         return Optional.ofNullable(get(key));
     }
