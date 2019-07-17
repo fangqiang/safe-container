@@ -51,8 +51,8 @@ public class NoneNullSetTest {
     public void of() {
         Assert.assertEquals(NoneNullSet.of(1, 1, 2).size(), 2);
         Assert.assertEquals(NoneNullSet.of(Arrays.asList(1, 1, 2)).size(), 2);
-        Assert.assertEquals(NoneNullSet.extractNotNullFrom(null, "a").size(), 1);
-        Assert.assertEquals(NoneNullSet.extractNotNullFrom(Arrays.asList(null, "a")).size(), 1);
+        Assert.assertEquals(NoneNullSet.extractFrom(null, "a").size(), 1);
+        Assert.assertEquals(NoneNullSet.extractFrom(Arrays.asList(null, "a")).size(), 1);
     }
 
 

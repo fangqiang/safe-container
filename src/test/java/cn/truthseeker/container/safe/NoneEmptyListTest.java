@@ -69,8 +69,8 @@ public class NoneEmptyListTest {
 
         Assert.assertEquals(NoneEmptyList.of(1, 1, 2).size(), 3);
         Assert.assertEquals(NoneEmptyList.of(Arrays.asList(1, 1, 2)).size(), 3);
-        Assert.assertEquals(NoneEmptyList.extractNotEmptyFrom("", "a").size(), 1);
-        Assert.assertEquals(NoneEmptyList.extractNotEmptyFrom(Arrays.asList("", "a")).size(), 1);
+        Assert.assertEquals(NoneEmptyList.extractFrom("", "a").size(), 1);
+        Assert.assertEquals(NoneEmptyList.extractFrom(Arrays.asList("", "a")).size(), 1);
     }
 
     @Test

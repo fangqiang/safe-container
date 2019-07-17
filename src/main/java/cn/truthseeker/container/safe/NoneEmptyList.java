@@ -101,7 +101,7 @@ public class NoneEmptyList<E> extends ArrayList<E> implements CommonNoneEmptyOpe
     /**
      * 快速构建方法，从集合中抽取非empty元素
      */
-    public static <E> NoneEmptyList<E> extractNotEmptyFrom(E... e) {
+    public static <E> NoneEmptyList<E> extractFrom(E... e) {
         NoneEmptyList<E> ret = new NoneEmptyList<>();
         ret.addAllOmitEmpty(e);
         return ret;
@@ -110,7 +110,7 @@ public class NoneEmptyList<E> extends ArrayList<E> implements CommonNoneEmptyOpe
     /**
      * 快速构建方法，从集合中抽取非empty元素
      */
-    public static <E> NoneEmptyList<E> extractNotEmptyFrom(Iterable<E> e) {
+    public static <E> NoneEmptyList<E> extractFrom(Iterable<E> e) {
         NoneEmptyList<E> ret = new NoneEmptyList<>();
         ret.addAllOmitEmpty(e);
         return ret;

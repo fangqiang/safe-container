@@ -97,7 +97,7 @@ public class NoneNullList<E> extends ArrayList<E> implements CommonNoneNullOper<
     /**
      * 快速构建方法，从集合中抽取非null元素
      */
-    public static <E> NoneNullList<E> extractNotNullFrom(E... e) {
+    public static <E> NoneNullList<E> extractFrom(E... e) {
         NoneNullList<E> ret = new NoneNullList<>();
         ret.addAllOmitNull(e);
         return ret;
@@ -106,7 +106,7 @@ public class NoneNullList<E> extends ArrayList<E> implements CommonNoneNullOper<
     /**
      * 快速构建方法，从集合中抽取非null元素
      */
-    public static <E> NoneNullList<E> extractNotNullFrom(Iterable<E> e) {
+    public static <E> NoneNullList<E> extractFrom(Iterable<E> e) {
         NoneNullList<E> ret = new NoneNullList<>();
         ret.addAllOmitNull(e);
         return ret;

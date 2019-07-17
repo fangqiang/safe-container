@@ -78,7 +78,7 @@ public class NoneEmptyMap<K, V> extends HashMap<K, V> implements CommonNoneEmpty
     /**
      * 快速构建方法，从集合中抽取非empty元素
      */
-    public static <K, V> NoneEmptyMap<K, V> extractNotEmptyFrom(Map<K, V> m) {
+    public static <K, V> NoneEmptyMap<K, V> extractFrom(Map<K, V> m) {
         NoneEmptyMap<K, V> ret = new NoneEmptyMap<>();
         ret.putAllOmitEmpty(m);
         return ret;

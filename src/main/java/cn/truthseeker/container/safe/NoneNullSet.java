@@ -77,7 +77,7 @@ public class NoneNullSet<E> extends HashSet<E> implements CommonNoneNullOper<E> 
     /**
      * 快速构建方法，从集合中抽取非null元素
      */
-    public static <E> NoneNullSet<E> extractNotNullFrom(E... e) {
+    public static <E> NoneNullSet<E> extractFrom(E... e) {
         NoneNullSet<E> ret = new NoneNullSet<>();
         ret.addAllOmitNull(e);
         return ret;
@@ -86,7 +86,7 @@ public class NoneNullSet<E> extends HashSet<E> implements CommonNoneNullOper<E> 
     /**
      * 快速构建方法，从集合中抽取非null元素
      */
-    public static <E> NoneNullSet<E> extractNotNullFrom(Iterable<E> e) {
+    public static <E> NoneNullSet<E> extractFrom(Iterable<E> e) {
         NoneNullSet<E> ret = new NoneNullSet<>();
         ret.addAllOmitNull(e);
         return ret;

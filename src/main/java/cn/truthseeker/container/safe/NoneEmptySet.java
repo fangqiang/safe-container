@@ -81,7 +81,7 @@ public class NoneEmptySet<E> extends HashSet<E> implements CommonNoneEmptyOper<E
     /**
      * 快速构建方法，从集合中抽取非empty元素
      */
-    public static <E> NoneEmptySet<E> extractNotEmptyFrom(E... e) {
+    public static <E> NoneEmptySet<E> extractFrom(E... e) {
         NoneEmptySet<E> ret = new NoneEmptySet<>();
         ret.addAllOmitEmpty(e);
         return ret;
@@ -90,7 +90,7 @@ public class NoneEmptySet<E> extends HashSet<E> implements CommonNoneEmptyOper<E
     /**
      * 快速构建方法，从集合中抽取非empty元素
      */
-    public static <E> NoneEmptySet<E> extractNotEmptyFrom(Iterable<E> e) {
+    public static <E> NoneEmptySet<E> extractFrom(Iterable<E> e) {
         NoneEmptySet<E> ret = new NoneEmptySet<>();
         ret.addAllOmitEmpty(e);
         return ret;

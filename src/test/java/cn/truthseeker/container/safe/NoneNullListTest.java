@@ -67,8 +67,8 @@ public class NoneNullListTest {
     public void of() {
         Assert.assertEquals(NoneNullList.of(1, 2).size(), 2);
         Assert.assertEquals(NoneNullList.of(Arrays.asList(1, 2)).size(), 2);
-        Assert.assertEquals(NoneNullList.extractNotNullFrom(null, "a").size(), 1);
-        Assert.assertEquals(NoneNullList.extractNotNullFrom(Arrays.asList(null, "a")).size(), 1);
+        Assert.assertEquals(NoneNullList.extractFrom(null, "a").size(), 1);
+        Assert.assertEquals(NoneNullList.extractFrom(Arrays.asList(null, "a")).size(), 1);
     }
 
     @Test

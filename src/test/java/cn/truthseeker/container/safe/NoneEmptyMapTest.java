@@ -50,7 +50,7 @@ public class NoneEmptyMapTest {
         Assert.assertEquals(NoneEmptyMap.of("a", 1).size(), 1);
         Assert.assertEquals(NoneEmptyMap.of("a", 1, "b", 1).size(), 2);
         Assert.assertEquals(NoneEmptyMap.of("a", 1, "b", 1, "c", 1).size(), 3);
-        Assert.assertEquals(NoneEmptyMap.extractNotEmptyFrom(Maps.of("a", "1", "b", "")).size(), 1);
+        Assert.assertEquals(NoneEmptyMap.extractFrom(Maps.of("a", "1", "b", "")).size(), 1);
     }
 
     @Test

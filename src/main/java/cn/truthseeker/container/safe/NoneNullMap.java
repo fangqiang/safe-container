@@ -74,7 +74,7 @@ public class NoneNullMap<K, V> extends HashMap<K, V> implements CommonNoneNullMa
     /**
      * 快速构建方法，从集合中抽取非null元素
      */
-    public static <K, V> NoneNullMap<K, V> extractNotNullFrom(Map<K, V> m) {
+    public static <K, V> NoneNullMap<K, V> extractFrom(Map<K, V> m) {
         NoneNullMap<K, V> ret = new NoneNullMap<>();
         ret.putAllOmitNull(m);
         return ret;
